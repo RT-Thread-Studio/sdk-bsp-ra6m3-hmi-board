@@ -101,7 +101,7 @@ template_projects:
     - rt-thread
     source_path_offset: project_0
     target_path_offset: ''
-  external_files:
+  external_files: []
   project_description: 开发板模板工程
   project_name: HMI-Board
   project_type: rt-thread|@full|@5.0.0
