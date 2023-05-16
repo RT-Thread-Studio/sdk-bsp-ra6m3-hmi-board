@@ -1,0 +1,108 @@
+board:
+  buy_url_cn: https://item.taobao.com/item.htm?spm=a1z0k.7386009.0.d4919233.346437de2j0keJ&id=718982035562&_u=t2dmg8j26111
+  buy_url_global: N/A
+  debug_interface: SWD
+  debugger: DAP-LINK
+  description_en: N/A
+  description_zh: HMI-Board为 RT-Thread 联合瑞萨推出的高性价比图形评估套件，取代传统的 HMI+主控板硬件，一套硬件即可实现
+    HMI+IoT+控制的全套能力。依托于瑞萨高性能芯片 RA6M3 及 RT-Thread 软件生态，HMI-Board 不仅硬件性能强劲，同时软件生态丰富，助力开发者快速开发出GUI智能硬件产品。
+  emulator_machine: ''
+  large_image: documents/images/big.png
+  name: R7FA6M3AH-HMI-Board
+  price_cn: 198.00 CNY
+  price_global: 28.46 USD
+  sale_contact_cn: https://www.rt-thread.org/
+  sale_contact_global: https://www.rt-thread.org/
+  small_image: documents/images/small.png
+  vendor: Renesas
+  version: 1.0.0
+chip:
+  chip_name: R7FA6M3AH
+  clock_source: HSE
+  device_vendor: Renesas
+  family_name: Renesas
+  rx_name: PA10
+  series_name: RA6M3
+  source_freq: '8000000'
+  sub_series_name: RA6M3-2M
+  target_freq: '240000000'
+  tx_name: PA9
+  uart_name: UART1
+docs:
+- category: sheet
+  file: documents/ra6m3-芯片手册.pdf
+  title: ra6m3-芯片手册
+- category: sheet
+  file: documents/ra6m3-数据手册.pdf
+  title: ra6m3-数据手册
+- category: manual
+  file: documents/hmi-board-v3.1原理图.pdf
+  title: hmi-board-v3.1原理图
+example_projects: []
+features:
+- 2M on-chip flash
+- 640Kb on-chip SRAM
+- Hardware JPEG decoding
+- 2D graphics acceleration
+- RGB888-LCD controller
+- Arduino interface
+- Pmod interface
+- Ethernet
+- USB-Device
+- CAN interface
+- Speaker, microphone interface
+- On board DAP-Link
+features_zh:
+- 2M片上flash
+- 640Kb片上SRAM
+- 硬件JPEG解码
+- 2D图形加速
+- RGB888-LCD控制器
+- Arduino 接口
+- Pmod 接口
+- 以太网接口
+- USB-Device
+- CAN接口
+- 扬声器，麦克风接口
+- 板载 DAP-Link
+pkg_type: Board_Support_Packages
+pkg_vendor: Rb
+pkg_version: 1.0.0
+template_projects:
+- builtin_files:
+  - files_and_folders:
+    - .config
+    - .cproject
+    - .gitignore
+    - .ignore_format.yml
+    - .project
+    - .settings
+    - board
+    - buildinfo.gpdsc
+    - configuration.xml
+    - docs
+    - Kconfig
+    - libraries
+    - project.uvoptx
+    - project.uvprojx
+    - R7FA6M3AH3CFC.pincfg
+    - ra
+    - ra_cfg
+    - ra_gen
+    - README.md
+    - rtconfig.h
+    - rtconfig.py
+    - SConscript
+    - SConstruct
+    - script
+    - src
+    - template.uvoptx
+    - template.uvprojx
+    - rt-thread
+    source_path_offset: project_0
+    target_path_offset: ''
+  external_files:
+  project_description: 开发板模板工程
+  project_name: HMI-Board
+  project_type: rt-thread|@full|@5.0.0
+yaml_version: 3
