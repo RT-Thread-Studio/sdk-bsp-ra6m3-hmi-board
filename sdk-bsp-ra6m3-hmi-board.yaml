@@ -8,7 +8,7 @@ board:
     HMI+IoT+控制的全套能力。依托于瑞萨高性能芯片 RA6M3 及 RT-Thread 软件生态，HMI-Board 不仅硬件性能强劲，同时软件生态丰富，助力开发者快速开发出GUI智能硬件产品。
   emulator_machine: ''
   large_image: documents/images/big.png
-  name: R7FA6M3AH-HMI-Board
+  name: RA6M3-HMI-Board
   price_cn: 198.00 CNY
   price_global: 28.46 USD
   sale_contact_cn: https://www.rt-thread.org/
@@ -19,8 +19,8 @@ board:
 chip:
   chip_name: R7FA6M3AH
   clock_source: HSE
-  device_vendor: Renesas
-  family_name: Renesas
+  device_vendor: RENESAS
+  family_name: RA
   rx_name: PA10
   series_name: RA6M3
   source_freq: '8000000'
