@@ -20,3 +20,4 @@
                 #define OSPI_DEVICE_0_LENGTH 0x0
                 #define OSPI_DEVICE_1_START  0x70000000
                 #define OSPI_DEVICE_1_LENGTH 0x0
+                    #define RAM_NS_BUFFER_LENGTH 0xC20

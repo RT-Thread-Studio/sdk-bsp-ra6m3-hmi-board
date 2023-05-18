@@ -16,10 +16,12 @@ elif rtconfig.PLATFORM in ['gcc', 'armclang']:
         src += [cwd + '/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.c']
         src += [cwd + '/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.c']
         src += Glob(cwd + '/fsp/src/r_*/*.c')
+        src += Glob(cwd + '/tes/dave2d/src/*.c')
         CPPPATH = [ cwd + '/arm/CMSIS_5/CMSIS/Core/Include',
                     cwd + '/fsp/inc',
                     cwd + '/fsp/inc/api',
-                    cwd + '/fsp/inc/instances',]
+                    cwd + '/fsp/inc/instances',
+                    cwd + '/tes/dave2d/inc',]
 
 group = DefineGroup('ra', src, depend = [''], CPPPATH = CPPPATH)
 Return('group')
