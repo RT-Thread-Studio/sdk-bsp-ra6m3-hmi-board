@@ -20,7 +20,7 @@
  * performance, bitmaps need to be in correct order */
 #define DLG_LVGL_CF_SUB_BYTE_SWAP   0
 
-#define DLG_LVGL_USE_GPU_RA6M3      1
+#define DLG_LVGL_USE_GPU_RA6M3      0
 
 #define LV_USE_PERF_MONITOR         1
 #define LV_COLOR_DEPTH              16
