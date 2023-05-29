@@ -67,7 +67,7 @@ features_zh:
 - 板载 DAP-Link
 pkg_type: Board_Support_Packages
 pkg_vendor: Rb
-pkg_version: 1.0.0
+pkg_version: 1.0.2
 template_projects:
 - builtin_files:
   - files_and_folders:
