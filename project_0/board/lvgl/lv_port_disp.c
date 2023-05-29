@@ -20,7 +20,7 @@
     #include "lcd_port.h"
 #endif
 
-#define COLOR_BUFFER  (LV_HOR_RES_MAX * LV_VER_RES_MAX / 4)
+#define COLOR_BUFFER  (LV_HOR_RES_MAX * LV_VER_RES_MAX / 2)
 
 /*A static or global variable to store the buffers*/
 static lv_disp_draw_buf_t disp_buf;
