@@ -206,6 +206,8 @@ menu "Hardware Drivers Config"
         config BSP_USING_LCD
             bool "Enable LCD-RGB565"
             select BSP_USING_GPIO
+            select BSP_USING_PWM
+            select BSP_USING_PWM5
             default n
 
         config BSP_USING_SPI_LCD

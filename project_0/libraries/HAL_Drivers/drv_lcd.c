@@ -44,6 +44,18 @@ __WEAK void _ra_port_display_callback(display_callback_args_t *p_args)
 
 void turn_on_lcd_backlight(void)
 {
+#ifdef BSP_USING_PWM5
+#define LCD_PWM_DEV_NAME    "pwm5"
+#define LCD_PWM_DEV_CHANNEL 0
+
+    struct rt_device_pwm *pwm_dev;
+
+    /* turn on the LCD backlight */
+    pwm_dev = (struct rt_device_pwm *)rt_device_find(LCD_PWM_DEV_NAME);
+    /* pwm frequency:100K = 10000ns */
+    rt_pwm_set(pwm_dev, LCD_PWM_DEV_CHANNEL, 10000, 7000);
+    rt_pwm_enable(pwm_dev, LCD_PWM_DEV_CHANNEL);
+#endif
     rt_pin_mode(LCD_BL_PIN, PIN_MODE_OUTPUT);   /* LCD_BL */
     rt_pin_write(LCD_BL_PIN, PIN_HIGH);
 }
