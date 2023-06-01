@@ -32,7 +32,7 @@ struct drv_lcd_device
 struct drv_lcd_device _lcd;
 
 uint16_t screen_rotation;
-uint16_t *lcd_current_working_buffer = (uint16_t *)&fb_background[0];
+uint16_t *lcd_current_working_buffer = (uint16_t *) &fb_background[0];
 
 // jpeg and lvgl can only select one
 __WEAK void _ra_port_display_callback(display_callback_args_t *p_args)
@@ -119,7 +119,7 @@ void ra_bsp_lcd_swap_buffer(void)
 void bsp_lcd_draw_pixel(uint32_t x, uint32_t y, uint16_t color)
 {
     // Verify pixel is within LCD range
-    if ((x < LCD_WIDTH) && (y < LCD_HEIGHT))
+    if ((x <= LCD_WIDTH) && (y <= LCD_HEIGHT))
     {
         switch (screen_rotation)
         {
