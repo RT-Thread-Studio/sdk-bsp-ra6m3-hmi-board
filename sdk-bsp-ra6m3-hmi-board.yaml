@@ -69,7 +69,10 @@ pkg_type: Board_Support_Packages
 pkg_vendor: Rb
 pkg_version: 1.0.3
 example_projects:
-- builtin_files:
+- project_name: hmi-video
+  project_description: video 示例工程
+  project_type: rt-thread|@full|@5.0.0
+  builtin_files:
   - source_path_offset: projects/hmi-board-video
     target_path_offset: ''
     files_and_folders:
@@ -79,11 +82,10 @@ example_projects:
     files_and_folders:
     - libraries
     - rt-thread
-  project_description: video 示例工程
-  project_name: hmi-lvgl
+- project_name: hmi-lvgl
+  project_description: lvgl 示例工程
   project_type: rt-thread|@full|@5.0.0
-example_projects:
-- builtin_files:
+  builtin_files:
   - source_path_offset: projects/hmi-board-lvgl
     target_path_offset: ''
     files_and_folders:
@@ -93,11 +95,11 @@ example_projects:
     files_and_folders:
     - libraries
     - rt-thread
-  project_description: lvgl 示例工程
-  project_name: hmi-lvgl
-  project_type: rt-thread|@full|@5.0.0
 template_projects:
-- builtin_files:
+- project_name: HMI-Board
+  project_description: 开发板模板工程
+  project_type: rt-thread|@full|@5.0.0
+  builtin_files:
   - source_path_offset: projects/project_0
     target_path_offset: ''
     files_and_folders:
@@ -107,7 +109,5 @@ template_projects:
     files_and_folders:
     - libraries
     - rt-thread
-  project_description: 开发板模板工程
-  project_name: HMI-Board
-  project_type: rt-thread|@full|@5.0.0
+
 yaml_version: 3
