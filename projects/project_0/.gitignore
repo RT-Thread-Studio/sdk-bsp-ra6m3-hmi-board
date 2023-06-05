@@ -3,3 +3,5 @@
 /Objects
 ra_cfg.txt
 
+/Debug/
+/makefile.targets
