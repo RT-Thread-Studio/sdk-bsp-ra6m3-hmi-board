@@ -1181,6 +1181,329 @@
           <GroupName>LVGL</GroupName>
           <Files>
             <File>
+              <FileName>lv_draw_img.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_img.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_fmt_txt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_fmt_txt.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_gpu_swm341_dma2d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\swm341_dma2d\lv_gpu_swm341_dma2d.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_win.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\win\lv_win.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_40.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_40.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_line.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_line.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_gpu_arm2d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\arm2d\lv_gpu_arm2d.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_gridnav.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\others\gridnav\lv_gridnav.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_chart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\chart\lv_chart.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_spinner.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\spinner\lv_spinner.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_30.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_hal_tick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\hal\lv_hal_tick.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl_line.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_line.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_obj_scroll.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_scroll.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_freetype.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\freetype\lv_freetype.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_line.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_line.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_dither.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_dither.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
               <FileName>lv_img_cache.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\LVGL-v8.3.5\src\draw\lv_img_cache.c</FilePath>
@@ -1219,9 +1542,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_switch.c</FileName>
+              <FileName>lv_mem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_switch.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_mem.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1238,9 +1561,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lodepng.c</FileName>
+              <FileName>lv_btnmatrix.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\png\lodepng.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_btnmatrix.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1257,9 +1580,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_group.c</FileName>
+              <FileName>lv_tileview.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_group.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\tileview\lv_tileview.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1276,9 +1599,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sdl_utils.c</FileName>
+              <FileName>lv_draw_vglite_arc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_utils.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_arc.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1295,9 +1618,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw_layer.c</FileName>
+              <FileName>lv_objx_templ.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_layer.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_objx_templ.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1314,9 +1637,123 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sdl_arc.c</FileName>
+              <FileName>lv_font_montserrat_32.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_arc.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_32.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_42.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_42.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl_rect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_rect.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_obj_style.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_style.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_fs_stdio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\fsdrv\lv_fs_stdio.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_vglite_rect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_rect.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1352,9 +1789,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_anim.c</FileName>
+              <FileName>lv_lru.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_anim.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_lru.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1371,9 +1808,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_event.c</FileName>
+              <FileName>lv_draw_sdl_img.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_event.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_img.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1390,484 +1827,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw_arc.c</FileName>
+              <FileName>lv_imgfont.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_arc.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_spinbox.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\spinbox\lv_spinbox.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_img_decoder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_img_decoder.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_vglite.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_14.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_14.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_utils.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_gpu_nxp_pxp_osa.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\pxp\lv_gpu_nxp_pxp_osa.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_extra.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\lv_extra.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_20.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_math.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_math.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_sjpg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\sjpg\lv_sjpg.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_hal_indev.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\hal\lv_hal_indev.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_gpu_nxp_pxp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\pxp\lv_gpu_nxp_pxp.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_menu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\menu\lv_menu.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj_style_gen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_style_gen.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sw_transform.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_transform.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sw_line.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_line.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_24.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_bar.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_bar.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_gif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\gif\lv_gif.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_indev_scroll.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_indev_scroll.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_snapshot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\others\snapshot\lv_snapshot.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_fmt_txt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_fmt_txt.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_bidi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_bidi.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_log.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_log.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sdl_line.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_line.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\others\imgfont\lv_imgfont.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1903,9 +1865,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_spinner.c</FileName>
+              <FileName>lv_imgbtn.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\spinner\lv_spinner.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\imgbtn\lv_imgbtn.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1922,9 +1884,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_refr.c</FileName>
+              <FileName>lv_meter.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_refr.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\meter\lv_meter.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1941,9 +1903,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font_montserrat_12_subpx.c</FileName>
+              <FileName>lv_extra.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_12_subpx.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\lv_extra.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1960,9 +1922,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_btn.c</FileName>
+              <FileName>lv_font_montserrat_34.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_btn.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_34.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -1979,9 +1941,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>qrcodegen.c</FileName>
+              <FileName>lv_draw_sdl_utils.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\qrcode\qrcodegen.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_utils.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2036,332 +1998,142 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_canvas.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_canvas.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_loader.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_loader.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_vglite_rect.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_rect.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_22.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_22.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_qrcode.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\qrcode\lv_qrcode.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_style_gen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_style_gen.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sdl_polygon.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_polygon.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_meter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\meter\lv_meter.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_theme_default.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\themes\default\lv_theme_default.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_layer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_layer.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_38.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_38.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_checkbox.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_checkbox.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_disp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_disp.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sw_blend.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_blend.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj_tree.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_tree.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_18.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_18.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_lru.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_lru.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
               <FileName>lv_draw_pxp.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\pxp\lv_draw_pxp.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_layer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_layer.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_line.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_line.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_mask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_mask.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_12_subpx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_12_subpx.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_timer.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl_layer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_layer.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_gif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\gif\lv_gif.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2397,9 +2169,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sdl_stack_blur.c</FileName>
+              <FileName>lv_font_montserrat_10.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_stack_blur.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_10.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2416,9 +2188,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw_dither.c</FileName>
+              <FileName>lv_area.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_dither.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_area.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2435,9 +2207,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sdl.c</FileName>
+              <FileName>lv_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_event.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2454,9 +2226,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font_montserrat_28.c</FileName>
+              <FileName>lv_vglite_utils.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_28.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_vglite_utils.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2473,9 +2245,256 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_objx_templ.c</FileName>
+              <FileName>lv_vglite_buf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_objx_templ.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_vglite_buf.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_rect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_rect.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_dejavu_16_persian_hebrew.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_dejavu_16_persian_hebrew.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_8.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_8.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_btn.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_btn.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl_polygon.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_polygon.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_fragment.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\others\fragment\lv_fragment.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_table.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_table.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_roller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_roller.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_obj.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_26.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_26.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_async.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_async.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_tlsf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_tlsf.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_disp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_disp.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2511,9 +2530,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_mem.c</FileName>
+              <FileName>lv_sjpg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_mem.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\sjpg\lv_sjpg.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2530,9 +2549,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sdl_rect.c</FileName>
+              <FileName>lv_refr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_rect.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_refr.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2549,9 +2568,408 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_chart.c</FileName>
+              <FileName>lv_font_montserrat_14.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\chart\lv_chart.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_14.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_simsun_16_cjk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_simsun_16_cjk.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_canvas.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_canvas.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_style.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_style.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_qrcode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\qrcode\lv_qrcode.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_bidi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_bidi.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_txt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_txt.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_group.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_group.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_theme_basic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\themes\basic\lv_theme_basic.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_img.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_img.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_indev.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_indev.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_vglite_blend.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_blend.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_vglite_line.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_line.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_checkbox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_checkbox.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl_texture_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_texture_cache.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>qrcodegen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\qrcode\qrcodegen.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\led\lv_led.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_img_buf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_img_buf.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_color.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_color.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_printf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_printf.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_utils.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_msgbox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\msgbox\lv_msgbox.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2606,9 +3024,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_txt_ap.c</FileName>
+              <FileName>lv_font_montserrat_46.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_txt_ap.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_46.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2625,9 +3043,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_fragment.c</FileName>
+              <FileName>lv_img.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\others\fragment\lv_fragment.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_img.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2644,9 +3062,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_btnmatrix.c</FileName>
+              <FileName>lv_draw_pxp_blend.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_btnmatrix.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\pxp\lv_draw_pxp_blend.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2663,9 +3081,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_calendar.c</FileName>
+              <FileName>lv_flex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\calendar\lv_calendar.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\layouts\flex\lv_flex.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2682,9 +3100,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font_dejavu_16_persian_hebrew.c</FileName>
+              <FileName>lv_snapshot.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_dejavu_16_persian_hebrew.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\others\snapshot\lv_snapshot.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2701,9 +3119,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font_montserrat_42.c</FileName>
+              <FileName>lv_draw_sw_gradient.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_42.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_gradient.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2720,9 +3138,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_slider.c</FileName>
+              <FileName>lv_draw_sdl_stack_blur.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_slider.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_stack_blur.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2739,9 +3157,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_ime_pinyin.c</FileName>
+              <FileName>lv_font_montserrat_20.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\others\ime\lv_ime_pinyin.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_20.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2758,9 +3176,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_indev.c</FileName>
+              <FileName>lv_fs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_indev.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_fs.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2777,9 +3195,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw_polygon.c</FileName>
+              <FileName>lv_dropdown.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_polygon.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_dropdown.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2796,9 +3214,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw_rect.c</FileName>
+              <FileName>lv_bar.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_rect.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_bar.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2815,9 +3233,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_imgfont.c</FileName>
+              <FileName>lv_fs_fatfs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\others\imgfont\lv_imgfont.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\fsdrv\lv_fs_fatfs.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2834,85 +3252,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_vglite_arc.c</FileName>
+              <FileName>lv_font_montserrat_22.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_arc.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_line.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_line.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_28_compressed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_28_compressed.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_roller.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_roller.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_22.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2948,9 +3290,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_async.c</FileName>
+              <FileName>lv_keyboard.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_async.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\keyboard\lv_keyboard.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2967,9 +3309,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_grid.c</FileName>
+              <FileName>lv_img_decoder.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\layouts\grid\lv_grid.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_img_decoder.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -2986,9 +3328,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_imgbtn.c</FileName>
+              <FileName>lv_menu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\imgbtn\lv_imgbtn.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\menu\lv_menu.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3005,9 +3347,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_theme_mono.c</FileName>
+              <FileName>lv_hal_indev.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\themes\mono\lv_theme_mono.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\hal\lv_hal_indev.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3024,9 +3366,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_vglite_blend.c</FileName>
+              <FileName>lv_gpu_stm32_dma2d.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_blend.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\stm32_dma2d\lv_gpu_stm32_dma2d.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3043,9 +3385,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font_montserrat_36.c</FileName>
+              <FileName>lv_math.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_36.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_math.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3062,9 +3404,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_table.c</FileName>
+              <FileName>lv_theme_default.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_table.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\themes\default\lv_theme_default.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3081,9 +3423,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>gifdec.c</FileName>
+              <FileName>lv_ime_pinyin.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\gif\gifdec.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\others\ime\lv_ime_pinyin.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3100,9 +3442,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sdl_img.c</FileName>
+              <FileName>lv_tabview.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_img.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\tabview\lv_tabview.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3119,9 +3461,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_colorwheel.c</FileName>
+              <FileName>lv_draw_sdl_mask.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\colorwheel\lv_colorwheel.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_mask.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3138,9 +3480,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_monkey.c</FileName>
+              <FileName>lv_obj_style_gen.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\others\monkey\lv_monkey.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_style_gen.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3157,9 +3499,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_img.c</FileName>
+              <FileName>lv_indev_scroll.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_img.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_indev_scroll.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3176,9 +3518,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font_montserrat_26.c</FileName>
+              <FileName>lv_draw_triangle.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_26.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_triangle.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3195,9 +3537,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_timer.c</FileName>
+              <FileName>lv_font_unscii_16.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_timer.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_unscii_16.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3214,9 +3556,28 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_fs_posix.c</FileName>
+              <FileName>lv_arc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\fsdrv\lv_fs_posix.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_arc.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_polygon.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_polygon.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3252,9 +3613,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw_letter.c</FileName>
+              <FileName>lv_obj_tree.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_letter.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_tree.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3271,66 +3632,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font.c</FileName>
+              <FileName>lv_grid.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_vglite_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_vglite_utils.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_8.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_textarea.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_textarea.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\layouts\grid\lv_grid.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3366,6 +3670,253 @@
           </Files>
           <Files>
             <File>
+              <FileName>lv_theme_mono.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\themes\mono\lv_theme_mono.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_gpu_nxp_pxp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\pxp\lv_gpu_nxp_pxp.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_loader.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_loader.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_gc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_gc.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_log.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_calendar_header_dropdown.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\calendar\lv_calendar_header_dropdown.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_arc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_arc.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_24.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_anim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_anim.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_slider.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_slider.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_switch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_switch.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_fs_posix.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\fsdrv\lv_fs_posix.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_vglite.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
               <FileName>lv_draw_sdl_label.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_label.c</FilePath>
@@ -3385,9 +3936,85 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw_gradient.c</FileName>
+              <FileName>lv_font_montserrat_18.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_gradient.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_18.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_38.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_38.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_obj_class.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_class.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_colorwheel.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\colorwheel\lv_colorwheel.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -3442,1225 +4069,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_font_montserrat_30.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_30.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_fs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_fs.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_txt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_txt.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_gpu_swm341_dma2d.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\swm341_dma2d\lv_gpu_swm341_dma2d.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_msgbox.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\msgbox\lv_msgbox.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_10.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_10.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_46.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_46.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_dropdown.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_dropdown.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_fs_fatfs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\fsdrv\lv_fs_fatfs.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_hal_tick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\hal\lv_hal_tick.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_freetype.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\freetype\lv_freetype.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_pxp_blend.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\pxp\lv_draw_pxp_blend.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_keyboard.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\keyboard\lv_keyboard.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_line.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_line.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_34.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_34.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_area.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_area.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj_draw.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_draw.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_gpu_stm32_dma2d.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\stm32_dma2d\lv_gpu_stm32_dma2d.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\led\lv_led.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_calendar_header_dropdown.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\calendar\lv_calendar_header_dropdown.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_triangle.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_triangle.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_simsun_16_cjk.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_simsun_16_cjk.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_img.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_img.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_rlottie.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\rlottie\lv_rlottie.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_style.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_style.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_flex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\layouts\flex\lv_flex.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_tileview.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\tileview\lv_tileview.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_rect.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_rect.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_40.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_40.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_arc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_arc.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj_pos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_pos.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sdl_layer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_layer.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_color.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_color.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_animimg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\animimg\lv_animimg.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sdl_composite.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_composite.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_arc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_arc.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sw_img.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_img.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_hal_disp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\hal\lv_hal_disp.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_fragment_manager.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\others\fragment\lv_fragment_manager.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_label.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_label.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_win.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\win\lv_win.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sdl_mask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_mask.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_theme_basic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\themes\basic\lv_theme_basic.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_transform.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_transform.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_32.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_32.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_tlsf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_tlsf.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj_scroll.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_scroll.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_span.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\span\lv_span.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_img_buf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_img_buf.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
               <FileName>lv_font_montserrat_12.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_12.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_printf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_printf.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_fs_stdio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\fsdrv\lv_fs_stdio.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj_class.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_class.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_vglite_buf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_vglite_buf.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_ll.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_ll.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_mask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_mask.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_draw_sdl_texture_cache.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_texture_cache.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_montserrat_44.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_44.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_gc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_gc.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_gridnav.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\others\gridnav\lv_gridnav.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_obj_style.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_style.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_bmp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\bmp\lv_bmp.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_tabview.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\tabview\lv_tabview.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  -std=c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>lv_font_unscii_16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_unscii_16.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -4696,9 +4107,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_gpu_arm2d.c</FileName>
+              <FileName>lv_draw_sw_transform.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\arm2d\lv_gpu_arm2d.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_transform.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -4715,9 +4126,9 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_sw.c</FileName>
+              <FileName>lv_style_gen.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_style_gen.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
@@ -4734,9 +4145,598 @@
           </Files>
           <Files>
             <File>
-              <FileName>lv_draw_vglite_line.c</FileName>
+              <FileName>lv_animimg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\vglite\lv_draw_vglite_line.c</FilePath>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\animimg\lv_animimg.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_gpu_nxp_pxp_osa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\nxp\pxp\lv_gpu_nxp_pxp_osa.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_transform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_transform.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_ll.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_ll.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_arc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_arc.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_obj_draw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_draw.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_fragment_manager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\others\fragment\lv_fragment_manager.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>gifdec.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\gif\gifdec.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_obj_pos.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\core\lv_obj_pos.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_layer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\lv_draw_layer.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_28.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_28.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_44.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_44.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl_arc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_arc.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_rect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_rect.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lodepng.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\png\lodepng.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_calendar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\calendar\lv_calendar.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_letter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_letter.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_36.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_36.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_label.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_label.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_textarea.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\widgets\lv_textarea.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_monkey.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\others\monkey\lv_monkey.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_rlottie.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\rlottie\lv_rlottie.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_span.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\span\lv_span.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_font_montserrat_28_compressed.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\font\lv_font_montserrat_28_compressed.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_hal_disp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\hal\lv_hal_disp.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sdl_composite.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sdl\lv_draw_sdl_composite.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_txt_ap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\misc\lv_txt_ap.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_spinbox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\widgets\spinbox\lv_spinbox.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_bmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\extra\libs\bmp\lv_bmp.c</FilePath>
+              <FileOption>
+                <FileArmAds>
+                  <Cads>
+                    <VariousControls>
+                      <MiscControls>  -std=c99</MiscControls>
+                      <Define> </Define>
+                      <Undefine> </Undefine>
+                      <IncludePath> </IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>lv_draw_sw_blend.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\LVGL-v8.3.5\src\draw\sw\lv_draw_sw_blend.c</FilePath>
               <FileOption>
                 <FileArmAds>
                   <Cads>
