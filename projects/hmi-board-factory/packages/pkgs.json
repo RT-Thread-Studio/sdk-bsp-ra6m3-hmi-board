@@ -13,5 +13,10 @@
   "path": "/packages/multimedia/LVGL/lv_music_demo", 
   "ver": "v0.3.2", 
   "name": "LV_MUSIC_DEMO"
+ }, 
+ {
+  "path": "/packages/system/tlsf", 
+  "ver": "v1.0.0", 
+  "name": "TLSF"
  }
 ]

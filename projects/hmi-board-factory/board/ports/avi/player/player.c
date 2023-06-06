@@ -7,7 +7,6 @@
 #include <sys/stat.h>
 #include <sys/statfs.h>
 
-#include "lv_demo_video.h"
 #include "drv_jpeg.h"
 
 #define DBG_TAG    "player"
