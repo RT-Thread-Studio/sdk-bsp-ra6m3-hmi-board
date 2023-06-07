@@ -15,7 +15,7 @@ typedef struct wifi_info
 static struct rt_thread wifi_scan_thread;
 static struct rt_thread wifi_connect_thread;
 static rt_uint8_t wifi_scan_thread_stack[512];
-static rt_uint8_t wifi_connect_thread_stack[512];
+static rt_uint8_t wifi_connect_thread_stack[1024];
 static wifi_info_t Wifi_Info;
 
 static rt_err_t wifi_scan_result_cache(struct rt_wlan_info *info)
