@@ -38,7 +38,6 @@ docs:
 - category: manual
   file: documents/hmi-board-v3.1原理图.pdf
   title: hmi-board-v3.1原理图
-example_projects: []
 features:
 - 2M on-chip flash
 - 640Kb on-chip SRAM
@@ -82,6 +81,7 @@ example_projects:
     files_and_folders:
     - libraries
     - rt-thread
+  external_files: []
 - project_name: hmi-board-video
   project_description: video 示例工程
   project_type: rt-thread|@full|@5.0.0
@@ -95,6 +95,7 @@ example_projects:
     files_and_folders:
     - libraries
     - rt-thread
+  external_files: []
 - project_name: hmi-board-lvgl
   project_description: lvgl 示例工程
   project_type: rt-thread|@full|@5.0.0
@@ -108,6 +109,7 @@ example_projects:
     files_and_folders:
     - libraries
     - rt-thread
+  external_files: []
 template_projects:
 - project_name: hmi-board-led
   project_description: 开发板模板工程
@@ -122,5 +124,5 @@ template_projects:
     files_and_folders:
     - libraries
     - rt-thread
-
+  external_files: []
 yaml_version: 3
