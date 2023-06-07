@@ -71,7 +71,7 @@ static rt_err_t ra_wait_complete(rt_event_t event, const char bus_name[RT_NAME_M
         return rt_event_recv(event,
                              RA_SPI0_EVENT,
                              RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,
-                             RT_WAITING_FOREVER,
+                             rt_tick_from_millisecond(1000),
                              &recved);
     }
     else if (bus_name[3] == '1')
@@ -79,7 +79,7 @@ static rt_err_t ra_wait_complete(rt_event_t event, const char bus_name[RT_NAME_M
         return rt_event_recv(event,
                              RA_SPI1_EVENT,
                              RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR,
-                             RT_WAITING_FOREVER,
+                             rt_tick_from_millisecond(1000),
                              &recved);
     }
     return -RT_EINVAL;
