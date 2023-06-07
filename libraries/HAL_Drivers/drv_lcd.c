@@ -55,9 +55,10 @@ void turn_on_lcd_backlight(void)
     /* pwm frequency:100K = 10000ns */
     rt_pwm_set(pwm_dev, LCD_PWM_DEV_CHANNEL, 10000, 7000);
     rt_pwm_enable(pwm_dev, LCD_PWM_DEV_CHANNEL);
-#endif
+#else
     rt_pin_mode(LCD_BL_PIN, PIN_MODE_OUTPUT);   /* LCD_BL */
     rt_pin_write(LCD_BL_PIN, PIN_HIGH);
+#endif
 }
 
 void ra_bsp_lcd_init(void)
