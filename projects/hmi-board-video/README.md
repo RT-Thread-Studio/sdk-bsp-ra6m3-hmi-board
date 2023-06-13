@@ -33,7 +33,7 @@
 
 ## HMI-Board-Video Demo 使用方式
 
-1. 准备一张 8GB SDCard（>=32 GB 会出现问题），拷贝视频资源到存储卡
+1. 准备一张 8GB SDCard，拷贝视频资源到存储卡
 2. 将 SDCard 插入 SD 卡接口
 3. 连接 RGB 屏幕
 4. 烧录固件
