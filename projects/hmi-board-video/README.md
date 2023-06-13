@@ -9,25 +9,25 @@
 
 这里我使用 `DiskGenius` 工具进行 SD卡格式化，值得注意的是：SD卡需要使用 512 Byte 大小格式化扇区。
 
-![](docs\picture\8.png)
+![](docs/picture/8.png)
 
 ## 视频制作方式
 
 这里我使用 [格式工厂](http://down.pcgeshi.com/FormatFactory_setup.exe) 软件进行视频转码处理，具体使用方式如下：
 
-![](docs\picture\3.png)
+![](docs/picture/3.png)
 
 * 视频配置选项：
 
-![](docs\picture\4.png)
+![](docs/picture/4.png)
 
 * 音频配置选项：
 
-![](docs\picture\5.png)
+![](docs/picture/5.png)
 
 * 配置选择好并选择指定的输出路径后，点击确定。最后点击开始转码即可完成视频转换步骤
 
-  ![](docs\picture\6.png)
+![](docs/picture/6.png)
 
 * 视频转换成功后，将其后缀名为 .avi 的视频存放到 sdcard 中即可
 
