@@ -30,14 +30,14 @@ chip:
   uart_name: UART1
 docs:
 - category: sheet
-  file: documents/ra6m3-芯片手册.pdf
-  title: ra6m3-芯片手册
+  file: documents/ra6m3-user-manual.pdf
+  title: ra6m3-user-manual
 - category: sheet
-  file: documents/ra6m3-数据手册.pdf
-  title: ra6m3-数据手册
+  file: documents/ra6m3-datasheet.pdf
+  title: ra6m3-datasheet
 - category: manual
-  file: documents/hmi-board-v3.1原理图.pdf
-  title: hmi-board-v3.1原理图
+  file: documents/hmi-board-v3.1-schematic.pdf
+  title: hmi-board-schematic
 features:
 - 2M on-chip flash
 - 640Kb on-chip SRAM
