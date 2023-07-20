@@ -126,15 +126,6 @@ void hal_entry(void)
 }
 ```
 
-### Advanced Features
-
-**Resources & Documents**
-
-- [Development Board Overview](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/cpk-ra6m4-evaluation-board#overview)
-- [User Guide](https://www2.renesas.cn/cn/zh/document/mah/1527156?language=zh&r=1527191)
-- [RA MCU](https://www.renesas.com/us/en/document/gde/1520091)
-- [RA6 MCU Quick Design Guide](https://www.renesas.com/us/en/document/apn/ra6-quick-design-guide)
-
 **ENV Configuration**
 
 • How to use the ENV tool: [RT-Thread env tool user manual](https://www.rt-thread.io/document/site/programming-manual/env/env/). 
