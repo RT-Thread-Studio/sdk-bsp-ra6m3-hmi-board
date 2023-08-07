@@ -1,0 +1,9 @@
+**\.o
+**__pycache__
+**\.sconsign.dblite
+**\packages.dbsqlite
+**\.vscode
+rtthread.hex
+rtthread.elf
+rtthread.map
+*/build

@@ -14,7 +14,7 @@ The music player demo shows what kind of modern, smartphone-like user interfaces
 
 - 如果想要自动播放的话，可以增加宏定义`#define LV_DEMO_RTT_MUSIC_AUTO_PLAY 1`
 
-- 如果想要一直自动播放下去（默认是自动播放40秒，显示平均FPS结果），需要增加宏定义`#define LV_DEMO_RTT_MUSIC_AUTO_PLAY_FOREVER 1`
+- 如果想要让demo循环反复播放，需要增加宏定义`#define LV_DEMO_RTT_MUSIC_AUTO_PLAY_FOREVER 1` （如果不定义这个，在只定义 `#define LV_DEMO_RTT_MUSIC_AUTO_PLAY 1` 的情况下，默认是自动播放40秒，显示平均FPS结果，然后停住）
 
 - `lv_conf.h`文件涉及到本demo的宏定义配置示例：
 
