@@ -66,6 +66,7 @@ static const short __spm[13] =
 rt_align(4) static const char *days = "Sun Mon Tue Wed Thu Fri Sat ";
 rt_align(4) static const char *months = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec ";
 
+#ifndef __isleap
 static int __isleap(int year)
 {
     /* every fourth year is a leap year except for century years that are
@@ -73,6 +74,7 @@ static int __isleap(int year)
     /*  return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)); */
     return (!(year % 4) && ((year % 100) || !(year % 400)));
 }
+#endif
 
 static void num2str(char *c, int i)
 {
@@ -175,7 +177,7 @@ static int set_timeval(struct timeval *tv)
 struct tm *gmtime_r(const time_t *timep, struct tm *r)
 {
     int i;
-    int work = *timep % (SPD);
+    int work;
 
     if(timep == RT_NULL || r == RT_NULL)
     {
@@ -185,6 +187,7 @@ struct tm *gmtime_r(const time_t *timep, struct tm *r)
 
     rt_memset(r, RT_NULL, sizeof(struct tm));
 
+    work = *timep % (SPD);
     r->tm_sec = work % 60;
     work /= 60;
     r->tm_min = work % 60;
@@ -536,9 +539,9 @@ int nanosleep(const struct timespec *rqtp, struct timespec *rmtp)
         return -1;
     }
 #ifdef RT_USING_CPUTIME
-    double unit = clock_cpu_getres();
+    rt_uint64_t unit = clock_cpu_getres();
     rt_uint64_t ns = rqtp->tv_sec * NANOSECOND_PER_SECOND + rqtp->tv_nsec;
-    rt_uint64_t tick = ns / unit;
+    rt_uint64_t tick = (ns * (1000UL * 1000)) / unit;
     rt_cputime_sleep(tick);
 
     if (rt_get_errno() == -RT_EINTR)
@@ -546,8 +549,8 @@ int nanosleep(const struct timespec *rqtp, struct timespec *rmtp)
         if (rmtp)
         {
             uint64_t rmtp_cpu_tick = tick - clock_cpu_gettime();
-            rmtp->tv_sec = ((time_t)(rmtp_cpu_tick * unit)) / NANOSECOND_PER_SECOND;
-            rmtp->tv_nsec = ((long)(rmtp_cpu_tick * unit)) % NANOSECOND_PER_SECOND;
+            rmtp->tv_sec = ((time_t)((rmtp_cpu_tick * unit) / (1000UL * 1000))) / NANOSECOND_PER_SECOND;
+            rmtp->tv_nsec = ((long)((rmtp_cpu_tick * unit) / (1000UL * 1000))) % NANOSECOND_PER_SECOND;
         }
         rt_set_errno(EINTR);
         return -1;
@@ -627,14 +630,15 @@ int clock_getres(clockid_t clockid, struct timespec *res)
     switch (clockid)
     {
     case CLOCK_REALTIME:
+#ifndef RT_USING_CPUTIME
         res->tv_sec = 0;
         res->tv_nsec = NANOSECOND_PER_SECOND/RT_TICK_PER_SECOND;
         break;
-
+#endif
 #ifdef RT_USING_CPUTIME
     case CLOCK_CPUTIME_ID:
         res->tv_sec  = 0;
-        res->tv_nsec = clock_cpu_getres();
+        res->tv_nsec = (clock_cpu_getres() / (1000UL * 1000));
         break;
 #endif
 
@@ -668,6 +672,7 @@ int clock_gettime(clockid_t clockid, struct timespec *tp)
     switch (clockid)
     {
     case CLOCK_REALTIME:
+#ifndef RT_USING_CPUTIME
         {
             rt_tick_t tick;
             rt_base_t level;
@@ -675,23 +680,28 @@ int clock_gettime(clockid_t clockid, struct timespec *tp)
             level = rt_hw_interrupt_disable();
             tick = rt_tick_get(); /* get tick */
             tp->tv_sec  = _timevalue.tv_sec + tick / RT_TICK_PER_SECOND;
-            tp->tv_nsec = (_timevalue.tv_usec + (tick % RT_TICK_PER_SECOND) * MICROSECOND_PER_TICK) * 1000;
+            tp->tv_nsec = (_timevalue.tv_usec + (tick % RT_TICK_PER_SECOND) * MICROSECOND_PER_TICK) * 1000U;
             rt_hw_interrupt_enable(level);
+            if (tp->tv_nsec > 1000000000ULL)
+            {
+                tp->tv_nsec %= 1000000000ULL;
+                tp->tv_sec += 1;
+            }
         }
         break;
-
+#endif
 #ifdef RT_USING_CPUTIME
     case CLOCK_MONOTONIC:
     case CLOCK_CPUTIME_ID:
         {
-            double unit = 0;
+            uint64_t unit = 0;
             uint64_t cpu_tick;
 
             unit = clock_cpu_getres();
             cpu_tick = clock_cpu_gettime();
 
-            tp->tv_sec  = ((uint64_t)(cpu_tick * unit)) / NANOSECOND_PER_SECOND;
-            tp->tv_nsec = ((uint64_t)(cpu_tick * unit)) % NANOSECOND_PER_SECOND;
+            tp->tv_sec  = ((uint64_t)((cpu_tick * unit) / (1000UL * 1000))) / NANOSECOND_PER_SECOND;
+            tp->tv_nsec = ((uint64_t)((cpu_tick * unit) / (1000UL * 1000))) % NANOSECOND_PER_SECOND;
         }
         break;
 #endif
@@ -757,9 +767,9 @@ int clock_nanosleep(clockid_t clockid, int flags, const struct timespec *rqtp, s
     case CLOCK_CPUTIME_ID:
     {
         rt_uint64_t cpu_tick_old = clock_cpu_gettime();
-        double unit = clock_cpu_getres();
+        uint64_t unit = clock_cpu_getres();
         rt_uint64_t ns = rqtp->tv_sec * NANOSECOND_PER_SECOND + rqtp->tv_nsec;
-        rt_uint64_t tick = ns / unit;
+        rt_uint64_t tick = (ns * (1000UL * 1000)) / unit;
         if ((flags & TIMER_ABSTIME) == TIMER_ABSTIME)
             tick -= cpu_tick_old;
         rt_cputime_sleep(tick);
@@ -769,8 +779,8 @@ int clock_nanosleep(clockid_t clockid, int flags, const struct timespec *rqtp, s
             if (rmtp)
             {
                 uint64_t rmtp_cpu_tick = tick - clock_cpu_gettime();
-                rmtp->tv_sec = ((time_t)(rmtp_cpu_tick * unit)) / NANOSECOND_PER_SECOND;
-                rmtp->tv_nsec = ((long)(rmtp_cpu_tick * unit)) % NANOSECOND_PER_SECOND;
+                rmtp->tv_sec = ((time_t)((rmtp_cpu_tick * unit) / (1000UL * 1000))) / NANOSECOND_PER_SECOND;
+                rmtp->tv_nsec = ((long)((rmtp_cpu_tick * unit) / (1000UL * 1000))) % NANOSECOND_PER_SECOND;
             }
             rt_set_errno(EINTR);
             return -1;
@@ -906,7 +916,7 @@ static void rtthread_timer_wrapper(void *timerobj)
 #ifdef RT_USING_CPUTIME
     if (timer->clockid == CLOCK_CPUTIME_ID && clock_cpu_issettimeout())
     {
-        timer->reload = (timer->interval.tv_sec * NANOSECOND_PER_SECOND + timer->interval.tv_nsec) / clock_cpu_getres();
+        timer->reload = ((timer->interval.tv_sec * NANOSECOND_PER_SECOND + timer->interval.tv_nsec) * (1000UL * 1000)) / clock_cpu_getres();
         if (timer->reload)
             rt_cputimer_control(&timer->cputimer, RT_TIMER_CTRL_SET_TIME, &(timer->reload));
     }
@@ -1174,7 +1184,7 @@ int timer_gettime(timer_t timerid, struct itimerspec *its)
             rt_uint64_t remain_tick;
             rt_uint64_t remaining;
             rt_cputimer_control(&timer->cputimer, RT_TIMER_CTRL_GET_REMAIN_TIME, &remain_tick);
-            remaining = (remain_tick - clock_cpu_gettime()) / clock_cpu_getres();
+            remaining = ((remain_tick - clock_cpu_gettime()) * (1000UL * 1000)) / clock_cpu_getres();
             seconds = remaining / NANOSECOND_PER_SECOND;
             nanoseconds = remaining % NANOSECOND_PER_SECOND;
         }
@@ -1278,9 +1288,9 @@ int timer_settime(timer_t timerid, int flags, const struct itimerspec *value,
     if (timer->clockid == CLOCK_CPUTIME_ID && clock_cpu_issettimeout())
     {
         rt_uint64_t tick;
-        double unit = clock_cpu_getres();
+        uint64_t unit = clock_cpu_getres();
 
-        tick = (value->it_value.tv_sec * NANOSECOND_PER_SECOND + value->it_value.tv_nsec) / unit;
+        tick = ((value->it_value.tv_sec * NANOSECOND_PER_SECOND + value->it_value.tv_nsec) * (1000UL * 1000)) / unit;
         if ((flags & TIMER_ABSTIME) == TIMER_ABSTIME)
         {
             tick -= clock_cpu_gettime();

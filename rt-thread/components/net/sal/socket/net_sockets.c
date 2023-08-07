@@ -26,7 +26,7 @@ int accept(int s, struct sockaddr *addr, socklen_t *addrlen)
     {
         /* this is a new socket, create it in file system fd */
         int fd;
-        struct dfs_fd *d;
+        struct dfs_file *d;
 
         /* allocate a fd */
         fd = fd_new();
@@ -40,8 +40,11 @@ int accept(int s, struct sockaddr *addr, socklen_t *addrlen)
         d = fd_get(fd);
         if(d)
         {
+#ifdef RT_USING_DFS_V2
+            d->fops = dfs_net_get_fops();
+#endif
             /* this is a socket fd */
-            d->vnode = (struct dfs_fnode *)rt_malloc(sizeof(struct dfs_fnode));
+            d->vnode = (struct dfs_vnode *)rt_malloc(sizeof(struct dfs_vnode));
             if (!d->vnode)
             {
                 /* release fd */
@@ -49,19 +52,10 @@ int accept(int s, struct sockaddr *addr, socklen_t *addrlen)
                 rt_set_errno(-ENOMEM);
                 return -1;
             }
-            rt_memset(d->vnode, 0, sizeof(struct dfs_fnode));
-            rt_list_init(&d->vnode->list);
+            rt_memset(d->vnode, 0, sizeof(struct dfs_vnode));
+            dfs_vnode_init(d->vnode, FT_SOCKET, dfs_net_get_fops());
 
-            d->vnode->type = FT_SOCKET;
-            d->vnode->path = NULL;
-            d->vnode->fullpath = NULL;
-            d->vnode->ref_count = 1;
-            d->vnode->fops = dfs_net_get_fops();
-            d->flags = O_RDWR; /* set flags as read and write */
-            d->vnode->size = 0;
-            d->pos = 0;
-
-            /* set socket to the data of dfs_fd */
+            /* set socket to the data of dfs_file */
             d->vnode->data = (void *)(size_t)new_socket;
 
             return fd;
@@ -99,7 +93,7 @@ int shutdown(int s, int how)
 {
     int error = 0;
     int socket = -1;
-    struct dfs_fd *d;
+    struct dfs_file *d;
 
     socket = dfs_net_getsocket(s);
     if (socket < 0)
@@ -227,7 +221,7 @@ int socket(int domain, int type, int protocol)
     /* create a BSD socket */
     int fd;
     int socket;
-    struct dfs_fd *d;
+    struct dfs_file *d;
 
     /* allocate a fd */
     fd = fd_new();
@@ -238,7 +232,12 @@ int socket(int domain, int type, int protocol)
         return -1;
     }
     d = fd_get(fd);
-    d->vnode = (struct dfs_fnode *)rt_malloc(sizeof(struct dfs_fnode));
+
+#ifdef RT_USING_DFS_V2
+    d->fops = dfs_net_get_fops();
+#endif
+
+    d->vnode = (struct dfs_vnode *)rt_malloc(sizeof(struct dfs_vnode));
     if (!d->vnode)
     {
         /* release fd */
@@ -254,24 +253,13 @@ int socket(int domain, int type, int protocol)
     }
 #endif /* SAL_USING_AF_UNIX */
 
-    /* create socket  and then put it to the dfs_fd */
+    /* create socket  and then put it to the dfs_file */
     socket = sal_socket(domain, type, protocol);
     if (socket >= 0)
     {
-        rt_memset(d->vnode, 0, sizeof(struct dfs_fnode));
-        rt_list_init(&d->vnode->list);
-        /* this is a socket fd */
-        d->vnode->type = FT_SOCKET;
-        d->vnode->path = NULL;
-        d->vnode->fullpath = NULL;
-        d->vnode->ref_count = 1;
-        d->vnode->fops = dfs_net_get_fops();
+        dfs_vnode_init(d->vnode, FT_SOCKET, dfs_net_get_fops());
 
-        d->flags = O_RDWR; /* set flags as read and write */
-        d->vnode->size = 0;
-        d->pos = 0;
-
-        /* set socket to the data of dfs_fd */
+        /* set socket to the data of dfs_file */
         d->vnode->data = (void *)(size_t)socket;
     }
     else
@@ -291,7 +279,7 @@ int closesocket(int s)
 {
     int error = 0;
     int socket = -1;
-    struct dfs_fd *d;
+    struct dfs_file *d;
 
     socket = dfs_net_getsocket(s);
     if (socket < 0)

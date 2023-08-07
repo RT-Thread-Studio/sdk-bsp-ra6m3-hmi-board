@@ -10,6 +10,7 @@
  * 2021-02-12     lizhirui     add 64-bit support for lwp_brk
  * 2021-02-19     lizhirui     add riscv64 support for lwp_user_accessable and lwp_get_from_user
  * 2021-06-07     lizhirui     modify user space bound check
+ * 2022-12-25     wangxiaoyao  adapt to new mm
  */
 
 #include <rtthread.h>
@@ -39,10 +40,12 @@ static void _init_lwp_objs(struct rt_lwp_objs *lwp_objs, rt_aspace_t aspace);
 int lwp_user_space_init(struct rt_lwp *lwp, rt_bool_t is_fork)
 {
     int err = -RT_ENOMEM;
+
     lwp->lwp_obj = rt_malloc(sizeof(struct rt_lwp_objs));
-    _init_lwp_objs(lwp->lwp_obj, lwp->aspace);
     if (lwp->lwp_obj)
     {
+        _init_lwp_objs(lwp->lwp_obj, lwp->aspace);
+
         err = arch_user_space_init(lwp);
         if (!is_fork && err == RT_EOK)
         {
@@ -52,6 +55,7 @@ int lwp_user_space_init(struct rt_lwp *lwp, rt_bool_t is_fork)
                                 MMU_MAP_U_RWCB, 0, &lwp->lwp_obj->mem_obj, 0);
         }
     }
+
     return err;
 }
 
@@ -119,7 +123,7 @@ static void _user_do_page_fault(struct rt_varea *varea,
 
     if (lwp_objs->source)
     {
-        void *paddr = rt_hw_mmu_v2p(lwp_objs->source, msg->fault_vaddr);
+        char *paddr = rt_hw_mmu_v2p(lwp_objs->source, msg->fault_vaddr);
         if (paddr != ARCH_MAP_FAILED)
         {
             void *vaddr;
@@ -127,7 +131,7 @@ static void _user_do_page_fault(struct rt_varea *varea,
 
             if (!(varea->flag & MMF_TEXT))
             {
-                void *cp = rt_pages_alloc(0);
+                void *cp = rt_pages_alloc_ext(0, PAGE_ANY_AVAILABLE);
                 if (cp)
                 {
                     memcpy(cp, vaddr, ARCH_PAGE_SIZE);
@@ -167,18 +171,21 @@ static void _user_do_page_fault(struct rt_varea *varea,
 
 static void _init_lwp_objs(struct rt_lwp_objs *lwp_objs, rt_aspace_t aspace)
 {
-    /**
-     * @brief one lwp_obj represent an base layout of page based memory in user space
-     * This is useful on duplication. Where we only have a (lwp_objs and offset) to
-     * provide identical memory. This is implemented by lwp_objs->source.
-     */
-    lwp_objs->source = NULL;
-    lwp_objs->mem_obj.get_name = user_get_name;
-    lwp_objs->mem_obj.hint_free = NULL;
-    lwp_objs->mem_obj.on_page_fault = _user_do_page_fault;
-    lwp_objs->mem_obj.on_page_offload = rt_mm_dummy_mapper.on_page_offload;
-    lwp_objs->mem_obj.on_varea_open = rt_mm_dummy_mapper.on_varea_open;
-    lwp_objs->mem_obj.on_varea_close = rt_mm_dummy_mapper.on_varea_close;
+    if (lwp_objs)
+    {
+        /**
+         * @brief one lwp_obj represent an base layout of page based memory in user space
+         * This is useful on duplication. Where we only have a (lwp_objs and offset) to
+         * provide identical memory. This is implemented by lwp_objs->source.
+         */
+        lwp_objs->source = NULL;
+        lwp_objs->mem_obj.get_name = user_get_name;
+        lwp_objs->mem_obj.hint_free = NULL;
+        lwp_objs->mem_obj.on_page_fault = _user_do_page_fault;
+        lwp_objs->mem_obj.on_page_offload = rt_mm_dummy_mapper.on_page_offload;
+        lwp_objs->mem_obj.on_varea_open = rt_mm_dummy_mapper.on_varea_open;
+        lwp_objs->mem_obj.on_varea_close = rt_mm_dummy_mapper.on_varea_close;
+    }
 }
 
 static void *_lwp_map_user(struct rt_lwp *lwp, void *map_va, size_t map_size,
@@ -206,17 +213,17 @@ static void *_lwp_map_user(struct rt_lwp *lwp, void *map_va, size_t map_size,
 
 int lwp_unmap_user(struct rt_lwp *lwp, void *va)
 {
-    int err;
-    err = rt_aspace_unmap(lwp->aspace, va);
+    int err = rt_aspace_unmap(lwp->aspace, va);
+
     return err;
 }
 
 static void _dup_varea(rt_varea_t varea, struct rt_lwp *src_lwp,
                        rt_aspace_t dst)
 {
-    void *vaddr = varea->start;
-    void *vend = vaddr + varea->size;
-    if (vaddr < (void *)USER_STACK_VSTART || vaddr >= (void *)USER_STACK_VEND)
+    char *vaddr = varea->start;
+    char *vend = vaddr + varea->size;
+    if (vaddr < (char *)USER_STACK_VSTART || vaddr >= (char *)USER_STACK_VEND)
     {
         while (vaddr != vend)
         {
@@ -424,7 +431,7 @@ void *lwp_map_user_phy(struct rt_lwp *lwp, void *map_va, void *map_pa,
                        size_t map_size, int cached)
 {
     int err;
-    void *va;
+    char *va;
     size_t offset = 0;
 
     if (!map_size)
@@ -452,7 +459,7 @@ void *lwp_map_user_phy(struct rt_lwp *lwp, void *map_va, void *map_pa,
     rt_size_t attr = cached ? MMU_MAP_U_RWCB : MMU_MAP_U_RW;
 
     err =
-        rt_aspace_map_phy(lwp->aspace, &hint, attr, MM_PA_TO_OFF(map_pa), &va);
+        rt_aspace_map_phy(lwp->aspace, &hint, attr, MM_PA_TO_OFF(map_pa), (void **)&va);
     if (err != RT_EOK)
     {
         va = RT_NULL;
@@ -525,7 +532,7 @@ void *lwp_mmap2(void *addr, size_t length, int prot, int flags, int fd,
     }
     else
     {
-        struct dfs_fd *d;
+        struct dfs_file *d;
 
         d = fd_get(fd);
         if (d && d->vnode->type == FT_DEVICE)

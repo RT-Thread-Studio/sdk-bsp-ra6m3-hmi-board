@@ -208,9 +208,9 @@ int lwip_netdev_ping(struct netdev *netif, const char *host, size_t data_len,
     int elapsed_time;
     rt_tick_t recv_start_tick;
 #if LWIP_VERSION_MAJOR == 1U /* v1.x */
-    int recv_timeout = timeout * 1000UL / RT_TICK_PER_SECOND;
+    int recv_timeout = timeout;
 #else /* >= v2.x */
-    struct timeval recv_timeout = { timeout / RT_TICK_PER_SECOND, timeout % RT_TICK_PER_SECOND };
+    struct timeval recv_timeout = { timeout / 1000UL, timeout % 1000UL * 1000 };
 #endif
     ip_addr_t target_addr;
     struct addrinfo hint, *res = RT_NULL;
@@ -246,7 +246,11 @@ int lwip_netdev_ping(struct netdev *netif, const char *host, size_t data_len,
     local.sin_len = sizeof(local);
     local.sin_family = AF_INET;
     local.sin_port = 0;
+#ifndef NETDEV_USING_IPV6
     local.sin_addr.s_addr = (netif->ip_addr.addr);
+#else
+    local.sin_addr.s_addr = (netif->ip_addr.u_addr.ip4.addr);
+#endif
     lwip_bind(s, (struct sockaddr *)&local, sizeof(struct sockaddr_in));
 
     lwip_setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, &recv_timeout, sizeof(recv_timeout));

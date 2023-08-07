@@ -1,4 +1,6 @@
-menuconfig RT_USING_DFS
+menu "DFS: device virtual file system"
+
+config RT_USING_DFS
     bool "DFS: device virtual file system"
     select RT_USING_MUTEX
     default y
@@ -14,18 +16,7 @@ if RT_USING_DFS
         bool "Using working directory"
         default y
 
-    config DFS_FILESYSTEMS_MAX
-        int "The maximal number of mounted file system"
-        default 4
-
-    config DFS_FILESYSTEM_TYPES_MAX
-        int "The maximal number of file system type"
-        default 4
-
-    config DFS_FD_MAX
-        int "The maximal number of opened files"
-        default 16
-
+if RT_USING_DFS_V1
     config RT_USING_DFS_MNTTABLE
         bool "Using mount table for file system"
         default n
@@ -37,6 +28,33 @@ if RT_USING_DFS
                     {0}
                 };
             The mount_table must be terminated with NULL.
+endif
+
+    config DFS_FD_MAX
+        int "The maximal number of opened files"
+        default 16
+
+    choice
+        prompt "The version of DFS"
+        default RT_USING_DFS_V1
+        default RT_USING_DFS_V2 if RT_USING_SMART
+
+        config RT_USING_DFS_V1
+            bool "DFS v1.0"
+
+        config RT_USING_DFS_V2
+            bool "DFS v2.0"
+    endchoice
+
+if RT_USING_DFS_V1
+    config DFS_FILESYSTEMS_MAX
+        int "The maximal number of mounted file system"
+        default 4
+
+    config DFS_FILESYSTEM_TYPES_MAX
+        int "The maximal number of file system type"
+        default 4
+endif
 
     config RT_USING_DFS_ELMFAT
         bool "Enable elm-chan fatfs"
@@ -140,7 +158,7 @@ if RT_USING_DFS
     config RT_USING_DFS_ROMFS
         bool "Enable ReadOnly file system on flash"
         default n
-
+if RT_USING_DFS_V1
     config RT_USING_DFS_CROMFS
         bool "Enable ReadOnly compressed file system on flash"
         default n
@@ -150,11 +168,12 @@ if RT_USING_DFS
         bool "Enable RAM file system"
         select RT_USING_MEMHEAP
         default n
-
+endif
     config RT_USING_DFS_TMPFS
         bool "Enable TMP file system"
         default n
 
+if RT_USING_DFS_V1
     config RT_USING_DFS_NFS
         bool "Using NFS v3 client file system"
         depends on RT_USING_LWIP
@@ -165,5 +184,8 @@ if RT_USING_DFS
             string "NFSv3 host export"
             default "192.168.1.5:/"
     endif
+endif
 
 endif
+
+endmenu

@@ -157,6 +157,38 @@ after_enable_mmu:
 #endif /* RT_USING_SMART */
     mcr p15, 0, r1, c1, c0, 0
 
+#ifndef RT_USING_SMART
+#ifdef RT_USING_SMP
+    /* Use spin-table to start secondary cores */
+    @ get cpu id, and subtract the offset from the stacks base address
+    bl rt_hw_cpu_id
+    mov r5, r0
+
+    cmp     r5, #0              @ cpu id == 0
+    beq     normal_setup
+
+    @ cpu id > 0, stop or wait
+#ifdef RT_SMP_AUTO_BOOT
+    ldr r0, =secondary_cpu_entry
+    mov r1, #0
+    str r1, [r0] /* clean secondary_cpu_entry */
+#endif /* RT_SMP_AUTO_BOOT */
+
+secondary_loop:
+    @ cpu core 1 goes into sleep until core 0 wakeup it
+    wfe
+#ifdef RT_SMP_AUTO_BOOT
+    ldr r1, =secondary_cpu_entry
+    ldr r0, [r1]
+    cmp r0, #0
+    blxne r0 /* if(secondary_cpu_entry) secondary_cpu_entry(); */
+#endif /* RT_SMP_AUTO_BOOT */
+    b secondary_loop
+
+normal_setup:
+#endif /* RT_USING_SMP */
+#endif /* RT_USING_SMART */
+
     /* enable I cache + branch prediction */
     mrc p15, 0, r0, c1, c0, 0
     orr     r0, r0, #(1<<12)
@@ -208,13 +240,21 @@ bss_loop:
 _rtthread_startup:
     .word rtthread_startup
 
+.weak rt_asm_cpu_id
+rt_asm_cpu_id:
+    mrc p15, 0, r0, c0, c0, 5
+    and r0, r0, #0xf
+    mov pc, lr
+
 stack_setup:
 
 #ifdef RT_USING_SMP
     /* cpu id */
-    mrc p15, 0, r0, c0, c0, 5
-    and r0, r0, #0xf
+    mov r10, lr
+    bl rt_asm_cpu_id
+    mov lr, r10
     add r0, r0, #1
+
 #else
     mov r0, #1
 #endif
@@ -284,7 +324,7 @@ rt_hw_mmu_switch:
     mov r0, #0
     mcr p15, 0, r0, c8, c7, 0
     mcr p15, 0, r0, c7, c5, 0       //iciallu
-    mcr p15, 0, r0, c7, c5, 6       //bpiall 
+    mcr p15, 0, r0, c7, c5, 6       //bpiall
 
     dsb
     isb
@@ -299,6 +339,50 @@ rt_hw_mmu_tbl_get:
 _halt:
     wfe
     b _halt
+
+#ifdef RT_USING_SMP
+
+.global rt_secondary_cpu_entry
+rt_secondary_cpu_entry:
+#ifdef RT_USING_SMART
+    ldr     r0, =_reset
+    adr     r5, _reset
+    sub     r5, r5, r0
+
+    ldr     lr, =after_enable_mmu_n
+    ldr     r0, =init_mtbl
+    add     r0, r5
+    b       enable_mmu
+
+after_enable_mmu_n:
+    ldr     r0, =MMUTable
+    add     r0, r5
+    bl      rt_hw_mmu_switch
+#endif
+
+#ifdef RT_USING_FPU
+    mov r4, #0xfffffff
+    mcr p15, 0, r4, c1, c0, 2
+#endif
+
+    mrc p15, 0, r1, c1, c0, 1
+    mov r0, #(1<<6)
+    orr r1, r0
+    mcr p15, 0, r1, c1, c0, 1    /* enable smp */
+
+    mrc p15, 0, r0, c1, c0, 0
+    bic r0, #(1<<13)
+    mcr p15, 0, r0, c1, c0, 0
+
+    bl stack_setup
+
+    /* initialize the mmu table and enable mmu */
+#ifndef RT_USING_SMART
+    bl rt_hw_mmu_init
+#endif
+
+    b rt_hw_secondary_cpu_bsp_start
+#endif
 
 /* exception handlers: undef, swi, padt, dabt, resv, irq, fiq */
 .section .text.isr, "ax"
@@ -616,53 +700,18 @@ rt_hw_clz:
     clz r0, r0
     bx lr
 
-#ifdef RT_USING_SMP
-
-.global rt_secondary_cpu_entry
-rt_secondary_cpu_entry:
-#ifdef RT_USING_SMART
-    ldr     r0, =_reset
-    adr     r5, _reset
-    sub     r5, r5, r0
-
-    ldr     lr, =after_enable_mmu_n
-    ldr     r0, =init_mtbl
-    add     r0, r5
-    b       enable_mmu
-
-after_enable_mmu_n:
-    ldr     r0, =MMUTable
-    add     r0, r5
-    bl      rt_hw_mmu_switch
-#endif
-
-#ifdef RT_USING_FPU
-    mov r4, #0xfffffff
-    mcr p15, 0, r4, c1, c0, 2
-#endif
-
-    mrc p15, 0, r1, c1, c0, 1
-    mov r0, #(1<<6)
-    orr r1, r0
-    mcr p15, 0, r1, c1, c0, 1    /* enable smp */
-
-    mrc p15, 0, r0, c1, c0, 0
-    bic r0, #(1<<13)
-    mcr p15, 0, r0, c1, c0, 0
-
-    bl stack_setup
-
-    /* initialize the mmu table and enable mmu */
-#ifndef RT_USING_SMART
-    bl rt_hw_mmu_init
-#endif
-
-    b rt_hw_secondary_cpu_bsp_start
-#endif
-
 #ifndef RT_CPUS_NR
 #define RT_CPUS_NR 1
 #endif
+
+#include "asm-generic.h"
+
+START_POINT(_thread_start)
+    mov     r10, lr
+    blx     r1
+    blx     r10
+    b       .   /* never here */
+START_POINT_END(_thread_start)
 
 .bss
 .align 3     /* align to  2~3=8 */
