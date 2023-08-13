@@ -216,8 +216,10 @@ struct pbuf *rt_ra6m3_eth_rx(rt_device_t dev)
     fsp_err_t res;
 
     res = R_ETHER_Read(&g_ether0_ctrl, buffer, &len);
-    if (res != FSP_SUCCESS)
+    if (res != FSP_SUCCESS) {
         LOG_D("R_ETHER_Read failed!, res = %d", res);
+        return NULL;
+    }
 
     uint32_t bufferoffset = 0;
     uint32_t payloadoffset = 0;
@@ -392,7 +394,7 @@ static int rt_hw_ra6m3_eth_init(void)
 
     ra6m3_eth_device.parent.eth_rx     = rt_ra6m3_eth_rx;
     ra6m3_eth_device.parent.eth_tx     = rt_ra6m3_eth_tx;
-    
+
     rt_ra6m3_eth_init();
 
     /* register eth device */

@@ -6,6 +6,8 @@
 **/build
 **/libraries
 **/rt-thread
+**/packages
+**/.config.old
 rtthread.hex
 rtthread.elf
 rtthread.map
