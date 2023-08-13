@@ -59,7 +59,7 @@ static time_t get_rtc_timestamp(void)
     return timegm(&tm_new);
 }
 
-static rt_err_t ra_get_secs(void *args)
+static rt_err_t ra_get_secs(time_t *args)
 {
     *(rt_uint32_t *)args = get_rtc_timestamp();
     LOG_D("RTC: get rtc_time %x\n", *(rt_uint32_t *)args);
@@ -95,7 +95,7 @@ static rt_err_t set_rtc_time_stamp(time_t time_stamp)
     return RT_EOK;
 }
 
-static rt_err_t ra_set_secs(void *args)
+static rt_err_t ra_set_secs(time_t *args)
 {
 
     rt_err_t result = RT_EOK;
@@ -110,10 +110,10 @@ static rt_err_t ra_set_secs(void *args)
 }
 
 #ifdef RT_USING_ALARM
-static rt_err_t ra_get_alarm(void *arg)
+static rt_err_t ra_get_alarm(struct rt_rtc_wkalarm *wkalarm)
 {
     rt_err_t result = RT_EOK;
-    struct rt_rtc_wkalarm *wkalarm = (struct rt_rtc_wkalarm *)arg;
+
     rtc_alarm_time_t alarm_time_get =
     {
         .sec_match        =  RT_FALSE,
@@ -139,10 +139,10 @@ static rt_err_t ra_get_alarm(void *arg)
     return result;
 }
 
-static rt_err_t ra_set_alarm(void *arg)
+static rt_err_t ra_set_alarm(struct rt_rtc_wkalarm *wkalarm)
 {
     rt_err_t result = RT_EOK;
-    struct rt_rtc_wkalarm *wkalarm = (struct rt_rtc_wkalarm *)arg;
+
     rtc_alarm_time_t alarm_time_set =
     {
         .sec_match        =  RT_TRUE,

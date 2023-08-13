@@ -1,0 +1,17 @@
+[
+ {
+  "name": "RW007",
+  "path": "/packages/iot/WiFi/rw007",
+  "ver": "v2.1.0"
+ },
+ {
+  "name": "LVGL",
+  "path": "/packages/multimedia/LVGL/LVGL",
+  "ver": "v8.3.9"
+ },
+ {
+  "name": "TLSF",
+  "path": "/packages/system/tlsf",
+  "ver": "v1.0.0"
+ }
+]
