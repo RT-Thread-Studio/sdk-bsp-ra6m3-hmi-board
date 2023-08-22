@@ -16,6 +16,9 @@ if GetDepend(['BSP_USING_JPEG']):
 if GetDepend(['BSP_USING_G2D']):
     src += Glob('ports/drv_g2d.c')
 
+if GetDepend(['RT_USING_CAN']):
+    src += Glob('ports/can_test.c')
+
 objs = DefineGroup('Drivers', src, depend = [''], CPPPATH = CPPPATH)
 
 for item in list:
