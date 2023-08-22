@@ -5,7 +5,6 @@
  * 命令解释：命令第二个参数是要使用的 CAN 设备名称，为空则使用默认的 CAN 设备
  * 程序功能：通过 CAN 设备发送一帧，并创建一个线程接收数据然后打印输出。
  */
-
 #include <rtthread.h>
 #include "rtdevice.h"
 #include "drivers/can.h"
@@ -65,11 +64,12 @@ static void can_rx_thread(void *parameter)
         /* 从 CAN 读取一帧数据 */
         rt_device_read(can_dev, 0, &rxmsg, sizeof(rxmsg));
         /* 打印数据 ID 及内容 */
-        rt_kprintf("ID:%x", rxmsg.id);
-        for (i = 0; i < 8; i++)
+        rt_kprintf("ID: %04x:", rxmsg.id);
+        for (i = 0; i < 7; i++)
         {
-            rt_kprintf("%2x", rxmsg.data[i]);
+            rt_kprintf("%02x ", rxmsg.data[i]);
         }
+        rt_kprintf("%02x", rxmsg.data[7]);
 
         rt_kprintf("\n");
     }
@@ -82,38 +82,44 @@ int can_sample(int argc, char *argv[])
     rt_size_t size;
     rt_thread_t thread;
     char can_name[RT_NAME_MAX];
+    if (can_dev == NULL)
+    {
+        if (argc == 2)
+        {
+            rt_strncpy(can_name, argv[1], RT_NAME_MAX);
+        }
+        else
+        {
+            rt_strncpy(can_name, CAN_DEV_NAME, RT_NAME_MAX);
+        }
+        /* 查找 CAN 设备 */
+        can_dev = rt_device_find(can_name);
+        if (!can_dev)
+        {
+            rt_kprintf("find %s failed!\n", can_name);
+            return RT_ERROR;
+        }
 
-    if (argc == 2)
-    {
-        rt_strncpy(can_name, argv[1], RT_NAME_MAX);
-    }
-    else
-    {
-        rt_strncpy(can_name, CAN_DEV_NAME, RT_NAME_MAX);
-    }
-    /* 查找 CAN 设备 */
-    can_dev = rt_device_find(can_name);
-    if (!can_dev)
-    {
-        rt_kprintf("find %s failed!\n", can_name);
-        return RT_ERROR;
-    }
+        /* 初始化 CAN 接收信号量 */
+        rt_sem_init(&rx_sem, "rx_sem", 0, RT_IPC_FLAG_FIFO);
 
-    /* 初始化 CAN 接收信号量 */
-    rt_sem_init(&rx_sem, "rx_sem", 0, RT_IPC_FLAG_FIFO);
+        /* 以中断接收及发送方式打开 CAN 设备 */
+        res = rt_device_open(can_dev, RT_DEVICE_FLAG_INT_TX | RT_DEVICE_FLAG_INT_RX);
+        RT_ASSERT(res == RT_EOK);
 
-    /* 以中断接收及发送方式打开 CAN 设备 */
-    res = rt_device_open(can_dev, RT_DEVICE_FLAG_INT_TX | RT_DEVICE_FLAG_INT_RX);
-    RT_ASSERT(res == RT_EOK);
-    /* 创建数据接收线程 */
-    thread = rt_thread_create("can_rx", can_rx_thread, RT_NULL, 1024, 25, 10);
-    if (thread != RT_NULL)
-    {
-        rt_thread_startup(thread);
-    }
-    else
-    {
-        rt_kprintf("create can_rx thread failed!\n");
+        res = rt_device_control(can_dev,RT_CAN_CMD_SET_MODE, (void*)RT_CAN_MODE_LOOPBACK);
+        RT_ASSERT(res == RT_EOK);
+
+        /* 创建数据接收线程 */
+        thread = rt_thread_create("can_rx", can_rx_thread, RT_NULL, 1024, 25, 10);
+        if (thread != RT_NULL)
+        {
+            rt_thread_startup(thread);
+        }
+        else
+        {
+            rt_kprintf("create can_rx thread failed!\n");
+        }
     }
 
     msg.id = 0x78;          /* ID 为 0x78 */
@@ -136,7 +142,7 @@ int can_sample(int argc, char *argv[])
         {
             rt_kprintf("can dev write data failed!\n");
         }
-        rt_thread_mdelay(1000);
+        rt_thread_mdelay(100);
     }
 
     return res;

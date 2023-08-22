@@ -115,6 +115,7 @@
 #define RT_USING_SERIAL
 #define RT_USING_SERIAL_V2
 #define RT_SERIAL_USING_DMA
+#define RT_USING_CAN
 #define RT_USING_I2C
 #define RT_USING_I2C_BITOPS
 #define RT_USING_PIN
@@ -450,6 +451,8 @@
 #define SDHI_USING_1_BIT
 #define BSP_USING_PWM
 #define BSP_USING_PWM5
+#define BSP_USING_CAN
+#define BSP_USING_CAN0
 #define BSP_USING_LCD
 #define BSP_USING_G2D
 #define BSP_USING_JPEG
