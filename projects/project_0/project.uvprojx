@@ -10,12 +10,13 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>6190000::V6.19::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>R7FA6M3AH</Device>
           <Vendor>Renesas</Vendor>
-          <PackID>Renesas.RA_DFP.4.3.0</PackID>
+          <PackID>Renesas.RA_DFP.4.4.0</PackID>
           <PackURL>https://www2.renesas.eu/Keil_MDK_Packs/</PackURL>
           <Cpu>IRAM(0x1FFE0000,0x020000) IRAM2(0x20000000,0x080000) IROM(0x00000000,0x200000) CPUTYPE("Cortex-M4") FPU2 DSP CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -185,6 +186,7 @@
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
+            <nBranchProt>0</nBranchProt>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -336,9 +338,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>-Wno-license-management -Wunused -Wuninitialized -Wall  -Wmissing-declarations  -Wpointer-arith  -Waggregate-return -Wfloat-equal</MiscControls>
-              <Define>RT_USING_LIBC, RT_USING_ARMLIBC, __STDC_LIMIT_MACROS, __RTTHREAD__, __CLK_TCK=RT_TICK_PER_SECOND</Define>
+              <Define>RT_USING_LIBC, __CLK_TCK=RT_TICK_PER_SECOND, __STDC_LIMIT_MACROS, RT_USING_ARMLIBC, __RTTHREAD__</Define>
               <Undefine></Undefine>
-              <IncludePath>rt-thread\components\drivers\include;rt-thread\components\libc\posix\ipc;rt-thread\components\drivers\include;rt-thread\components\libc\posix\io\stdio;libraries\HAL_Drivers;rt-thread\include;rt-thread\components\libc\compilers\common\extension;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;board;rt-thread\components\libc\posix\io\poll;board\ports;rt-thread\components\libc\compilers\common\include;rt-thread\components\finsh;libraries\HAL_Drivers\config;rt-thread\components\libc\compilers\common\extension\fcntl\octal;board\ports\wifi;rt-thread\components\drivers\include;.</IncludePath>
+              <IncludePath>libraries\HAL_Drivers\config;rt-thread\libcpu\arm\common;rt-thread\components\libc\compilers\common\include;rt-thread\components\libc\posix\ipc;rt-thread\components\finsh;rt-thread\components\libc\compilers\common\extension\fcntl\octal;rt-thread\components\drivers\include;rt-thread\components\libc\posix\io\poll;rt-thread\components\libc\compilers\common\extension;rt-thread\include;.;rt-thread\components\drivers\include;board\ports\wifi;rt-thread\components\drivers\include;board\ports;board;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\posix\io\stdio;libraries\HAL_Drivers</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -557,7 +559,7 @@
                       <MiscControls>  -std=c99</MiscControls>
                       <Define> </Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -613,7 +615,7 @@
                       <MiscControls>  -std=c99</MiscControls>
                       <Define> </Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -669,7 +671,7 @@
                       <MiscControls>  -std=c99</MiscControls>
                       <Define> </Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -725,7 +727,7 @@
                       <MiscControls>  -std=c99</MiscControls>
                       <Define> </Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -851,7 +853,7 @@
     <apis/>
     <components>
       <component Cclass="Flex Software" Cgroup="RA Configuration" Cvendor="Renesas" Cversion="1.0.0" condition="RA Device" generator="Renesas RA Smart Configurator">
-        <package name="RA_DFP" schemaVersion="1.7.2" url="https://www2.renesas.eu/Keil_MDK_Packs/" vendor="Renesas" version="4.3.0"/>
+        <package name="RA_DFP" schemaVersion="1.7.2" url="https://www2.renesas.eu/Keil_MDK_Packs/" vendor="Renesas" version="4.4.0"/>
         <targetInfos>
           <targetInfo name="Target 1"/>
         </targetInfos>
@@ -859,20 +861,5 @@
     </components>
     <files/>
   </RTE>
-
-  <LayerInfo>
-    <Layers>
-      <Layer>
-        <LayName>&lt;Project Info&gt;</LayName>
-        <LayDesc></LayDesc>
-        <LayUrl></LayUrl>
-        <LayKeys></LayKeys>
-        <LayCat></LayCat>
-        <LayLic></LayLic>
-        <LayTarg>0</LayTarg>
-        <LayPrjMark>1</LayPrjMark>
-      </Layer>
-    </Layers>
-  </LayerInfo>
 
 </Project>
