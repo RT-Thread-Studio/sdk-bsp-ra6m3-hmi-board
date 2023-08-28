@@ -1,22 +1,22 @@
 [
  {
-  "path": "/packages/iot/WiFi/rw007", 
-  "ver": "v2.1.0", 
+  "path": "/packages/iot/WiFi/rw007",
+  "ver": "v2.1.0",
   "name": "RW007"
- }, 
+ },
  {
-  "path": "/packages/multimedia/LVGL/LVGL", 
-  "ver": "v8.3.5", 
+  "path": "/packages/multimedia/LVGL/LVGL",
+  "ver": "v8.3.5",
   "name": "LVGL"
- }, 
+ },
  {
-  "path": "/packages/multimedia/LVGL/lv_music_demo", 
-  "ver": "v0.3.2", 
+  "path": "/packages/multimedia/LVGL/lv_music_demo",
+  "ver": "v0.3.3",
   "name": "LV_MUSIC_DEMO"
- }, 
+ },
  {
-  "path": "/packages/system/tlsf", 
-  "ver": "v1.0.0", 
+  "path": "/packages/system/tlsf",
+  "ver": "v1.0.0",
   "name": "TLSF"
  }
 ]

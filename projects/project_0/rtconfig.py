@@ -1,10 +1,15 @@
 import os
 import sys
+import platform
 
 # toolchains options
 ARCH='arm'
 CPU='cortex-m4'
-CROSS_TOOL='keil'
+BUILD_HOST=platform.system()
+if  BUILD_HOST == 'Linux':
+    CROSS_TOOL='gcc'
+else :
+    CROSS_TOOL='keil'
 
 if os.getenv('RTT_CC'):
     CROSS_TOOL = os.getenv('RTT_CC')
@@ -15,7 +20,10 @@ if os.getenv('RTT_ROOT'):
 # EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR
 if  CROSS_TOOL == 'gcc':
     PLATFORM    = 'gcc'
-    EXEC_PATH   = r'C:\Users\XXYYZZ'
+    if BUILD_HOST == 'Linux':
+        EXEC_PATH   = r'/usr/bin'
+    else :
+        EXEC_PATH   = r'C:\Users\XXYYZZ'
 elif CROSS_TOOL == 'keil':
     PLATFORM    = 'armclang'
     EXEC_PATH   = r'C:/Keil_v5'
@@ -26,8 +34,8 @@ elif CROSS_TOOL == 'iar':
 if os.getenv('RTT_EXEC_PATH'):
     EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
-BUILD = 'debug' 
-# BUILD = 'release' 
+BUILD = 'debug'
+# BUILD = 'release'
 
 if PLATFORM == 'gcc':
     # toolchains

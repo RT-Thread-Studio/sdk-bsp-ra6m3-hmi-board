@@ -13,9 +13,10 @@
 #include <sys/time.h>
 #include <sys/errno.h>
 #include <rtthread.h>
+#include <limits.h>
 #include "mqueue.h"
 
-static mqd_t posix_mq_list = RT_NULL;
+static mqdes_t posix_mq_list = RT_NULL;
 static struct rt_semaphore posix_mq_lock;
 
 /* initialize posix mqueue */
@@ -26,15 +27,19 @@ static int posix_mq_system_init(void)
 }
 INIT_COMPONENT_EXPORT(posix_mq_system_init);
 
-rt_inline void posix_mq_insert(mqd_t pmq)
+rt_inline void posix_mq_insert(mqdes_t pmq)
 {
+    if (posix_mq_list == RT_NULL)
+        pmq->mq_id = 1;
+    else
+        pmq->mq_id = posix_mq_list->mq_id + 1;
     pmq->next = posix_mq_list;
     posix_mq_list = pmq;
 }
 
-static void posix_mq_delete(mqd_t pmq)
+static void posix_mq_delete(mqdes_t pmq)
 {
-    mqd_t iter;
+    mqdes_t iter;
     if (posix_mq_list == pmq)
     {
         posix_mq_list = pmq->next;
@@ -63,9 +68,9 @@ static void posix_mq_delete(mqd_t pmq)
     }
 }
 
-static mqd_t posix_mq_find(const char* name)
+static mqdes_t posix_mq_find(const char *name)
 {
-    mqd_t iter;
+    mqdes_t iter;
     rt_object_t object;
 
     for (iter = posix_mq_list; iter != RT_NULL; iter = iter->next)
@@ -81,12 +86,20 @@ static mqd_t posix_mq_find(const char* name)
     return RT_NULL;
 }
 
-int mq_setattr(mqd_t                 mqdes,
+static mqdes_t posix_mq_id_find(mqd_t id)
+{
+    for (mqdes_t iter = posix_mq_list; iter != RT_NULL; iter = iter->next)
+        if (iter->mq_id == id)
+            return iter;
+    return RT_NULL;
+}
+
+int mq_setattr(mqd_t                 id,
                const struct mq_attr *mqstat,
                struct mq_attr       *omqstat)
 {
     if (mqstat == RT_NULL)
-        return mq_getattr(mqdes, omqstat);
+        return mq_getattr(id, omqstat);
     else
         rt_set_errno(-RT_ERROR);
 
@@ -94,9 +107,11 @@ int mq_setattr(mqd_t                 mqdes,
 }
 RTM_EXPORT(mq_setattr);
 
-int mq_getattr(mqd_t mqdes, struct mq_attr *mqstat)
+int mq_getattr(mqd_t id, struct mq_attr *mqstat)
 {
-    mqdes = (mqd_t)((uintptr_t)mqdes << 1);
+    rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);
+    mqdes_t mqdes = posix_mq_id_find(id);
+    rt_sem_release(&posix_mq_lock);
     if ((mqdes == RT_NULL) || mqstat == RT_NULL)
     {
         rt_set_errno(EBADF);
@@ -115,39 +130,47 @@ RTM_EXPORT(mq_getattr);
 
 mqd_t mq_open(const char *name, int oflag, ...)
 {
-    mqd_t mqdes;
     va_list arg;
     mode_t mode;
+    mqdes_t mqdes = RT_NULL;
     struct mq_attr *attr = RT_NULL;
 
     /* lock posix mqueue list */
     rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);
+    int len = rt_strlen(name);
+    if (len > RT_NAME_MAX)
+    {
+        rt_set_errno(ENAMETOOLONG);
+        goto __return;
+    }
 
-    mqdes = RT_NULL;
-    /* find mqueue */
     mqdes = posix_mq_find(name);
     if (mqdes != RT_NULL)
     {
-        mqdes->refcount ++; /* increase reference count */
+        if (oflag & O_CREAT && oflag & O_EXCL)
+        {
+            rt_set_errno(EEXIST);
+            rt_sem_release(&posix_mq_lock);
+            return (mqd_t)(-1);
+        }
+        mqdes->refcount++; /* increase reference count */
     }
     else if (oflag & O_CREAT)
     {
         va_start(arg, oflag);
         mode = (mode_t)va_arg(arg, unsigned int);
-        mode = mode;
+        mode = (mode_t)mode; /* self-assignment avoids compiler optimization */
         attr = (struct mq_attr *)va_arg(arg, struct mq_attr *);
-        attr = attr;
+        attr = (struct mq_attr *)attr; /* self-assignment avoids compiler optimization */
         va_end(arg);
 
-        if (oflag & O_EXCL)
+        if (attr->mq_maxmsg <= 0)
         {
-            if (posix_mq_find(name) != RT_NULL)
-            {
-                rt_set_errno(EEXIST);
-                goto __return;
-            }
+            rt_set_errno(EINVAL);
+            goto __return;
         }
-        mqdes = (mqd_t) rt_malloc (sizeof(struct mqdes));
+
+        mqdes = (mqdes_t) rt_malloc (sizeof(struct mqdes));
         if (mqdes == RT_NULL)
         {
             rt_set_errno(ENFILE);
@@ -175,7 +198,7 @@ mqd_t mq_open(const char *name, int oflag, ...)
     }
     rt_sem_release(&posix_mq_lock);
 
-    return (mqd_t)((uintptr_t)mqdes >> 1);
+    return (mqd_t)(mqdes->mq_id);
 
 __return:
     /* release lock */
@@ -191,13 +214,15 @@ __return:
         }
         rt_free(mqdes);
     }
-    return RT_NULL;
+    return (mqd_t)(-1);
 }
 RTM_EXPORT(mq_open);
 
-ssize_t mq_receive(mqd_t mqdes, char *msg_ptr, size_t msg_len, unsigned *msg_prio)
+ssize_t mq_receive(mqd_t id, char *msg_ptr, size_t msg_len, unsigned *msg_prio)
 {
-    mqdes = (mqd_t)((uintptr_t)mqdes << 1);
+    rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);
+    mqdes_t mqdes = posix_mq_id_find(id);
+    rt_sem_release(&posix_mq_lock);
     rt_err_t result;
 
     if ((mqdes == RT_NULL) || (msg_ptr == RT_NULL))
@@ -208,17 +233,19 @@ ssize_t mq_receive(mqd_t mqdes, char *msg_ptr, size_t msg_len, unsigned *msg_pri
     }
 
     result = rt_mq_recv(mqdes->mq, msg_ptr, msg_len, RT_WAITING_FOREVER);
-    if (result == RT_EOK)
-        return msg_len;
+    if (result >= 0)
+        return rt_strlen(msg_ptr);
 
     rt_set_errno(EBADF);
     return -1;
 }
 RTM_EXPORT(mq_receive);
 
-int mq_send(mqd_t mqdes, const char *msg_ptr, size_t msg_len, unsigned msg_prio)
+int mq_send(mqd_t id, const char *msg_ptr, size_t msg_len, unsigned msg_prio)
 {
-    mqdes = (mqd_t)((uintptr_t)mqdes << 1);
+    rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);
+    mqdes_t mqdes = posix_mq_id_find(id);
+    rt_sem_release(&posix_mq_lock);
     rt_err_t result;
 
     if ((mqdes == RT_NULL) || (msg_ptr == RT_NULL))
@@ -238,13 +265,15 @@ int mq_send(mqd_t mqdes, const char *msg_ptr, size_t msg_len, unsigned msg_prio)
 }
 RTM_EXPORT(mq_send);
 
-ssize_t mq_timedreceive(mqd_t                  mqdes,
+ssize_t mq_timedreceive(mqd_t                  id,
                         char                  *msg_ptr,
                         size_t                 msg_len,
                         unsigned              *msg_prio,
                         const struct timespec *abs_timeout)
 {
-    mqdes = (mqd_t)((uintptr_t)mqdes << 1);
+    rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);
+    mqdes_t mqdes = posix_mq_id_find(id);
+    rt_sem_release(&posix_mq_lock);
     int tick = 0;
     rt_err_t result;
 
@@ -259,11 +288,13 @@ ssize_t mq_timedreceive(mqd_t                  mqdes,
         tick = rt_timespec_to_tick(abs_timeout);
 
     result = rt_mq_recv(mqdes->mq, msg_ptr, msg_len, tick);
-    if (result == RT_EOK)
-        return msg_len;
+    if (result >= 0)
+        return rt_strlen(msg_ptr);
 
     if (result == -RT_ETIMEOUT)
         rt_set_errno(ETIMEDOUT);
+    else if (result == -RT_ERROR)
+        rt_set_errno(EMSGSIZE);
     else
         rt_set_errno(EBADMSG);
 
@@ -271,33 +302,41 @@ ssize_t mq_timedreceive(mqd_t                  mqdes,
 }
 RTM_EXPORT(mq_timedreceive);
 
-int mq_timedsend(mqd_t                  mqdes,
+int mq_timedsend(mqd_t                  id,
                  const char            *msg_ptr,
                  size_t                 msg_len,
                  unsigned               msg_prio,
                  const struct timespec *abs_timeout)
 {
     /* RT-Thread does not support timed send */
-    return mq_send(mqdes, msg_ptr, msg_len, msg_prio);
+    return mq_send(id, msg_ptr, msg_len, msg_prio);
 }
 RTM_EXPORT(mq_timedsend);
 
-int mq_notify(mqd_t mqdes, const struct sigevent *notification)
+int mq_notify(mqd_t id, const struct sigevent *notification)
 {
-    mqdes = (mqd_t)((uintptr_t)mqdes << 1);
+    rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);
+    mqdes_t mqdes = posix_mq_id_find(id);
+    rt_sem_release(&posix_mq_lock);
+    if (mqdes == RT_NULL || mqdes->refcount == 0)
+    {
+        rt_set_errno(EBADF);
+        return -1;
+    }
     rt_set_errno(-RT_ERROR);
 
     return -1;
 }
 RTM_EXPORT(mq_notify);
 
-int mq_close(mqd_t mqdes)
+int mq_close(mqd_t id)
 {
-    mqdes = (mqd_t)((uintptr_t)mqdes << 1);
+    rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);
+    mqdes_t mqdes = posix_mq_id_find(id);
+    rt_sem_release(&posix_mq_lock);
     if (mqdes == RT_NULL)
     {
-        rt_set_errno(EINVAL);
-
+        rt_set_errno(EBADF);
         return -1;
     }
 
@@ -316,9 +355,43 @@ int mq_close(mqd_t mqdes)
 }
 RTM_EXPORT(mq_close);
 
+/**
+ * @brief    This function will remove a message queue (REALTIME).
+ *
+ * @note    The mq_unlink() function shall remove the message queue named by the string name.
+ *          If one or more processes have the message queue open when mq_unlink() is called,
+ *          destruction of the message queue shall be postponed until all references to the message queue have been closed.
+ *          However, the mq_unlink() call need not block until all references have been closed; it may return immediately.
+ *
+ *          After a successful call to mq_unlink(), reuse of the name shall subsequently cause mq_open() to behave as if
+ *          no message queue of this name exists (that is, mq_open() will fail if O_CREAT is not set,
+ *          or will create a new message queue if O_CREAT is set).
+ *
+ * @param    name  is the name of the message queue.
+ *
+ * @return   Upon successful completion, the function shall return a value of zero.
+ *           Otherwise, the named message queue shall be unchanged by this function call,
+ *           and the function shall return a value of -1 and set errno to indicate the error.
+ *
+ * @warning  This function can ONLY be called in the thread context, you can use RT_DEBUG_IN_THREAD_CONTEXT to
+ *           check the context.
+ *           The mq_unlink() function shall fail if:
+ *              [EACCES]
+ *              Permission is denied to unlink the named message queue.
+ *              [EINTR]
+ *              The call to mq_unlink() blocked waiting for all references to the named message queue to be closed and a signal interrupted the call.
+ *              [ENOENT]
+ *              The named message queue does not exist.
+ *           The mq_unlink() function may fail if:
+ *              [ENAMETOOLONG]
+ *              The length of the name argument exceeds {_POSIX_PATH_MAX} on systems that do not support the XSI option
+ *              or exceeds {_XOPEN_PATH_MAX} on XSI systems,or has a pathname component that is longer than {_POSIX_NAME_MAX} on systems that do
+ *              not support the XSI option or longer than {_XOPEN_NAME_MAX} on XSI systems.A call to mq_unlink() with a name argument that contains
+ *              the same message queue name as was previously used in a successful mq_open() call shall not give an [ENAMETOOLONG] error.
+ */
 int mq_unlink(const char *name)
 {
-    mqd_t pmq;
+    mqdes_t pmq;
 
     /* lock posix mqueue list */
     rt_sem_take(&posix_mq_lock, RT_WAITING_FOREVER);

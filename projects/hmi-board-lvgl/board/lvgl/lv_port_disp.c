@@ -139,7 +139,7 @@ void lv_port_disp_init(void)
 
 #if LV_USE_GPU_RA6M3_G2D
     /* Initialize GPU module */
-    lv_port_gpu_hw_init();
+    lv_draw_ra6m3_g2d_init();
 #endif /* LV_PORT_DISP_GPU_EN */
 
     /*Finally register the driver*/

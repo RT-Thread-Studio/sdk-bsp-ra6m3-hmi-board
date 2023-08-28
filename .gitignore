@@ -1,0 +1,12 @@
+**\.o
+**\.sconsign.dblite
+**\.vscode
+**__pycache__
+**/packages.dbsqlite
+**/build
+**/libraries
+**/rt-thread
+rtthread.hex
+rtthread.elf
+rtthread.map
+

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2006-2023, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -2160,7 +2160,7 @@ static void rt_usbd_thread_entry(void* parameter)
 
         /* receive message */
         if(rt_mq_recv(&usb_mq, &msg, sizeof(struct udev_msg),
-                    RT_WAITING_FOREVER) != RT_EOK )
+                    RT_WAITING_FOREVER) < 0)
             continue;
 
         device = rt_usbd_find_device(msg.dcd);

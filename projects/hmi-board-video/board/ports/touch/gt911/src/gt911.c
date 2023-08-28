@@ -265,7 +265,7 @@ static rt_size_t gt911_read_point(struct rt_touch_device *touch, void *buf, rt_s
             for (j = 0; j < touch_num; j++)                          /* this time touch num */
             {
                 read_id = read_buf[j * 8] & 0x0F;
-                
+
                 if (read_id > 0) continue;
 
                 if (pre_id[read_index] == read_id)                   /* this id is not free */
@@ -375,7 +375,7 @@ static rt_err_t gt911_control(struct rt_touch_device *touch, int cmd, void *arg)
     }
     case RT_TOUCH_CTRL_SET_X_TO_Y:
     {
-        config[8] = config[8] ^= (1 << 3);
+        config[8] ^= (1 << 3);
         break;
     }
     case RT_TOUCH_CTRL_SET_MODE:

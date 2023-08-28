@@ -32,9 +32,27 @@ config RT_USING_SMART
     select RT_USING_RTC
     select RT_USING_POSIX_TIMER
     select RT_USING_POSIX_CLOCK
+    select RT_USING_POSIX_FS
+    select RT_USING_POSIX_TERMIOS
     depends on ARCH_ARM_CORTEX_M || ARCH_ARM_ARM9 || ARCH_ARM_CORTEX_A || ARCH_ARMV8 || ARCH_RISCV64
     help
         RT-Thread Smart is a microkernel based operating system on RT-Thread.
+
+config RT_USING_AMP
+    bool "Enable AMP(Asymmetric Multi-Processing)"
+    default n
+    if RT_USING_AMP
+        choice
+            prompt "Select the AMP role"
+            default RT_AMP_SLAVE
+
+            config RT_AMP_MASTER
+            bool "amp role MASTER"
+
+            config RT_AMP_SLAVE
+            bool "amp role SLAVE"
+        endchoice
+    endif
 
 config RT_USING_SMP
     bool "Enable SMP(Symmetric multiprocessing)"
@@ -48,7 +66,7 @@ config RT_USING_SMP
 config RT_CPUS_NR
     int "Number of CPUs"
     default 2
-    depends on RT_USING_SMP
+    depends on RT_USING_SMP || RT_USING_AMP
     help
         Number of CPUs in the system
 
@@ -261,6 +279,12 @@ if RT_DEBUG
         int
         default 1 if RT_DEBUG_MEMHEAP_CONFIG
 
+    if ARCH_MM_MMU
+        config RT_DEBUG_PAGE_LEAK
+            bool "Enable page leaking tracer"
+            default n
+    endif
+
     config RT_DEBUG_MODULE_CONFIG
         bool "Enable debugging of Application Module"
         default n
@@ -305,15 +329,17 @@ endmenu
 
 menu "Memory Management"
 
-    config RT_PAGE_MAX_ORDER
-        int "Max order of pages allocatable by page allocator"
-        default 11
-        help
-            For example, A value of 11 means the maximum chunk of contiguous memory
-            allocatable by page system is 2^(11 + ARCH_PAGE_BITS - 1) Bytes.
-            Large memory requirement can consume all system resource, and should
-            consider reserved memory instead to enhance system endurance.
-            Max order should at least satisfied usage by huge page.
+    if ARCH_MM_MMU
+        config RT_PAGE_MAX_ORDER
+            int "Max order of pages allocatable by page allocator"
+            default 11
+            help
+                For example, A value of 11 means the maximum chunk of contiguous memory
+                allocatable by page system is 2^(11 + ARCH_PAGE_BITS - 1) Bytes.
+                Large memory requirement can consume all system resource, and should
+                consider reserved memory instead to enhance system endurance.
+                Max order should at least satisfied usage by huge page.
+    endif
 
     config RT_USING_MEMPOOL
         bool "Using memory pool"
@@ -475,7 +501,7 @@ endmenu
 
 config RT_VER_NUM
     hex
-    default 0x50000
+    default 0x50001
     help
         RT-Thread version number
 
