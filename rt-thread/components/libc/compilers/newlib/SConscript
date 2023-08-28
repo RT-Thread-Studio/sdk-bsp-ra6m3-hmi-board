@@ -5,6 +5,9 @@ Import('rtconfig')
 
 group = []
 
+if rtconfig.PLATFORM  != 'gcc':
+    Return('group')
+
 newlib_version = GetNewLibVersion(rtconfig)
 
 if newlib_version and not GetDepend('RT_USING_EXTERNAL_LIBC'):

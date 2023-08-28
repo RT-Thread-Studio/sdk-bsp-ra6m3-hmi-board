@@ -15,4 +15,10 @@ typedef struct _decode_drv_t
 
 int JPEG_X_Draw(void *p, int x0, int y0);
 void _DrawBitmap(int32_t x, int32_t y, void const *p, int32_t xSize, int32_t ySize);
+
+void LCDCONF_DrawJPEG(int32_t      x,
+                      int32_t      y,
+                      const void *p,
+                      int32_t      xSize,
+                      int32_t      ySize);
 #endif

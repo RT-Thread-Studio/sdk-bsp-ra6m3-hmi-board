@@ -5,6 +5,9 @@ Import('rtconfig')
 
 group = []
 
+if rtconfig.PLATFORM  != 'gcc':
+    Return('group')
+
 musllibc_version = GetMuslVersion(rtconfig)
 
 if musllibc_version:
