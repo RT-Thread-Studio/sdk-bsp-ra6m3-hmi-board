@@ -3,5 +3,20 @@
 /Objects
 ra_cfg.txt
 
-/Debug/
+/Debug
 /makefile.targets
+
+
+/libraries
+/packages
+**\.o
+**\.sconsign.dblite
+/.vscode
+/__pycache__
+/packages.dbsqlite
+/build
+/rt-thread
+.config.old
+rtthread.hex
+rtthread.elf
+rtthread.map
