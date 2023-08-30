@@ -14,7 +14,7 @@ typedef struct wifi_info
 
 static struct rt_thread wifi_scan_thread;
 static struct rt_thread wifi_connect_thread;
-static rt_uint8_t wifi_scan_thread_stack[512];
+static rt_uint8_t wifi_scan_thread_stack[2048];
 static rt_uint8_t wifi_connect_thread_stack[1024];
 static wifi_info_t Wifi_Info;
 
@@ -76,7 +76,7 @@ static void wifi_scan_thread_entry(void *parameter)
 int WiFi_Scan(void)
 {
     rt_err_t err;
-	
+
 	if((wifi_scan_thread.stat & RT_THREAD_RUNNING) == RT_THREAD_RUNNING)
 		return -1;
 
@@ -88,7 +88,7 @@ int WiFi_Scan(void)
 		return -1;
 	}
 
-	
+
 	WIFI_List_Clear();
     rt_thread_startup(&wifi_scan_thread);
     return 0;
