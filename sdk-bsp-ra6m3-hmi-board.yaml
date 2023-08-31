@@ -66,11 +66,11 @@ features_zh:
 - 板载 DAP-Link
 pkg_type: Board_Support_Packages
 pkg_vendor: Rb
-pkg_version: 1.0.3
+pkg_version: 1.1.0
 example_projects:
 - project_name: hmi-board-factory
   project_description: factory 示例工程
-  project_type: rt-thread|@full|@5.0.0
+  project_type: rt-thread|@full|@5.0.1
   builtin_files:
   - source_path_offset: projects/hmi-board-factory
     target_path_offset: ''
@@ -84,7 +84,7 @@ example_projects:
   external_files: []
 - project_name: hmi-board-video
   project_description: video 示例工程
-  project_type: rt-thread|@full|@5.0.0
+  project_type: rt-thread|@full|@5.0.1
   builtin_files:
   - source_path_offset: projects/hmi-board-video
     target_path_offset: ''
@@ -98,9 +98,23 @@ example_projects:
   external_files: []
 - project_name: hmi-board-lvgl
   project_description: lvgl 示例工程
-  project_type: rt-thread|@full|@5.0.0
+  project_type: rt-thread|@full|@5.0.1
   builtin_files:
   - source_path_offset: projects/hmi-board-lvgl
+    target_path_offset: ''
+    files_and_folders:
+    - "*"
+  - source_path_offset: ''
+    target_path_offset: ''
+    files_and_folders:
+    - libraries
+    - rt-thread
+  external_files: []
+- project_name: hmi-board-ebike
+  project_description: lvgl ebike demo
+  project_type: rt-thread|@full|@5.0.1
+  builtin_files:
+  - source_path_offset: projects/hmi-board-ebike
     target_path_offset: ''
     files_and_folders:
     - "*"
@@ -113,7 +127,7 @@ example_projects:
 template_projects:
 - project_name: hmi-board-led
   project_description: 开发板模板工程
-  project_type: rt-thread|@full|@5.0.0
+  project_type: rt-thread|@full|@5.0.1
   builtin_files:
   - source_path_offset: projects/project_0
     target_path_offset: ''

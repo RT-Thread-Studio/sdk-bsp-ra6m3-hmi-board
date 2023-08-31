@@ -1,9 +1,8 @@
-# 瑞萨 RA6M3-HMI-Board 开发板 BSP 说明
+# Futuristic_Ebike 示例程序
 
 ## 简介
 
 本专案展示LGVL 官方配套 Square Line Studio 内的范例 'Futuristic_Ebike' 移植到 RT-Thread/RA6M3-HMI-Board 的效果。并加上下列几点更新或功能
-
 - 加上使用 RTC 实现时钟更新效果。
 - 更新Renesas FSP HAL 到v4.5.0
 - 致能 CAN0 Loopback test, 命令为 'can_sample'
@@ -17,11 +16,11 @@
 
 基于瑞萨 RA6M3 MCU 开发的 HMI-BOARD 开发板，通过灵活配置软件包和 IDE，可帮助用户对 RA6M3 MCU 群组的特性轻松进行评估，并对嵌入系统应用程序进行开发。
 
-开发板正面外观如下图：
+开发板正面外观如下图： 
 
 ![](docs/picture/front.png)
 
-开发板背面外观如下图：
+开发板背面外观如下图： 
 
 ![](docs/picture/back.png)
 
@@ -114,7 +113,7 @@ clear            - clear the terminal screen
 version          - show RT-Thread version information
 list             - list objects
 
-msh >
+msh > 
 ```
 
 **应用入口函数**
