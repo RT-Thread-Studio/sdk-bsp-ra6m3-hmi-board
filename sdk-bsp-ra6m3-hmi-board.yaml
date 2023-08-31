@@ -65,7 +65,7 @@ features_zh:
 - 扬声器，麦克风接口
 - 板载 DAP-Link
 pkg_type: Board_Support_Packages
-pkg_vendor: Rb
+pkg_vendor: RealThread
 pkg_version: 1.1.0
 example_projects:
 - project_name: hmi-board-factory
