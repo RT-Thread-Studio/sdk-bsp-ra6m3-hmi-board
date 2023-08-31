@@ -2,7 +2,11 @@
 
 ## 简介
 
-本文档为 RA6M3-HMI-Board 开发板提供的 BSP (板级支持包) 说明。通过阅读快速上手章节开发者可以快速地上手该 BSP，将 RT-Thread 运行在开发板上。
+本专案展示LGVL 官方配套 Square Line Studio 内的范例 'Futuristic_Ebike' 移植到 RT-Thread/RA6M3-HMI-Board 的效果。并加上下列几点更新或功能
+
+- 加上使用 RTC 实现时钟更新效果。
+- 更新Renesas FSP HAL 到v4.5.0
+- 致能 CAN0 Loopback test, 命令为 'can_sample'
 
 主要内容如下：
 
@@ -13,11 +17,11 @@
 
 基于瑞萨 RA6M3 MCU 开发的 HMI-BOARD 开发板，通过灵活配置软件包和 IDE，可帮助用户对 RA6M3 MCU 群组的特性轻松进行评估，并对嵌入系统应用程序进行开发。
 
-开发板正面外观如下图： 
+开发板正面外观如下图：
 
 ![](docs/picture/front.png)
 
-开发板背面外观如下图： 
+开发板背面外观如下图：
 
 ![](docs/picture/back.png)
 
@@ -58,6 +62,7 @@
 |     SPI      |     支持     |                          |
 |     I2C      |     支持     |                          |
 |     CAN      |     支持     |                          |
+|     RTC      |     支持     |                          |
 
 * 注意：仓库刚拉下来是最小系统，若需添加/使能其他外设需参考：[外设驱动使用教程 (rt-thread.org)](https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/tutorial/make-bsp/renesas-ra/RA系列BSP外设驱动使用教程)
 
@@ -96,8 +101,9 @@
 ```bash
  \ | /
 - RT -     Thread Operating System
- / | \     5.0.0 build Jan  4 2023 10:14:56
+ / | \     5.0.1 build Aug 29 2023 11:44:43
  2006 - 2022 Copyright by RT-Thread team
+lwIP-2.0.3 initialized!
 Hello RT-Thread!
 msh >
 msh >help
@@ -108,7 +114,7 @@ clear            - clear the terminal screen
 version          - show RT-Thread version information
 list             - list objects
 
-msh > 
+msh >
 ```
 
 **应用入口函数**
