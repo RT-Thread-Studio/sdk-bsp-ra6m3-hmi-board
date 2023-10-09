@@ -1,6 +1,6 @@
 # RA6M3-HMI-Board-LVGL Reference Design Guide 
 
-[中文](README_ZH.md)|English
+[中文](README_ZH.md)|English|[性能评估](docs/evaluation.md)
 
 Get ready to rock with our LVGL music player demo, designed for the HMI-Board development board. Built on the RT-Thread operating system and compatible with RT-Thread Studio/MDK5 software development environment, this design is powered by the RA6M3 central control chip. With features like 2D acceleration, JPEG encoding and decoding, and 2M Flash large-capacity storage control, you’ll have everything you need to create amazing graphic applications.
 
