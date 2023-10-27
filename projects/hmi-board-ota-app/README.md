@@ -39,6 +39,7 @@ msh >
 ```
 
 此工程自带了 ymodem_ota 命令，可配合支持 ymodem 协议的终端工具，发送升级包到系统。
+> 注：支持 ymodem 协议的工具有 xshell,windterm 等，mobaxterm 和 putty 不支持！
 
 ![img](docs/picture/img.png)
 
