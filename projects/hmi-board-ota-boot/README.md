@@ -68,7 +68,7 @@ OTA 的过程就是打包 app 工程的 bin 文件，生成待升级文件，然
 
 ### 打包固件
 
-app工程编译完成之后会在Debug目录下生成rtthread.hex文件，我们需要从hex文件里提取出来这两个bin文件，这里我们使用tool目录下提供的hex2bin小工具。它可以从rtthread.hex文件里分离出两个bin文件，其中0x10000结尾的是对应app分区的固件，也是我们要升级的固件。
+app工程编译完成之后会在Debug目录下生成rtthread.hex文件，我们需要从hex文件里提取出来这两个 bin 文件，这里我们使用 app 工程 tool 目录下提供的[hex2bin](https://github.com/Guozhanxin/hex2bin)小工具。它可以从rtthread.hex文件里分离出两个bin文件，其中0x10000结尾的是对应app分区的固件，也是我们要升级的固件。
 
 ```
 $ hex2bin.exe rtthread.hex
