@@ -1,0 +1,12 @@
+[
+ {
+  "path": "/packages/system/qboot", 
+  "ver": "v1.06", 
+  "name": "QBOOT"
+ }, 
+ {
+  "path": "/packages/misc/crclib", 
+  "ver": "v1.02", 
+  "name": "CRCLIB"
+ }
+]

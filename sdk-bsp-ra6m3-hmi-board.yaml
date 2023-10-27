@@ -66,7 +66,7 @@ features_zh:
 - 板载 DAP-Link
 pkg_type: Board_Support_Packages
 pkg_vendor: RealThread
-pkg_version: 1.1.0
+pkg_version: 1.1.1
 example_projects:
 - project_name: hmi-board-factory
   project_description: factory 示例工程
@@ -115,6 +115,34 @@ example_projects:
   project_type: rt-thread|@full|@5.0.1
   builtin_files:
   - source_path_offset: projects/hmi-board-ebike
+    target_path_offset: ''
+    files_and_folders:
+    - "*"
+  - source_path_offset: ''
+    target_path_offset: ''
+    files_and_folders:
+    - libraries
+    - rt-thread
+  external_files: []
+- project_name: hmi-board-ota-boot
+  project_description: ota boot project
+  project_type: rt-thread|@full|@5.0.1
+  builtin_files:
+  - source_path_offset: projects/hmi-board-ota-boot
+    target_path_offset: ''
+    files_and_folders:
+    - "*"
+  - source_path_offset: ''
+    target_path_offset: ''
+    files_and_folders:
+    - libraries
+    - rt-thread
+  external_files: []
+- project_name: hmi-board-ota-app
+  project_description: ota app project
+  project_type: rt-thread|@full|@5.0.1
+  builtin_files:
+  - source_path_offset: projects/hmi-board-ota-app
     target_path_offset: ''
     files_and_folders:
     - "*"
