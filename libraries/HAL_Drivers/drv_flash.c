@@ -110,11 +110,11 @@ int _flash_write(rt_uint32_t addr, const rt_uint8_t *buf, size_t size)
     rt_base_t level;
     fsp_err_t err = FSP_SUCCESS;
     size_t written_size = 0;
+    uint8_t wr_buf[FLASH_CF_WRITE_SIZE];
 
     if (size % FLASH_CF_WRITE_SIZE)
     {
-        LOG_E("Flash Write size must be an integer multiple of %d", FLASH_CF_WRITE_SIZE);
-        return -RT_EINVAL;
+        LOG_W("Flash Write size must be an integer multiple of %d", FLASH_CF_WRITE_SIZE);
     }
 
     while (written_size < size)
@@ -122,7 +122,16 @@ int _flash_write(rt_uint32_t addr, const rt_uint8_t *buf, size_t size)
         level = rt_hw_interrupt_disable();
         R_FLASH_Reset(&g_flash_ctrl);
         /* Write code flash data*/
-        err = R_FLASH_Write(&g_flash_ctrl, (uint32_t)(buf + written_size), addr + written_size, FLASH_CF_WRITE_SIZE);
+        if (size - written_size >= FLASH_CF_WRITE_SIZE)
+        {
+            err = R_FLASH_Write(&g_flash_ctrl, (uint32_t)(buf + written_size), addr + written_size, FLASH_CF_WRITE_SIZE);
+        }
+        else
+        {
+            rt_memset(wr_buf, 0xFF, FLASH_CF_WRITE_SIZE);
+            rt_memcpy(wr_buf, (void*)(uint32_t)(buf + written_size), size - written_size);
+            err = R_FLASH_Write(&g_flash_ctrl, (uint32_t)(wr_buf), addr + written_size, FLASH_CF_WRITE_SIZE);
+        }
         rt_hw_interrupt_enable(level);
 
         /* Error Handle */
