@@ -21,6 +21,21 @@ static lv_anim_timeline_t*  PageAnimTimeLine = NULL;
 
 LV_IMG_DECLARE(IMG_QRCode);
 LV_IMG_DECLARE(IMG_Logo);
+
+
+static void return_event_handler(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    // lv_obj_t *obj = lv_event_get_target(e);
+
+    if (code == LV_EVENT_CLICKED)
+    {
+        LV_LOG_USER("Clicked: return\n");
+        PM_Pop(Page);
+    }
+}
+
+
 static void Info_Create(lv_obj_t* par)
 {
 	static lv_style_t style;
@@ -87,6 +102,16 @@ static void Info_Create(lv_obj_t* par)
 	lv_label_set_long_mode(label7, LV_LABEL_LONG_WRAP);
 	lv_obj_add_style(label7, &style, LV_PART_MAIN);
 	lv_obj_add_flag(label7, LV_OBJ_FLAG_EVENT_BUBBLE);
+
+	lv_obj_t *rbtn = lv_btn_create(par);
+    lv_obj_align(rbtn, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
+    lv_obj_set_style_border_width(rbtn, 0, LV_PART_MAIN);
+    lv_obj_set_size(rbtn, 50, 50);
+    lv_obj_set_style_bg_color(rbtn, lv_color_make(0x99, 0xcc, 0xff), LV_PART_MAIN);
+    lv_obj_add_event_cb(rbtn, return_event_handler, LV_EVENT_CLICKED, NULL);
+    lv_obj_t *rlabel = lv_label_create(rbtn);
+    lv_label_set_text(rlabel, LV_SYMBOL_LEFT);
+    lv_obj_center(rlabel);
 }
 
 
