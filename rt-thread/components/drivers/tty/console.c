@@ -20,7 +20,67 @@
 #endif /* RT_TTY_DEBUG */
 #include <rtdbg.h>
 
+#include <ipc/waitqueue.h>
+#include <ipc/ringbuffer.h>
+
 static struct tty_struct console_dev;
+static struct rt_ringbuffer console_rx_ringbuffer;
+static struct rt_wqueue console_rx_wqueue;
+static rt_thread_t console_rx_thread;
+static const size_t rb_bufsz = 0x1000;
+
+static void console_rx_work(void *parameter)
+{
+    int len;
+    char ch;
+    int lens;
+    static char buf[0x1000];
+
+    struct tty_struct *console;
+    console = &console_dev;
+
+    while (1)
+    {
+        rt_wqueue_wait(&console_rx_wqueue, 0, RT_WAITING_FOREVER);
+        lens = 0;
+
+        while (lens < sizeof(buf))
+        {
+            len = rt_ringbuffer_get(&console_rx_ringbuffer, (void *)&ch, sizeof(ch));
+            if (len == 0)
+            {
+                break;
+            }
+            lens += len;
+            buf[lens-1] = ch;
+        }
+
+        if (lens && console->ldisc->ops->receive_buf)
+        {
+            console->ldisc->ops->receive_buf((struct tty_struct *)console, buf, lens);
+        }
+    }
+}
+
+static int rx_thread_init(void)
+{
+    void *rb_buffer;
+    rt_thread_t thread;
+
+    rb_buffer = rt_malloc(rb_bufsz);
+    rt_ringbuffer_init(&console_rx_ringbuffer, rb_buffer, rb_bufsz);
+    rt_wqueue_init(&console_rx_wqueue);
+
+    thread = rt_thread_create("console_rx", console_rx_work, &console_dev, rb_bufsz, 10, 10);
+    if (thread != RT_NULL)
+    {
+        rt_thread_startup(thread);
+        console_rx_thread = thread;
+    }
+
+    return 0;
+}
+INIT_COMPONENT_EXPORT(rx_thread_init);
 
 static void console_rx_notify(struct rt_device *dev)
 {
@@ -28,7 +88,6 @@ static void console_rx_notify(struct rt_device *dev)
     int len = 0;
     int lens = 0;
     char ch = 0;
-    char buf[1024] = {0};
 
     console = (struct tty_struct *)dev;
     RT_ASSERT(console != RT_NULL);
@@ -41,17 +100,14 @@ static void console_rx_notify(struct rt_device *dev)
             break;
         }
         lens += len;
-        buf[lens-1] = ch;
-        if (lens > 1024)
+        rt_ringbuffer_put(&console_rx_ringbuffer, (void *)&ch, sizeof(ch));
+        if (lens > rb_bufsz)
         {
             break;
         }
     }
-
-    if (console->ldisc->ops->receive_buf)
-    {
-        console->ldisc->ops->receive_buf((struct tty_struct *)console, buf, lens);
-    }
+    if (console_rx_thread)
+        rt_wqueue_wakeup(&console_rx_wqueue, 0);
 }
 
 struct tty_struct *console_tty_get(void)
@@ -93,14 +149,7 @@ static rt_err_t iodev_open(struct tty_struct *console)
 
 struct rt_device *console_get_iodev(void)
 {
-    rt_base_t level = 0;
-    struct rt_device *iodev = RT_NULL;
-
-    level = rt_hw_interrupt_disable();
-    iodev = console_dev.io_dev;
-    rt_hw_interrupt_enable(level);
-
-    return iodev;
+    return console_dev.io_dev;
 }
 
 struct rt_device *console_set_iodev(struct rt_device *iodev)
@@ -113,7 +162,7 @@ struct rt_device *console_set_iodev(struct rt_device *iodev)
 
     console = &console_dev;
 
-    level = rt_hw_interrupt_disable();
+    level = rt_spin_lock_irqsave(&console->spinlock);
 
     RT_ASSERT(console->init_flag >= TTY_INIT_FLAG_REGED);
 
@@ -139,7 +188,7 @@ struct rt_device *console_set_iodev(struct rt_device *iodev)
     }
 
 exit:
-    rt_hw_interrupt_enable(level);
+    rt_spin_unlock_irqrestore(&console->spinlock, level);
     return io_before;
 }
 
@@ -157,7 +206,7 @@ static rt_err_t rt_console_init(struct rt_device *dev)
 
     console = (struct tty_struct *)dev;
 
-    level = rt_hw_interrupt_disable();
+    level = rt_spin_lock_irqsave(&console->spinlock);
 
     RT_ASSERT(console->init_flag == TTY_INIT_FLAG_REGED);
 
@@ -169,7 +218,7 @@ static rt_err_t rt_console_init(struct rt_device *dev)
 
     console->init_flag = TTY_INIT_FLAG_INITED;
 exit:
-    rt_hw_interrupt_enable(level);
+    rt_spin_unlock_irqrestore(&console->spinlock, level);
     return result;
 }
 

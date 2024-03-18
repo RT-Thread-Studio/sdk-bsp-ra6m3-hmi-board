@@ -28,19 +28,8 @@ extern "C" {
 #define CLOCKS_PER_SEC RT_TICK_PER_SECOND
 
 /* timezone */
+/* this method of representing timezones has been abandoned */
 #define DST_NONE    0   /* not on dst */
-#define DST_USA     1   /* USA style dst */
-#define DST_AUST    2   /* Australian style dst */
-#define DST_WET     3   /* Western European dst */
-#define DST_MET     4   /* Middle European dst */
-#define DST_EET     5   /* Eastern European dst */
-#define DST_CAN     6   /* Canada */
-#define DST_GB      7   /* Great Britain and Eire */
-#define DST_RUM     8   /* Rumania */
-#define DST_TUR     9   /* Turkey */
-#define DST_AUSTALT 10  /* Australian style with shift in 1986 */
-
-struct itimerspec;
 
 struct timezone
 {
@@ -48,7 +37,26 @@ struct timezone
     int tz_dsttime;       /* type of dst correction */
 };
 
-#if defined(_GNU_SOURCE) && (defined(__x86_64__) || defined(__i386__))
+/* lightweight timezone and daylight saving time */
+#ifdef RT_LIBC_USING_LIGHT_TZ_DST
+void rt_tz_set(int32_t offset_sec);
+int32_t rt_tz_get(void);
+int8_t rt_tz_is_dst(void);
+#endif /* RT_LIBC_USING_LIGHT_TZ_DST */
+
+struct itimerspec;
+
+/* 'struct timeval' is defined on __x86_64__ toolchain */
+#if !defined(__x86_64__) && !defined(_TIMEVAL_DEFINED)
+#define _TIMEVAL_DEFINED
+struct timeval
+{
+    time_t      tv_sec;     /* seconds */
+    suseconds_t tv_usec;    /* and microseconds */
+};
+#endif /* _TIMEVAL_DEFINED */
+
+#if defined(_GNU_SOURCE) && (defined(__x86_64__) || defined(__i386__) || defined(RT_USING_SMART))
 /* linux x86 platform gcc use! */
 #define _TIMEVAL_DEFINED
 /* Values for the first argument to `getitimer' and `setitimer'.  */
@@ -73,16 +81,7 @@ struct itimerval
     /* Time to the next timer expiration.  */
     struct timeval it_value;
 };
-#endif /* defined(_GNU_SOURCE) && (defined(__x86_64__) || defined(__i386__)) */
-
-#ifndef _TIMEVAL_DEFINED
-#define _TIMEVAL_DEFINED
-struct timeval
-{
-    time_t      tv_sec;     /* seconds */
-    suseconds_t tv_usec;    /* and microseconds */
-};
-#endif /* _TIMEVAL_DEFINED */
+#endif /* defined(_GNU_SOURCE) && (defined(__x86_64__) || defined(__i386__)) || defined(RT_USING_SMART) */
 
 #if defined(__ARMCC_VERSION) || defined(_WIN32) || (defined(__ICCARM__) && (__VER__ < 8010001))
 struct timespec
@@ -139,8 +138,12 @@ int nanosleep(const struct timespec *rqtp, struct timespec *rmtp);
 #if defined(RT_USING_POSIX_CLOCK) || defined (RT_USING_POSIX_TIMER)
 /* POSIX clock and timer */
 
+#ifndef CLOCK_REALTIME_COARSE
+#define CLOCK_REALTIME_COARSE 0
+#endif /* CLOCK_REALTIME_COARSE */
+
 #ifndef CLOCK_REALTIME
-#define CLOCK_REALTIME      1
+#define CLOCK_REALTIME 1
 #endif /* CLOCK_REALTIME */
 
 #define CLOCK_CPUTIME_ID    2
@@ -150,12 +153,36 @@ int nanosleep(const struct timespec *rqtp, struct timespec *rmtp);
 #endif /* CLOCK_PROCESS_CPUTIME_ID */
 
 #ifndef CLOCK_THREAD_CPUTIME_ID
-#define CLOCK_THREAD_CPUTIME_ID  CLOCK_CPUTIME_ID
+#define CLOCK_THREAD_CPUTIME_ID 3
 #endif /* CLOCK_THREAD_CPUTIME_ID */
 
 #ifndef CLOCK_MONOTONIC
 #define CLOCK_MONOTONIC     4
 #endif /* CLOCK_MONOTONIC */
+
+#ifndef CLOCK_MONOTONIC_RAW
+#define CLOCK_MONOTONIC_RAW 5
+#endif /* CLOCK_MONOTONIC_RAW */
+
+#ifndef CLOCK_MONOTONIC_COARSE
+#define CLOCK_MONOTONIC_COARSE 6
+#endif /* CLOCK_MONOTONIC_COARSE */
+
+#ifndef CLOCK_BOOTTIME
+#define CLOCK_BOOTTIME 7
+#endif /* CLOCK_BOOTTIME */
+
+#ifndef CLOCK_REALTIME_ALARM
+#define CLOCK_REALTIME_ALARM 8
+#endif /* CLOCK_REALTIME_ALARM */
+
+#ifndef CLOCK_BOOTTIME_ALARM
+#define CLOCK_BOOTTIME_ALARM 9
+#endif /* CLOCK_BOOTTIME_ALARM */
+
+#ifndef CLOCK_SGI_CYCLE
+#define CLOCK_SGI_CYCLE 10 // newlib says they don't have this definition,  make the compiler happy
+#endif /* CLOCK_SGI_CYCLE */
 
 #ifndef TIMER_ABSTIME
 #define TIMER_ABSTIME       4
@@ -166,6 +193,11 @@ int nanosleep(const struct timespec *rqtp, struct timespec *rmtp);
 #else
 #define CLOCK_ID_MAX CLOCK_MONOTONIC
 #endif
+
+#ifndef CLOCK_TAI
+#define CLOCK_TAI 11  // newlib says they don't have this definition,  make the compiler happy
+#endif /* CLOCK_TAI */
+
 #endif /* defined(RT_USING_POSIX_CLOCK) || defined (RT_USING_POSIX_TIMER) */
 
 #ifdef RT_USING_POSIX_CLOCK
@@ -184,11 +216,6 @@ int timer_getoverrun(timer_t timerid);
 int timer_gettime(timer_t timerid, struct itimerspec *its);
 int timer_settime(timer_t timerid, int flags, const struct itimerspec *value, struct itimerspec *ovalue);
 #endif /* RT_USING_POSIX_TIMER */
-
-/* timezone */
-void tz_set(int8_t tz);
-int8_t tz_get(void);
-int8_t tz_is_dst(void);
 
 #ifdef __cplusplus
 }

@@ -5,7 +5,8 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2021.12.07     linzhenxing      first version
+ * 2021-12-07     linzhenxing  first version
+ * 2023-06-26     WangXiaoyao  fix bug on foreground app switch
  */
 #include <dfs_file.h>
 #include <dfs_fs.h>
@@ -14,6 +15,7 @@
 #include <rtthread.h>
 #include <tty.h>
 #include <tty_ldisc.h>
+#include <shell.h>
 
 #if defined(RT_USING_POSIX_DEVIO)
 #include <termios.h>
@@ -41,7 +43,7 @@ const struct termios tty_std_termios = {  /* for the benefit of tty drivers  */
 void tty_initstack(struct tty_node *node)
 {
     node->lwp = RT_NULL;
-    node->next = node;
+    node->next = RT_NULL;
 }
 
 static struct tty_node tty_node_cache = { RT_NULL, RT_NULL };
@@ -125,26 +127,6 @@ struct rt_lwp *tty_pop(struct tty_node **head, struct rt_lwp *target_lwp)
     return lwp;
 }
 
-rt_inline int tty_sigismember(lwp_sigset_t *set, int _sig)
-{
-    unsigned long sig = _sig - 1;
-
-    if (_LWP_NSIG_WORDS == 1)
-    {
-        return 1 & (set->sig[0] >> sig);
-    }
-    else
-    {
-        return 1 & (set->sig[sig / _LWP_NSIG_BPW] >> (sig % _LWP_NSIG_BPW));
-    }
-}
-
-static int is_ignored(int sig)
-{
-    return (tty_sigismember(&current->signal_mask, sig) ||
-        current->signal_handler[sig-1] == SIG_IGN);
-}
-
 /**
  *  tty_check_change    -   check for POSIX terminal changes
  *  @tty: tty to check
@@ -159,44 +141,28 @@ static int is_ignored(int sig)
 int __tty_check_change(struct tty_struct *tty, int sig)
 {
     pid_t pgrp = 0, tty_pgrp = 0;
-    struct rt_lwp *lwp = tty->foreground;
     int ret = 0;
-    int level = 0;
+    struct rt_lwp *lwp;
 
-    level = rt_hw_interrupt_disable();
-    if (current == RT_NULL)
+    lwp = lwp_self();
+
+    if (lwp == RT_NULL)
     {
-        rt_hw_interrupt_enable(level);
         return 0;
     }
 
-    if (current->tty != tty)
+    if (lwp->tty != tty)
     {
-        rt_hw_interrupt_enable(level);
         return 0;
     }
 
-    pgrp = current->__pgrp;
+    pgrp = lwp->__pgrp;
     tty_pgrp = tty->pgrp;
 
     if (tty_pgrp && (pgrp != tty->pgrp))
     {
-        if (is_ignored(sig))
-        {
-            if (sig == SIGTTIN)
-            {
-                ret = -EIO;
-            }
-        }
-        else
-        {
-            if (lwp)
-            {
-                lwp_kill(lwp_to_pid(lwp), sig);
-            }
-        }
+        lwp_signal_kill(lwp, sig, SI_USER, 0);
     }
-    rt_hw_interrupt_enable(level);
 
     if (!tty_pgrp)
     {
@@ -305,9 +271,97 @@ static int tiocsctty(struct tty_struct *tty, int arg)
     return 0;
 }
 
+static int tiocswinsz(struct tty_struct *tty, struct winsize *p_winsize)
+{
+    rt_kprintf("\x1b[8;%d;%dt", p_winsize->ws_col, p_winsize->ws_row);
+    return 0;
+}
+
+static int tiocgwinsz(struct tty_struct *tty, struct winsize *p_winsize)
+{
+    if(rt_thread_self() != rt_thread_find(FINSH_THREAD_NAME))
+    {
+        /* only can be used in tshell thread; otherwise, return default size */
+        p_winsize->ws_col = 80;
+        p_winsize->ws_row = 24;
+    }
+    else
+    {
+        #define _TIO_BUFLEN 20
+        char _tio_buf[_TIO_BUFLEN];
+        unsigned char cnt1, cnt2, cnt3, i;
+        char row_s[4], col_s[4];
+        char *p;
+
+        rt_memset(_tio_buf, 0, _TIO_BUFLEN);
+
+        /* send the command to terminal for getting the window size of the terminal */
+        rt_kprintf("\033[18t");
+
+        /* waiting for the response from the terminal */
+        i = 0;
+        while(i < _TIO_BUFLEN)
+        {
+            _tio_buf[i] = finsh_getchar();
+            if(_tio_buf[i] != 't')
+            {
+                i ++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        if(i == _TIO_BUFLEN)
+        {
+            /* buffer overloaded, and return default size */
+            p_winsize->ws_col = 80;
+            p_winsize->ws_row = 24;
+            return 0;
+        }
+
+        /* interpreting data eg: "\033[8;1;15t" which means row is 1 and col is 15 (unit: size of ONE character) */
+        rt_memset(row_s,0,4);
+        rt_memset(col_s,0,4);
+        cnt1 = 0;
+        while(cnt1 < _TIO_BUFLEN && _tio_buf[cnt1] != ';')
+        {
+            cnt1++;
+        }
+        cnt2 = ++cnt1;
+        while(cnt2 < _TIO_BUFLEN && _tio_buf[cnt2] != ';')
+        {
+            cnt2++;
+        }
+        p = row_s;
+        while(cnt1 < cnt2)
+        {
+            *p++ = _tio_buf[cnt1++];
+        }
+        p = col_s;
+        cnt2++;
+        cnt3 = rt_strlen(_tio_buf) - 1;
+        while(cnt2 < cnt3)
+        {
+            *p++ = _tio_buf[cnt2++];
+        }
+
+        /* load the window size date */
+        p_winsize->ws_col = atoi(col_s);
+        p_winsize->ws_row = atoi(row_s);
+    #undef _TIO_BUFLEN
+    }
+
+    p_winsize->ws_xpixel = 0;/* unused */
+    p_winsize->ws_ypixel = 0;/* unused */
+
+    return 0;
+}
+
 static int tty_ioctl(struct dfs_file *fd, int cmd, void *args)
 {
     int ret = 0;
+    void *p = (void *)args;
     struct tty_struct *tty = RT_NULL;
     struct tty_struct *real_tty = RT_NULL;
     struct tty_ldisc *ld = RT_NULL;
@@ -328,6 +382,10 @@ static int tty_ioctl(struct dfs_file *fd, int cmd, void *args)
     {
     case TIOCSCTTY:
         return tiocsctty(real_tty, 1);
+    case TIOCGWINSZ:
+        return tiocgwinsz(real_tty, p);
+    case TIOCSWINSZ:
+        return tiocswinsz(real_tty, p);
     }
 
     ld = tty->ldisc;
@@ -339,9 +397,9 @@ static int tty_ioctl(struct dfs_file *fd, int cmd, void *args)
 }
 
 #ifdef RT_USING_DFS_V2
-static int tty_read(struct dfs_file *fd, void *buf, size_t count, off_t *pos)
+static ssize_t tty_read(struct dfs_file *fd, void *buf, size_t count, off_t *pos)
 #else
-static int tty_read(struct dfs_file *fd, void *buf, size_t count)
+static ssize_t tty_read(struct dfs_file *fd, void *buf, size_t count)
 #endif
 {
     int ret = 0;
@@ -360,9 +418,9 @@ static int tty_read(struct dfs_file *fd, void *buf, size_t count)
 }
 
 #ifdef RT_USING_DFS_V2
-static int tty_write(struct dfs_file *fd, const void *buf, size_t count, off_t *pos)
+static ssize_t tty_write(struct dfs_file *fd, const void *buf, size_t count, off_t *pos)
 #else
-static int tty_write(struct dfs_file *fd, const void *buf, size_t count )
+static ssize_t tty_write(struct dfs_file *fd, const void *buf, size_t count )
 #endif
 {
     int ret = 0;
@@ -434,6 +492,7 @@ int tty_init(struct tty_struct *tty, int type, int subtype, struct rt_device *io
 
             rt_mutex_init(&tty->lock, "ttyLock", RT_IPC_FLAG_PRIO);
             rt_wqueue_init(&tty->wait_queue);
+            rt_spin_lock_init(&tty->spinlock);
 
             tty_ldisc_init(tty);
             tty->init_termios = tty_std_termios;

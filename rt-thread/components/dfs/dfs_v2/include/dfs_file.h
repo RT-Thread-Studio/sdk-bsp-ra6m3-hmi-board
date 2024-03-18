@@ -33,16 +33,17 @@ struct rt_pollreq;
 struct dirent;
 struct lwp_avl_struct;
 struct file_lock;
+struct dfs_aspace;
 
 struct dfs_file_ops
 {
     int (*open)(struct dfs_file *file);
     int (*close)(struct dfs_file *file);
     int (*ioctl)(struct dfs_file *file, int cmd, void *arg);
-    int (*read)(struct dfs_file *file, void *buf, size_t count, off_t *pos);
-    int (*write)(struct dfs_file *file, const void *buf, size_t count, off_t *pos);
+    ssize_t (*read)(struct dfs_file *file, void *buf, size_t count, off_t *pos);
+    ssize_t (*write)(struct dfs_file *file, const void *buf, size_t count, off_t *pos);
     int (*flush)(struct dfs_file *file);
-    int (*lseek)(struct dfs_file *file, off_t offset, int wherece);
+    off_t (*lseek)(struct dfs_file *file, off_t offset, int wherece);
     int (*truncate)(struct dfs_file *file, off_t offset);
     int (*getdents)(struct dfs_file *file, struct dirent *dirp, uint32_t count);
     int (*poll)(struct dfs_file *file, struct rt_pollreq *req);
@@ -73,6 +74,9 @@ struct dfs_vnode
     struct timespec mtime;
     struct timespec ctime;
 
+    struct dfs_aspace *aspace;
+    struct rt_mutex lock;
+
     void *data;             /* private data of this file system */
 };
 
@@ -92,6 +96,8 @@ struct dfs_file
     const struct dfs_file_ops *fops;
     struct dfs_dentry *dentry;  /* dentry of this file */
     struct dfs_vnode *vnode;    /* vnode of this file */
+
+    void *mmap_context;         /* used by mmap routine */
 
     void *data;
 };
@@ -122,7 +128,7 @@ struct dfs_vnode *dfs_vnode_ref(struct dfs_vnode *vnode);
 void dfs_vnode_unref(struct dfs_vnode *vnode);
 
 /*dfs_file.c*/
-
+#ifdef RT_USING_SMART
 struct dfs_mmap2_args
 {
     void *addr;
@@ -131,8 +137,10 @@ struct dfs_mmap2_args
     int flags;
     off_t pgoffset;
 
+    struct rt_lwp *lwp;
     void *ret;
 };
+#endif
 
 void dfs_file_init(struct dfs_file *file);
 void dfs_file_deinit(struct dfs_file *file);
@@ -140,9 +148,11 @@ void dfs_file_deinit(struct dfs_file *file);
 int dfs_file_open(struct dfs_file *file, const char *path, int flags, mode_t mode);
 int dfs_file_close(struct dfs_file *file);
 
+off_t dfs_file_get_fpos(struct dfs_file *file);
+void dfs_file_set_fpos(struct dfs_file *file, off_t fpos);
 ssize_t dfs_file_read(struct dfs_file *file, void *buf, size_t len);
 ssize_t dfs_file_write(struct dfs_file *file, const void *buf, size_t len);
-int generic_dfs_lseek(struct dfs_file *file, off_t offset, int whence);
+off_t generic_dfs_lseek(struct dfs_file *file, off_t offset, int whence);
 off_t dfs_file_lseek(struct dfs_file *file, off_t offset, int wherece);
 int dfs_file_stat(const char *path, struct stat *buf);
 int dfs_file_lstat(const char *path, struct stat *buf);
@@ -164,7 +174,14 @@ int dfs_file_isdir(const char *path);
 int dfs_file_access(const char *path, mode_t mode);
 int dfs_file_chdir(const char *path);
 char *dfs_file_getcwd(char *buf, size_t size);
+char *dfs_nolink_path(struct dfs_mnt **mnt, char *fullpath, int mode);
+#ifdef RT_USING_SMART
 int dfs_file_mmap2(struct dfs_file *file, struct dfs_mmap2_args *mmap2);
+
+int dfs_file_mmap(struct dfs_file *file, struct dfs_mmap2_args *mmap2);
+#endif
+
+char *dfs_nolink_path(struct dfs_mnt **mnt, char *fullpath, int mode);
 
 /* 0x5254 is just a magic number to make these relatively unique ("RT") */
 #define RT_FIOFTRUNCATE  0x52540000U

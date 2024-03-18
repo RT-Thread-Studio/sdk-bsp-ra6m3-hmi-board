@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2006-2023, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -216,10 +216,8 @@ struct pbuf *rt_ra6m3_eth_rx(rt_device_t dev)
     fsp_err_t res;
 
     res = R_ETHER_Read(&g_ether0_ctrl, buffer, &len);
-    if (res != FSP_SUCCESS) {
+    if (res != FSP_SUCCESS)
         LOG_D("R_ETHER_Read failed!, res = %d", res);
-        return NULL;
-    }
 
     uint32_t bufferoffset = 0;
     uint32_t payloadoffset = 0;

@@ -19,6 +19,10 @@
 #include <dfs_mnt.h>
 #include "dfs_private.h"
 
+#ifdef RT_USING_PAGECACHE
+#include "dfs_pcache.h"
+#endif
+
 #define DBG_TAG "DFS.fs"
 #define DBG_LVL DBG_INFO
 #include <rtdbg.h>
@@ -41,6 +45,11 @@ static struct dfs_filesystem_type **_find_filesystem(const char *name)
     }
 
     return type;
+}
+
+struct dfs_filesystem_type *dfs_filesystems(void)
+{
+    return file_systems;
 }
 
 int dfs_register(struct dfs_filesystem_type *fs)
@@ -160,6 +169,8 @@ int dfs_mount(const char *device_name,
                             DLOG(msg, type->fs_ops->name, "dfs", DLOG_MSG_RET, "mount OK, ret root_dentry");
 
                             mnt_child = mnt_parent;
+                            mnt_child->flags |= MNT_IS_MOUNTED;
+
                             DLOG(note_right, "mnt", "mount sucessfully");
                             DLOG(msg, "dfs", "mnt", DLOG_MSG, "dfs_mnt_insert(, mnt_child)");
                             dfs_mnt_insert(RT_NULL, mnt_child);
@@ -202,7 +213,7 @@ int dfs_mount(const char *device_name,
                     ret = -1;
                 }
             }
-            else if (strcmp(mnt_parent->fullpath, fullpath) != 0)
+            else if (mnt_parent && (strcmp(mnt_parent->fullpath, fullpath) != 0))
             {
                 DLOG(msg, "dfs", "dentry", DLOG_MSG, "mntpoint_dentry = dfs_dentry_lookup(mnt_parent, %s, 0)", fullpath);
                 mntpoint_dentry = dfs_dentry_lookup(mnt_parent, fullpath, 0);
@@ -224,6 +235,8 @@ int dfs_mount(const char *device_name,
                             ret = mnt_child->fs_ops->mount(mnt_child, rwflag, data);
                             if (ret == RT_EOK)
                             {
+                                mnt_child->flags |= MNT_IS_MOUNTED;
+
                                 LOG_D("mount %s sucessfully", fullpath);
                                 DLOG(msg, mnt_child->fs_ops->name, "dfs", DLOG_MSG_RET, "mount OK");
 
@@ -285,7 +298,7 @@ int dfs_mount(const char *device_name,
     return ret;
 }
 
-int dfs_umount(const char *specialfile)
+int dfs_umount(const char *specialfile, int flags)
 {
     int ret = -RT_ERROR;
     char *fullpath = RT_NULL;
@@ -301,22 +314,16 @@ int dfs_umount(const char *specialfile)
             if (strcmp(mnt->fullpath, fullpath) == 0)
             {
                 /* is the mount point */
+                rt_atomic_t ref_count = rt_atomic_load(&(mnt->ref_count));
 
-                if (rt_atomic_load(&(mnt->ref_count)) == 1 && rt_list_isempty(&mnt->child))
+                if (!(mnt->flags & MNT_IS_LOCKED) && rt_list_isempty(&mnt->child) && (ref_count == 1 || (flags & MNT_FORCE)))
                 {
-                    DLOG(msg, "dfs", mnt->fs_ops->name, DLOG_MSG, "fs_ops->umount(mnt)");
-                    ret = mnt->fs_ops->umount(mnt);
-                    if (ret == 0)
-                    {
-                        DLOG(msg, mnt->fs_ops->name, "dfs", DLOG_MSG_RET, "return OK");
-                        /* destroy this mount point */
-                        DLOG(msg, "dfs", "mnt", DLOG_MSG, "dfs_mnt_destroy(mnt)");
-                        dfs_mnt_destroy(mnt);
-                    }
-                    else
-                    {
-                        LOG_E("umount file system: %s failed.", fullpath);
-                    }
+#ifdef RT_USING_PAGECACHE
+                    dfs_pcache_unmount(mnt);
+#endif
+                    /* destroy this mount point */
+                    DLOG(msg, "dfs", "mnt", DLOG_MSG, "dfs_mnt_destroy(mnt)");
+                    ret = dfs_mnt_destroy(mnt);
                 }
                 else
                 {
@@ -345,7 +352,19 @@ int dfs_umount(const char *specialfile)
 /* for compatibility */
 int dfs_unmount(const char *specialfile)
 {
-    return dfs_umount(specialfile);
+    return dfs_umount(specialfile, 0);
+}
+
+int dfs_is_mounted(struct dfs_mnt *mnt)
+{
+    int ret = 0;
+
+    if (mnt && !(mnt->flags & MNT_IS_MOUNTED))
+    {
+        ret = -1;
+    }
+
+    return ret;
 }
 
 int dfs_mkfs(const char *fs_name, const char *device_name)
@@ -384,6 +403,18 @@ int dfs_mkfs(const char *fs_name, const char *device_name)
     if (type->fs_ops->mkfs)
     {
         ret = type->fs_ops->mkfs(dev_id, type->fs_ops->name);
+#ifdef RT_USING_PAGECACHE
+        if (ret == RT_EOK)
+        {
+            struct dfs_mnt *mnt = RT_NULL;
+
+            mnt = dfs_mnt_dev_lookup(dev_id);
+            if (mnt)
+            {
+                dfs_pcache_unmount(mnt);
+            }
+        }
+#endif
     }
 
     return ret;
@@ -407,7 +438,10 @@ int dfs_statfs(const char *path, struct statfs *buffer)
     {
         if (mnt->fs_ops->statfs)
         {
-            ret = mnt->fs_ops->statfs(mnt, buffer);
+            if (dfs_is_mounted(mnt) == 0)
+            {
+                ret = mnt->fs_ops->statfs(mnt, buffer);
+            }
         }
     }
 

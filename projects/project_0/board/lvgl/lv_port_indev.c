@@ -10,12 +10,11 @@
 #include <lvgl.h>
 #include <rtdevice.h>
 
+#include "gt911.h"
+
 #define DBG_TAG "lv_port_indev"
 #define DBG_LVL DBG_LOG
 #include <rtdbg.h>
-
-#ifdef BSP_USING_TOUCH
-#include "gt911.h"
 
 #include "hal_data.h"
 
@@ -120,11 +119,9 @@ rt_err_t rt_hw_gt911_register(void)
 
     return RT_EOK;
 }
-#endif
 
 void lv_port_indev_init(void)
 {
-#ifdef BSP_USING_TOUCH
     static lv_indev_drv_t indev_drv;         /* Descriptor of a input device driver */
     lv_indev_drv_init(&indev_drv);           /* Basic initialization */
     indev_drv.type = LV_INDEV_TYPE_POINTER;  /* Touch pad is a pointer-like device */
@@ -136,5 +133,4 @@ void lv_port_indev_init(void)
     /* Register touch device */
     rt_err_t res = rt_hw_gt911_register();
     RT_ASSERT(res == RT_EOK);
-#endif
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2006-2024, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -24,10 +24,20 @@
  * 2022-08-24     Yunjie       make rt_memset word-independent to adapt to ti c28x (16bit word)
  * 2022-08-30     Yunjie       make rt_vsnprintf adapt to ti c28x (16bit int)
  * 2023-02-02     Bernard      add Smart ID for logo version show
+ * 2023-10-16     Shell        Add hook point for rt_malloc services
+ * 2023-12-10     xqyjlj       perf rt_hw_interrupt_disable/enable, fix memheap lock
  */
 
 #include <rtthread.h>
 #include <rthw.h>
+
+#define DBG_TAG           "kernel.service"
+#ifdef RT_DEBUG_DEVICE
+#define DBG_LVL           DBG_LOG
+#else
+#define DBG_LVL           DBG_WARNING
+#endif /* defined (RT_DEBUG_DEVICE) */
+#include <rtdbg.h>
 
 #ifdef RT_USING_MODULE
 #include <dlmodule.h>
@@ -38,10 +48,6 @@
 #include <lwp_user_mm.h>
 #include <console.h>
 #endif
-
-/* use precision */
-#define RT_PRINTF_PRECISION
-#define RT_PRINTF_SPECIAL
 
 /**
  * @addtogroup KernelService
@@ -58,8 +64,47 @@ static rt_device_t _console_device = RT_NULL;
 rt_weak void rt_hw_us_delay(rt_uint32_t us)
 {
     (void) us;
-    RT_DEBUG_LOG(RT_DEBUG_DEVICE, ("rt_hw_us_delay() doesn't support for this board."
-        "Please consider implementing rt_hw_us_delay() in another file.\n"));
+    LOG_W("rt_hw_us_delay() doesn't support for this board."
+        "Please consider implementing rt_hw_us_delay() in another file.");
+}
+
+rt_weak void rt_hw_cpu_reset(void)
+{
+    LOG_W("rt_hw_cpu_reset() doesn't support for this board."
+        "Please consider implementing rt_hw_cpu_reset() in another file.");
+    return;
+}
+
+rt_weak void rt_hw_cpu_shutdown(void)
+{
+    rt_base_t level;
+    LOG_I("CPU shutdown...");
+    LOG_W("Using default rt_hw_cpu_shutdown()."
+        "Please consider implementing rt_hw_cpu_reset() in another file.");
+    level = rt_hw_interrupt_disable();
+    while (level)
+    {
+        RT_ASSERT(RT_NULL);
+    }
+    return;
+}
+
+rt_weak rt_err_t rt_hw_backtrace_frame_get(rt_thread_t thread, struct rt_hw_backtrace_frame *frame)
+{
+    RT_UNUSED(thread);
+    RT_UNUSED(frame);
+
+    LOG_W("%s is not implemented", __func__);
+    return -RT_ENOSYS;
+}
+
+rt_weak rt_err_t rt_hw_backtrace_frame_unwind(rt_thread_t thread, struct rt_hw_backtrace_frame *frame)
+{
+    RT_UNUSED(thread);
+    RT_UNUSED(frame);
+
+    LOG_W("%s is not implemented", __func__);
+    return -RT_ENOSYS;
 }
 
 rt_weak const char *rt_hw_cpu_arch(void)
@@ -67,20 +112,29 @@ rt_weak const char *rt_hw_cpu_arch(void)
     return "unknown";
 }
 
-static const char* rt_errno_strs[] =
+struct _errno_str_t
 {
-    "OK",
-    "ERROR",
-    "ETIMOUT",
-    "ERSFULL",
-    "ERSEPTY",
-    "ENOMEM",
-    "ENOSYS",
-    "EBUSY",
-    "EIO",
-    "EINTRPT",
-    "EINVAL",
-    "EUNKNOW"
+    rt_err_t error;
+    const char *str;
+};
+
+static struct _errno_str_t  rt_errno_strs[] =
+{
+    {RT_EOK     , "OK     "},
+    {RT_ERROR   , "ERROR  "},
+    {RT_ETIMEOUT, "ETIMOUT"},
+    {RT_EFULL   , "ERSFULL"},
+    {RT_EEMPTY  , "ERSEPTY"},
+    {RT_ENOMEM  , "ENOMEM "},
+    {RT_ENOSYS  , "ENOSYS "},
+    {RT_EBUSY   , "EBUSY  "},
+    {RT_EIO     , "EIO    "},
+    {RT_EINTR   , "EINTRPT"},
+    {RT_EINVAL  , "EINVAL "},
+    {RT_ENOENT  , "ENOENT "},
+    {RT_ENOSPC  , "ENOSPC "},
+    {RT_EPERM   , "EPERM  "},
+    {RT_ETRAP   , "ETRAP  "},
 };
 
 /**
@@ -92,12 +146,18 @@ static const char* rt_errno_strs[] =
  */
 const char *rt_strerror(rt_err_t error)
 {
+    int i = 0;
+
     if (error < 0)
         error = -error;
 
-    return (error > RT_EINVAL + 1) ?
-           rt_errno_strs[RT_EINVAL + 1] :
-           rt_errno_strs[error];
+    for (i = 0; i < sizeof(rt_errno_strs) / sizeof(rt_errno_strs[0]); i++)
+    {
+        if (rt_errno_strs[i].error == error)
+            return rt_errno_strs[i].str;
+    }
+
+    return "EUNKNOW";
 }
 RTM_EXPORT(rt_strerror);
 
@@ -670,14 +730,16 @@ RTM_EXPORT(rt_strdup);
 void rt_show_version(void)
 {
     rt_kprintf("\n \\ | /\n");
-#ifdef RT_USING_SMART
+#if defined(RT_USING_SMART)
     rt_kprintf("- RT -     Thread Smart Operating System\n");
+#elif defined(RT_USING_NANO)
+    rt_kprintf("- RT -     Thread Nano Operating System\n");
 #else
     rt_kprintf("- RT -     Thread Operating System\n");
 #endif
     rt_kprintf(" / | \\     %d.%d.%d build %s %s\n",
                (rt_int32_t)RT_VERSION_MAJOR, (rt_int32_t)RT_VERSION_MINOR, (rt_int32_t)RT_VERSION_PATCH, __DATE__, __TIME__);
-    rt_kprintf(" 2006 - 2022 Copyright by RT-Thread team\n");
+    rt_kprintf(" 2006 - 2024 Copyright by RT-Thread team\n");
 }
 RTM_EXPORT(rt_show_version);
 
@@ -740,9 +802,7 @@ static char *print_number(char *buf,
                           int   base,
                           int   qualifier,
                           int   s,
-#ifdef RT_PRINTF_PRECISION
                           int   precision,
-#endif /* RT_PRINTF_PRECISION */
                           int   type)
 {
     char c = 0, sign = 0;
@@ -812,7 +872,6 @@ static char *print_number(char *buf,
         }
     }
 
-#ifdef RT_PRINTF_SPECIAL
     if (type & SPECIAL)
     {
         if (base == 2 || base == 16)
@@ -824,7 +883,6 @@ static char *print_number(char *buf,
             size--;
         }
     }
-#endif /* RT_PRINTF_SPECIAL */
 
     i = 0;
     if (num == 0)
@@ -837,15 +895,11 @@ static char *print_number(char *buf,
             tmp[i++] = digits[divide(&num, base)];
     }
 
-#ifdef RT_PRINTF_PRECISION
     if (i > precision)
     {
         precision = i;
     }
     size -= precision;
-#else
-    size -= i;
-#endif /* RT_PRINTF_PRECISION */
 
     if (!(type & (ZEROPAD | LEFT)))
     {
@@ -875,7 +929,6 @@ static char *print_number(char *buf,
         ++ buf;
     }
 
-#ifdef RT_PRINTF_SPECIAL
     if (type & SPECIAL)
     {
         if (base == 2)
@@ -908,7 +961,6 @@ static char *print_number(char *buf,
             ++ buf;
         }
     }
-#endif /* RT_PRINTF_SPECIAL */
 
     /* no align to the left */
     if (!(type & LEFT))
@@ -924,7 +976,6 @@ static char *print_number(char *buf,
         }
     }
 
-#ifdef RT_PRINTF_PRECISION
     while (i < precision--)
     {
         if (buf < end)
@@ -934,7 +985,6 @@ static char *print_number(char *buf,
 
         ++ buf;
     }
-#endif /* RT_PRINTF_PRECISION */
 
     /* put number in the temporary buffer */
     while (i-- > 0 && (precision_bak != 0))
@@ -960,6 +1010,11 @@ static char *print_number(char *buf,
     return buf;
 }
 
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+/* ignore warning: this statement may fall through */
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
+#endif /* __GNUC__ */
 /**
  * @brief  This function will fill a formatted string to buffer.
  *
@@ -988,10 +1043,7 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
     rt_uint8_t flags = 0;           /* flags to print number */
     rt_uint8_t qualifier = 0;       /* 'h', 'l', or 'L' for integer fields */
     rt_int32_t field_width = 0;     /* width of output field */
-
-#ifdef RT_PRINTF_PRECISION
     int precision = 0;      /* min. # of digits for integers and max for a string */
-#endif /* RT_PRINTF_PRECISION */
 
     str = buf;
     end = buf + size;
@@ -1022,7 +1074,7 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
         while (1)
         {
             /* skips the first '%' also */
-            ++ fmt;
+            ++fmt;
             if (*fmt == '-') flags |= LEFT;
             else if (*fmt == '+') flags |= PLUS;
             else if (*fmt == ' ') flags |= SPACE;
@@ -1039,7 +1091,7 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
         }
         else if (*fmt == '*')
         {
-            ++ fmt;
+            ++fmt;
             /* it's the next argument */
             field_width = va_arg(args, int);
             if (field_width < 0)
@@ -1049,19 +1101,18 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
             }
         }
 
-#ifdef RT_PRINTF_PRECISION
         /* get the precision */
         precision = -1;
         if (*fmt == '.')
         {
-            ++ fmt;
+            ++fmt;
             if (_ISDIGIT(*fmt))
             {
                 precision = skip_atoi(&fmt);
             }
             else if (*fmt == '*')
             {
-                ++ fmt;
+                ++fmt;
                 /* it's the next argument */
                 precision = va_arg(args, int);
             }
@@ -1070,24 +1121,29 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
                 precision = 0;
             }
         }
-#endif /* RT_PRINTF_PRECISION */
-        /* get the conversion qualifier */
-        qualifier = 0;
+
+        qualifier = 0; /* get the conversion qualifier */
+
+        if (*fmt == 'h' || *fmt == 'l' ||
 #ifdef RT_KPRINTF_USING_LONGLONG
-        if (*fmt == 'h' || *fmt == 'l' || *fmt == 'L')
-#else
-        if (*fmt == 'h' || *fmt == 'l')
+            *fmt == 'L' ||
 #endif /* RT_KPRINTF_USING_LONGLONG */
+            *fmt == 'z')
         {
             qualifier = *fmt;
-            ++ fmt;
+            ++fmt;
 #ifdef RT_KPRINTF_USING_LONGLONG
             if (qualifier == 'l' && *fmt == 'l')
             {
                 qualifier = 'L';
-                ++ fmt;
+                ++fmt;
             }
 #endif /* RT_KPRINTF_USING_LONGLONG */
+            if (qualifier == 'h' && *fmt == 'h')
+            {
+                qualifier = 'H';
+                ++fmt;
+            }
         }
 
         /* the default base */
@@ -1129,12 +1185,11 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
             }
 
             for (len = 0; (len != field_width) && (s[len] != '\0'); len++);
-#ifdef RT_PRINTF_PRECISION
+
             if (precision > 0 && len > precision)
             {
                 len = precision;
             }
-#endif /* RT_PRINTF_PRECISION */
 
             if (!(flags & LEFT))
             {
@@ -1163,21 +1218,12 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
             if (field_width == -1)
             {
                 field_width = sizeof(void *) << 1;
-#ifdef RT_PRINTF_SPECIAL
                 field_width += 2; /* `0x` prefix */
                 flags |= SPECIAL;
-#endif
                 flags |= ZEROPAD;
             }
-#ifdef RT_PRINTF_PRECISION
-            str = print_number(str, end,
-                               (unsigned long)va_arg(args, void *),
+            str = print_number(str, end, (unsigned long)va_arg(args, void *),
                                16, qualifier, field_width, precision, flags);
-#else
-            str = print_number(str, end,
-                               (unsigned long)va_arg(args, void *),
-                               16, qualifier, field_width, flags);
-#endif
             continue;
 
         case '%':
@@ -1208,6 +1254,13 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
         case 'u':
             break;
 
+        case 'e':
+        case 'E':
+        case 'G':
+        case 'g':
+        case 'f':
+        case 'F':
+            va_arg(args, double);
         default:
             if (str < end)
             {
@@ -1230,17 +1283,21 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
             continue;
         }
 
-#ifdef RT_KPRINTF_USING_LONGLONG
         if (qualifier == 'L')
         {
             num = va_arg(args, unsigned long long);
         }
         else if (qualifier == 'l')
-#else
-        if (qualifier == 'l')
-#endif /* RT_KPRINTF_USING_LONGLONG */
         {
             num = va_arg(args, unsigned long);
+        }
+        else if (qualifier == 'H')
+        {
+            num = (rt_int8_t)va_arg(args, rt_int32_t);
+            if (flags & SIGN)
+            {
+                num = (rt_int8_t)num;
+            }
         }
         else if (qualifier == 'h')
         {
@@ -1250,15 +1307,19 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
                 num = (rt_int16_t)num;
             }
         }
+        else if (qualifier == 'z')
+        {
+            num = va_arg(args, rt_size_t);
+            if (flags & SIGN)
+            {
+                num = (rt_ssize_t)num;
+            }
+        }
         else
         {
             num = (rt_uint32_t)va_arg(args, unsigned long);
         }
-#ifdef RT_PRINTF_PRECISION
         str = print_number(str, end, num, base, qualifier, field_width, precision, flags);
-#else
-        str = print_number(str, end, num, base, qualifier, field_width, flags);
-#endif
     }
 
     if (size > 0)
@@ -1279,6 +1340,9 @@ rt_weak int rt_vsnprintf(char *buf, rt_size_t size, const char *fmt, va_list arg
     return str - buf;
 }
 RTM_EXPORT(rt_vsnprintf);
+#ifdef __GNUC__
+#pragma GCC diagnostic pop /* ignored "-Wimplicit-fallthrough" */
+#endif /* __GNUC__ */
 
 /**
  * @brief  This function will fill a formatted string to buffer.
@@ -1422,8 +1486,125 @@ RTM_EXPORT(rt_console_set_device);
 rt_weak void rt_hw_console_output(const char *str)
 {
     /* empty console output */
+    RT_UNUSED(str);
 }
 RTM_EXPORT(rt_hw_console_output);
+
+#ifdef RT_USING_THREADSAFE_PRINTF
+
+/* system console lock */
+static struct rt_spinlock _syscon_lock = RT_SPINLOCK_INIT;
+/* lock of kprintf buffer */
+static struct rt_spinlock _prbuf_lock = RT_SPINLOCK_INIT;
+/* current user of system console */
+static rt_thread_t _pr_curr_user;
+
+#ifdef RT_USING_DEBUG
+static rt_base_t _pr_critical_level;
+#endif /* RT_USING_DEBUG */
+
+/* nested level of current user */
+static volatile int _pr_curr_user_nested;
+
+rt_thread_t rt_console_current_user(void)
+{
+    return _pr_curr_user;
+}
+
+static void _console_take(void)
+{
+    rt_ubase_t level = rt_spin_lock_irqsave(&_syscon_lock);
+    rt_thread_t self_thread = rt_thread_self();
+    rt_base_t critical_level;
+    RT_UNUSED(critical_level);
+
+    while (_pr_curr_user != self_thread)
+    {
+        if (_pr_curr_user == RT_NULL)
+        {
+            /* no preemption is allowed to avoid dead lock */
+            critical_level = rt_enter_critical();
+#ifdef RT_USING_DEBUG
+            _pr_critical_level = _syscon_lock.critical_level;
+            _syscon_lock.critical_level = critical_level;
+#endif
+            _pr_curr_user = self_thread;
+            break;
+        }
+        else
+        {
+            rt_spin_unlock_irqrestore(&_syscon_lock, level);
+            rt_thread_yield();
+            level = rt_spin_lock_irqsave(&_syscon_lock);
+        }
+    }
+
+    _pr_curr_user_nested++;
+
+    rt_spin_unlock_irqrestore(&_syscon_lock, level);
+}
+
+static void _console_release(void)
+{
+    rt_ubase_t level = rt_spin_lock_irqsave(&_syscon_lock);
+    rt_thread_t self_thread = rt_thread_self();
+    RT_UNUSED(self_thread);
+
+    RT_ASSERT(_pr_curr_user == self_thread);
+
+    _pr_curr_user_nested--;
+    if (!_pr_curr_user_nested)
+    {
+        _pr_curr_user = RT_NULL;
+
+#ifdef RT_USING_DEBUG
+        rt_exit_critical_safe(_syscon_lock.critical_level);
+        _syscon_lock.critical_level = _pr_critical_level;
+#else
+        rt_exit_critical();
+#endif
+    }
+    rt_spin_unlock_irqrestore(&_syscon_lock, level);
+}
+
+#define CONSOLE_TAKE          _console_take()
+#define CONSOLE_RELEASE       _console_release()
+#define PRINTF_BUFFER_TAKE    rt_ubase_t level = rt_spin_lock_irqsave(&_prbuf_lock)
+#define PRINTF_BUFFER_RELEASE rt_spin_unlock_irqrestore(&_prbuf_lock, level)
+#else
+
+#define CONSOLE_TAKE
+#define CONSOLE_RELEASE
+#define PRINTF_BUFFER_TAKE
+#define PRINTF_BUFFER_RELEASE
+#endif /* RT_USING_THREADSAFE_PRINTF */
+
+/**
+ * @brief This function will put string to the console.
+ *
+ * @param str is the string output to the console.
+ */
+static void _kputs(const char *str, long len)
+{
+    RT_UNUSED(len);
+
+    CONSOLE_TAKE;
+
+#ifdef RT_USING_DEVICE
+    if (_console_device == RT_NULL)
+    {
+        rt_hw_console_output(str);
+    }
+    else
+    {
+        rt_device_write(_console_device, 0, str, len);
+    }
+#else
+    rt_hw_console_output(str);
+#endif /* RT_USING_DEVICE */
+
+    CONSOLE_RELEASE;
+}
 
 /**
  * @brief This function will put string to the console.
@@ -1437,18 +1618,7 @@ void rt_kputs(const char *str)
         return;
     }
 
-#ifdef RT_USING_DEVICE
-    if (_console_device == RT_NULL)
-    {
-        rt_hw_console_output(str);
-    }
-    else
-    {
-        rt_device_write(_console_device, 0, str, rt_strlen(str));
-    }
-#else
-    rt_hw_console_output(str);
-#endif /* RT_USING_DEVICE */
+    _kputs(str, rt_strlen(str));
 }
 
 /**
@@ -1465,6 +1635,8 @@ rt_weak int rt_kprintf(const char *fmt, ...)
     static char rt_log_buf[RT_CONSOLEBUF_SIZE];
 
     va_start(args, fmt);
+    PRINTF_BUFFER_TAKE;
+
     /* the return value of vsnprintf is the number of bytes that would be
      * written to buffer had if the size of the buffer been sufficiently
      * large excluding the terminating null byte. If the output string
@@ -1476,18 +1648,9 @@ rt_weak int rt_kprintf(const char *fmt, ...)
         length = RT_CONSOLEBUF_SIZE - 1;
     }
 
-#ifdef RT_USING_DEVICE
-    if (_console_device == RT_NULL)
-    {
-        rt_hw_console_output(rt_log_buf);
-    }
-    else
-    {
-        rt_device_write(_console_device, 0, rt_log_buf, length);
-    }
-#else
-    rt_hw_console_output(rt_log_buf);
-#endif /* RT_USING_DEVICE */
+    _kputs(rt_log_buf, length);
+
+    PRINTF_BUFFER_RELEASE;
     va_end(args);
 
     return length;
@@ -1495,10 +1658,116 @@ rt_weak int rt_kprintf(const char *fmt, ...)
 RTM_EXPORT(rt_kprintf);
 #endif /* RT_USING_CONSOLE */
 
+#ifdef __GNUC__
+rt_weak rt_err_t rt_backtrace(void)
+{
+    struct rt_hw_backtrace_frame frame = {
+        .fp = (rt_base_t)__builtin_frame_address(0U),
+        .pc = ({__label__ pc; pc: (rt_base_t)&&pc;})
+    };
+    rt_hw_backtrace_frame_unwind(rt_thread_self(), &frame);
+    return rt_backtrace_frame(&frame);
+}
+
+#else /* otherwise not implemented */
+rt_weak rt_err_t rt_backtrace(void)
+{
+   /* LOG_W cannot work under this environment */
+    rt_kprintf("%s is not implemented\n", __func__);
+    return -RT_ENOSYS;
+}
+#endif
+
+rt_err_t rt_backtrace_frame(struct rt_hw_backtrace_frame *frame)
+{
+    long nesting = 0;
+
+    rt_kprintf("please use: addr2line -e rtthread.elf -a -f");
+
+    while (nesting < RT_BACKTRACE_LEVEL_MAX_NR)
+    {
+        rt_kprintf(" 0x%lx", (rt_ubase_t)frame->pc);
+        if (rt_hw_backtrace_frame_unwind(rt_thread_self(), frame))
+        {
+            break;
+        }
+        nesting++;
+    }
+    rt_kprintf("\n");
+    return RT_EOK;
+}
+
+rt_err_t rt_backtrace_thread(rt_thread_t thread)
+{
+    rt_err_t rc;
+    struct rt_hw_backtrace_frame frame;
+    if (thread)
+    {
+        rc = rt_hw_backtrace_frame_get(thread, &frame);
+        if (rc == RT_EOK)
+        {
+            rc = rt_backtrace_frame(&frame);
+        }
+    }
+    else
+    {
+        rc = -RT_EINVAL;
+    }
+    return rc;
+}
+
+#if defined(RT_USING_LIBC) && defined(RT_USING_FINSH)
+#include <stdlib.h> /* for string service */
+
+static void cmd_backtrace(int argc, char** argv)
+{
+    rt_ubase_t pid;
+    char *end_ptr;
+
+    if (argc != 2)
+    {
+        if (argc == 1)
+        {
+            rt_kprintf("[INFO] No thread specified\n"
+                "[HELP] You can use commands like: backtrace %p\n"
+                "Printing backtrace of calling stack...\n",
+                rt_thread_self());
+            rt_backtrace();
+            return ;
+        }
+        else
+        {
+            rt_kprintf("please use: backtrace [thread_address]\n");
+            return;
+        }
+    }
+
+    pid = strtoul(argv[1], &end_ptr, 0);
+    if (end_ptr == argv[1])
+    {
+        rt_kprintf("Invalid input: %s\n", argv[1]);
+        return ;
+    }
+
+    if (pid && rt_object_get_type((void *)pid) == RT_Object_Class_Thread)
+    {
+        rt_thread_t target = (rt_thread_t)pid;
+        rt_kprintf("backtrace %s(0x%lx), from %s\n", target->parent.name, pid, argv[1]);
+        rt_backtrace_thread(target);
+    }
+    else
+        rt_kprintf("Invalid pid: %ld\n", pid);
+}
+MSH_CMD_EXPORT_ALIAS(cmd_backtrace, backtrace, print backtrace of a thread);
+
+#endif /* RT_USING_LIBC */
+
 #if defined(RT_USING_HEAP) && !defined(RT_USING_USERHEAP)
 #ifdef RT_USING_HOOK
-static void (*rt_malloc_hook)(void *ptr, rt_size_t size);
-static void (*rt_free_hook)(void *ptr);
+static void (*rt_malloc_hook)(void **ptr, rt_size_t size);
+static void (*rt_realloc_entry_hook)(void **ptr, rt_size_t size);
+static void (*rt_realloc_exit_hook)(void **ptr, rt_size_t size);
+static void (*rt_free_hook)(void **ptr);
 
 /**
  * @addtogroup Hook
@@ -1511,9 +1780,31 @@ static void (*rt_free_hook)(void *ptr);
  *
  * @param hook the hook function.
  */
-void rt_malloc_sethook(void (*hook)(void *ptr, rt_size_t size))
+void rt_malloc_sethook(void (*hook)(void **ptr, rt_size_t size))
 {
     rt_malloc_hook = hook;
+}
+
+/**
+ * @brief This function will set a hook function, which will be invoked when a memory
+ *        block is allocated from heap memory.
+ *
+ * @param hook the hook function.
+ */
+void rt_realloc_set_entry_hook(void (*hook)(void **ptr, rt_size_t size))
+{
+    rt_realloc_entry_hook = hook;
+}
+
+/**
+ * @brief This function will set a hook function, which will be invoked when a memory
+ *        block is allocated from heap memory.
+ *
+ * @param hook the hook function.
+ */
+void rt_realloc_set_exit_hook(void (*hook)(void **ptr, rt_size_t size))
+{
+    rt_realloc_exit_hook = hook;
 }
 
 /**
@@ -1522,7 +1813,7 @@ void rt_malloc_sethook(void (*hook)(void *ptr, rt_size_t size))
  *
  * @param hook the hook function
  */
-void rt_free_sethook(void (*hook)(void *ptr))
+void rt_free_sethook(void (*hook)(void **ptr))
 {
     rt_free_hook = hook;
 }
@@ -1532,6 +1823,7 @@ void rt_free_sethook(void (*hook)(void *ptr))
 #endif /* RT_USING_HOOK */
 
 #if defined(RT_USING_HEAP_ISR)
+static struct rt_spinlock _heap_spinlock;
 #elif defined(RT_USING_MUTEX)
 static struct rt_mutex _lock;
 #endif
@@ -1539,6 +1831,7 @@ static struct rt_mutex _lock;
 rt_inline void _heap_lock_init(void)
 {
 #if defined(RT_USING_HEAP_ISR)
+    rt_spin_lock_init(&_heap_spinlock);
 #elif defined(RT_USING_MUTEX)
     rt_mutex_init(&_lock, "heap", RT_IPC_FLAG_PRIO);
 #endif
@@ -1547,7 +1840,7 @@ rt_inline void _heap_lock_init(void)
 rt_inline rt_base_t _heap_lock(void)
 {
 #if defined(RT_USING_HEAP_ISR)
-    return rt_hw_interrupt_disable();
+    return rt_spin_lock_irqsave(&_heap_spinlock);
 #elif defined(RT_USING_MUTEX)
     if (rt_thread_self())
         return rt_mutex_take(&_lock, RT_WAITING_FOREVER);
@@ -1562,7 +1855,7 @@ rt_inline rt_base_t _heap_lock(void)
 rt_inline void _heap_unlock(rt_base_t level)
 {
 #if defined(RT_USING_HEAP_ISR)
-    rt_hw_interrupt_enable(level);
+    rt_spin_unlock_irqrestore(&_heap_spinlock, level);
 #elif defined(RT_USING_MUTEX)
     RT_ASSERT(level == RT_EOK);
     if (rt_thread_self())
@@ -1611,7 +1904,10 @@ void *_memheap_alloc(struct rt_memheap *heap, rt_size_t size);
 void _memheap_free(void *rmem);
 void *_memheap_realloc(struct rt_memheap *heap, void *rmem, rt_size_t newsize);
 #define _MEM_INIT(_name, _start, _size) \
-    rt_memheap_init(&system_heap, _name, _start, _size)
+    do {\
+        rt_memheap_init(&system_heap, _name, _start, _size); \
+        system_heap.locked = RT_TRUE; \
+    } while(0)
 #define _MEM_MALLOC(_size)  \
     _memheap_alloc(&system_heap, _size)
 #define _MEM_REALLOC(_ptr, _newsize)    \
@@ -1649,6 +1945,19 @@ rt_inline void _slab_info(rt_size_t *total,
 #define _MEM_INFO(...)
 #endif
 
+static void _rt_system_heap_init(void *begin_addr, void *end_addr)
+{
+    rt_ubase_t begin_align = RT_ALIGN((rt_ubase_t)begin_addr, RT_ALIGN_SIZE);
+    rt_ubase_t end_align   = RT_ALIGN_DOWN((rt_ubase_t)end_addr, RT_ALIGN_SIZE);
+
+    RT_ASSERT(end_align > begin_align);
+
+    /* Initialize system memory heap */
+    _MEM_INIT("heap", (void *)begin_align, end_align - begin_align);
+    /* Initialize multi thread contention lock */
+    _heap_lock_init();
+}
+
 /**
  * @brief This function will init system heap.
  *
@@ -1658,15 +1967,7 @@ rt_inline void _slab_info(rt_size_t *total,
  */
 rt_weak void rt_system_heap_init(void *begin_addr, void *end_addr)
 {
-    rt_ubase_t begin_align = RT_ALIGN((rt_ubase_t)begin_addr, RT_ALIGN_SIZE);
-    rt_ubase_t end_align   = RT_ALIGN_DOWN((rt_ubase_t)end_addr, RT_ALIGN_SIZE);
-
-    RT_ASSERT(end_align > begin_align);
-
-    /* Initialize system memory heap */
-    _MEM_INIT("heap", begin_addr, end_align - begin_align);
-    /* Initialize multi thread contention lock */
-    _heap_lock_init();
+    _rt_system_heap_init(begin_addr, end_addr);
 }
 
 /**
@@ -1688,7 +1989,7 @@ rt_weak void *rt_malloc(rt_size_t size)
     /* Exit critical zone */
     _heap_unlock(level);
     /* call 'rt_malloc' hook */
-    RT_OBJECT_HOOK_CALL(rt_malloc_hook, (ptr, size));
+    RT_OBJECT_HOOK_CALL(rt_malloc_hook, (&ptr, size));
     return ptr;
 }
 RTM_EXPORT(rt_malloc);
@@ -1707,12 +2008,16 @@ rt_weak void *rt_realloc(void *ptr, rt_size_t newsize)
     rt_base_t level;
     void *nptr;
 
+    /* Entry hook */
+    RT_OBJECT_HOOK_CALL(rt_realloc_entry_hook, (&ptr, newsize));
     /* Enter critical zone */
     level = _heap_lock();
     /* Change the size of previously allocated memory block */
     nptr = _MEM_REALLOC(ptr, newsize);
     /* Exit critical zone */
     _heap_unlock(level);
+    /* Exit hook */
+    RT_OBJECT_HOOK_CALL(rt_realloc_exit_hook, (&nptr, newsize));
     return nptr;
 }
 RTM_EXPORT(rt_realloc);
@@ -1756,7 +2061,7 @@ rt_weak void rt_free(void *ptr)
     rt_base_t level;
 
     /* call 'rt_free' hook */
-    RT_OBJECT_HOOK_CALL(rt_free_hook, (ptr));
+    RT_OBJECT_HOOK_CALL(rt_free_hook, (&ptr));
     /* NULL check */
     if (ptr == RT_NULL) return;
     /* Enter critical zone */
@@ -1975,11 +2280,7 @@ int __rt_ffs(int value)
 #endif /* RT_USING_TINY_FFS */
 #endif /* RT_USING_CPU_FFS */
 
-#ifndef __on_rt_assert_hook
-    #define __on_rt_assert_hook(ex, func, line)         __ON_HOOK_ARGS(rt_assert_hook, (ex, func, line))
-#endif
-
-#ifdef RT_DEBUG
+#ifdef RT_USING_DEBUG
 /* RT_ASSERT(EX)'s hook */
 
 void (*rt_assert_hook)(const char *ex, const char *func, rt_size_t line);
@@ -2019,6 +2320,7 @@ void rt_assert_handler(const char *ex_string, const char *func, rt_size_t line)
 #endif /*RT_USING_MODULE*/
         {
             rt_kprintf("(%s) assertion failed at function:%s, line number:%d \n", ex_string, func, line);
+            rt_backtrace();
             while (dummy == 0);
         }
     }
@@ -2028,6 +2330,6 @@ void rt_assert_handler(const char *ex_string, const char *func, rt_size_t line)
     }
 }
 RTM_EXPORT(rt_assert_handler);
-#endif /* RT_DEBUG */
+#endif /* RT_USING_DEBUG */
 
 /**@}*/

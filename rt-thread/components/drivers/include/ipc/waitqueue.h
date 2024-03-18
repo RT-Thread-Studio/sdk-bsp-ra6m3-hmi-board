@@ -12,7 +12,8 @@
 #ifndef WAITQUEUE_H__
 #define WAITQUEUE_H__
 
-#include <rtthread.h>
+#include <rtdef.h>
+#include <rtconfig.h>
 
 #define RT_WQ_FLAG_CLEAN    0x00
 #define RT_WQ_FLAG_WAKEUP   0x01
@@ -25,6 +26,7 @@ struct rt_wqueue_node
     rt_thread_t polling_thread;
     rt_list_t   list;
 
+    rt_wqueue_t *wqueue;
     rt_wqueue_func_t wakeup;
     rt_uint32_t key;
 };
@@ -38,6 +40,7 @@ rt_inline void rt_wqueue_init(rt_wqueue_t *queue)
 
     queue->flag = RT_WQ_FLAG_CLEAN;
     rt_list_init(&(queue->waiting_list));
+    rt_spin_lock_init(&(queue->spinlock));
 }
 
 void rt_wqueue_add(rt_wqueue_t *queue, struct rt_wqueue_node *node);
@@ -51,7 +54,6 @@ void rt_wqueue_wakeup(rt_wqueue_t *queue, void *key);
     struct rt_wqueue_node name = {                      \
         rt_current_thread,                              \
         RT_LIST_OBJECT_INIT(((name).list)),             \
-                                                        \
         function,                                       \
         0                                               \
     }
