@@ -36,6 +36,9 @@ struct dfs_mnt
 #define MNT_IS_ALLOCED 0x1          /* the mnt struct is allocated */
 #define MNT_IS_ADDLIST 0x2          /* the mnt struct is added into list */
 #define MNT_IS_MOUNTED 0x4          /* the mnt struct is mounted */
+#define MNT_IS_UMOUNT  0x8          /* the mnt is unmount */
+#define MNT_IS_LOCKED  0x10         /* the mnt is locked */
+#define MNT_FORCE      0x20         /* the mnt force unmount */
 
     rt_atomic_t ref_count;          /* reference count */
 
@@ -50,6 +53,7 @@ int dfs_mnt_destroy(struct dfs_mnt* mnt);
 int dfs_mnt_list(struct dfs_mnt* mnt);
 int dfs_mnt_insert(struct dfs_mnt* mnt, struct dfs_mnt* child);
 
+struct dfs_mnt *dfs_mnt_dev_lookup(rt_device_t dev_id);
 struct dfs_mnt *dfs_mnt_lookup(const char *path);
 const char *dfs_mnt_get_mounted_path(struct rt_device *device);
 
@@ -57,6 +61,8 @@ struct dfs_mnt* dfs_mnt_ref(struct dfs_mnt* mnt);
 int dfs_mnt_unref(struct dfs_mnt* mnt);
 
 rt_bool_t dfs_mnt_has_child_mnt(struct dfs_mnt *mnt, const char* fullpath);
+
+int dfs_mnt_foreach(struct dfs_mnt* (*func)(struct dfs_mnt *mnt, void *parameter), void *parameter);
 
 #ifdef __cplusplus
 }

@@ -58,37 +58,30 @@
         <file category="source" name="ra/board/ra6m3/board_leds.c"/>
         <file category="header" name="ra/board/ra6m3/board_leds.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/bsp_api.h" path=""/>
-        <file category="header" name="ra/fsp/inc/api/r_can_api.h" path=""/>
+        <file category="header" name="ra/fsp/inc/api/r_adc_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_display_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_elc_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_ether_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_ether_phy_api.h" path=""/>
-        <file category="header" name="ra/fsp/inc/api/r_external_irq_api.h" path=""/>
-        <file category="header" name="ra/fsp/inc/api/r_i2s_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_ioport_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_jpeg_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_sdmmc_api.h" path=""/>
-        <file category="header" name="ra/fsp/inc/api/r_spi_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_timer_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_transfer_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_uart_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/fsp_common_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/fsp_features.h" path=""/>
         <file category="header" name="ra/fsp/inc/fsp_version.h" path=""/>
-        <file category="header" name="ra/fsp/inc/instances/r_can.h" path=""/>
+        <file category="header" name="ra/fsp/inc/instances/r_adc.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_dmac.h" path=""/>
-        <file category="header" name="ra/fsp/inc/instances/r_dtc.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_ether.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_ether_phy.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_glcdc.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_gpt.h" path=""/>
-        <file category="header" name="ra/fsp/inc/instances/r_icu.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_ioport.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_jpeg.h" path=""/>
-        <file category="header" name="ra/fsp/inc/instances/r_sci_spi.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_sci_uart.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_sdhi.h" path=""/>
-        <file category="header" name="ra/fsp/inc/instances/r_ssi.h" path=""/>
         <file category="header" name="ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/base_addresses.h" path=""/>
         <file category="header" name="ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/renesas.h" path=""/>
         <file category="header" name="ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/system.h" path=""/>
@@ -122,13 +115,12 @@
         <file category="header" name="ra/fsp/src/bsp/mcu/ra6m3/bsp_elc.h" path=""/>
         <file category="header" name="ra/fsp/src/bsp/mcu/ra6m3/bsp_feature.h" path=""/>
         <file category="header" name="ra/fsp/src/bsp/mcu/ra6m3/bsp_mcu_info.h" path=""/>
-        <file category="source" name="ra/fsp/src/r_can/r_can.c"/>
+        <file category="source" name="ra/fsp/src/r_adc/r_adc.c"/>
         <file category="source" name="ra/fsp/src/r_dmac/r_dmac.c"/>
         <file category="source" name="ra/fsp/src/r_drw/r_drw_base.c"/>
         <file category="header" name="ra/fsp/src/r_drw/r_drw_base.h" path=""/>
         <file category="source" name="ra/fsp/src/r_drw/r_drw_irq.c"/>
         <file category="source" name="ra/fsp/src/r_drw/r_drw_memory.c"/>
-        <file category="source" name="ra/fsp/src/r_dtc/r_dtc.c"/>
         <file category="source" name="ra/fsp/src/r_ether/r_ether.c"/>
         <file category="source" name="ra/fsp/src/r_ether_phy/r_ether_phy.c"/>
         <file category="source" name="ra/fsp/src/r_ether_phy/targets/DP83620/r_ether_phy_target_dp83620.c"/>
@@ -136,14 +128,11 @@
         <file category="source" name="ra/fsp/src/r_ether_phy/targets/KSZ8091RNB/r_ether_phy_target_ksz8091rnb.c"/>
         <file category="source" name="ra/fsp/src/r_glcdc/r_glcdc.c"/>
         <file category="source" name="ra/fsp/src/r_gpt/r_gpt.c"/>
-        <file category="source" name="ra/fsp/src/r_icu/r_icu.c"/>
         <file category="source" name="ra/fsp/src/r_ioport/r_ioport.c"/>
         <file category="source" name="ra/fsp/src/r_jpeg/r_jpeg.c"/>
-        <file category="source" name="ra/fsp/src/r_sci_spi/r_sci_spi.c"/>
         <file category="source" name="ra/fsp/src/r_sci_uart/r_sci_uart.c"/>
         <file category="source" name="ra/fsp/src/r_sdhi/r_sdhi.c"/>
         <file category="header" name="ra/fsp/src/r_sdhi/r_sdhi_private.h" path=""/>
-        <file category="source" name="ra/fsp/src/r_ssi/r_ssi.c"/>
         <file category="other" name="ra/SConscript"/>
         <file category="header" name="ra/tes/dave2d/inc/dave_base.h" path=""/>
         <file category="header" name="ra/tes/dave2d/inc/dave_driver.h" path=""/>
@@ -212,21 +201,17 @@
         <file category="header" name="ra_cfg/fsp_cfg/bsp/bsp_mcu_device_pn_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/bsp/bsp_mcu_family_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h" path=""/>
-        <file category="header" name="ra_cfg/fsp_cfg/r_can_cfg.h" path=""/>
+        <file category="header" name="ra_cfg/fsp_cfg/r_adc_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_dmac_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_drw_cfg.h" path=""/>
-        <file category="header" name="ra_cfg/fsp_cfg/r_dtc_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_ether_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_ether_phy_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_glcdc_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_gpt_cfg.h" path=""/>
-        <file category="header" name="ra_cfg/fsp_cfg/r_icu_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_ioport_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_jpeg_cfg.h" path=""/>
-        <file category="header" name="ra_cfg/fsp_cfg/r_sci_spi_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_sci_uart_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_sdhi_cfg.h" path=""/>
-        <file category="header" name="ra_cfg/fsp_cfg/r_ssi_cfg.h" path=""/>
         <file category="other" name="ra_cfg/SConscript"/>
       </files>
     </component>

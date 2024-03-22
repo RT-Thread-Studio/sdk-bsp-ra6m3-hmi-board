@@ -166,6 +166,7 @@ struct tty_struct
 
 #define RT_TTY_BUF 1024
     rt_list_t tty_drivers;
+    struct rt_spinlock spinlock;
 };
 
 enum
@@ -179,8 +180,8 @@ enum
 #define TTY_DRIVER_TYPE_SYSTEM      0x0001
 #define TTY_DRIVER_TYPE_CONSOLE     0x0002
 #define TTY_DRIVER_TYPE_SERIAL      0x0003
-#define TTY_DRIVER_TYPE_PTY     0x0004
-#define TTY_DRIVER_TYPE_SCC     0x0005  /* scc driver */
+#define TTY_DRIVER_TYPE_PTY         0x0004
+#define TTY_DRIVER_TYPE_SCC         0x0005  /* scc driver */
 #define TTY_DRIVER_TYPE_SYSCONS     0x0006
 
 /* tty magic number */

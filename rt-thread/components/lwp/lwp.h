@@ -23,6 +23,7 @@
 #include <rtthread.h>
 #include <dfs.h>
 
+#include "lwp_arch.h"
 #include "lwp_pid.h"
 #include "lwp_ipc.h"
 #include "lwp_signal.h"
@@ -30,22 +31,26 @@
 #include "lwp_avl.h"
 #include "mm_aspace.h"
 
+#ifdef RT_USING_MUSLLIBC
+#include "libc_musl.h"
+#endif /* RT_USING_MUSLLIBC */
+
 #ifdef ARCH_MM_MMU
 #include "lwp_shm.h"
-
+#include <locale.h>
 #include "mmu.h"
 #include "page.h"
 #else
 #include "lwp_mpu.h"
-#endif
-#include "lwp_arch.h"
+#endif /* ARCH_MM_MMU */
 
-#ifdef RT_USING_MUSL
+#ifdef RT_USING_MUSLLIBC
 #include <locale.h>
-#endif
+#endif /* RT_USING_MUSLLIBC */
+
 #ifdef  RT_USING_TTY
 struct tty_struct;
-#endif
+#endif /* RT_USING_TTY */
 
 #ifdef __cplusplus
 extern "C" {
@@ -64,17 +69,29 @@ struct rt_lwp_objs
     struct rt_mem_obj mem_obj;
 };
 
+struct rt_lwp_notify
+{
+    void (*notify)(rt_wqueue_t *signalfd_queue, int signo);
+    rt_wqueue_t *signalfd_queue;
+    rt_slist_t list_node;
+};
+
+#ifdef RT_USING_MUSLLIBC
+#define LWP_CREATE_STAT(exit_code) (((exit_code) & 0xff) << 8)
+#else
+#error "No compatible lwp set status provided for this libc"
+#endif
+
 struct rt_lwp
 {
 #ifdef ARCH_MM_MMU
     size_t end_heap;
     rt_aspace_t aspace;
-    struct rt_lwp_objs *lwp_obj;
 #else
 #ifdef ARCH_MM_MPU
     struct rt_mpu_info mpu_info;
 #endif /* ARCH_MM_MPU */
-#endif
+#endif /* ARCH_MM_MMU */
 
 #ifdef RT_USING_SMP
     int bind_cpu;
@@ -88,15 +105,16 @@ struct rt_lwp
     struct rt_lwp *sibling;
 
     rt_list_t wait_list;
-    int32_t  finish;
-    int  lwp_ret;
+    rt_bool_t terminated;
+    rt_bool_t background;
+    int lwp_ret;
 
     void *text_entry;
     uint32_t text_size;
     void *data_entry;
     uint32_t data_size;
 
-    int ref;
+    rt_atomic_t ref;
     void *args;
     uint32_t args_length;
     pid_t pid;
@@ -104,17 +122,14 @@ struct rt_lwp
     pid_t tty_old_pgrp;
     pid_t session;
     rt_list_t t_grp;
+    rt_list_t timer; /* POSIX timer object binding to a process */
 
-    int leader; /*boolean value for session group_leader*/
+    int leader; /* boolean value for session group_leader*/
     struct dfs_fdtable fdt;
     char cmd[RT_NAME_MAX];
 
-    int sa_flags;
-    lwp_sigset_t signal;
-    lwp_sigset_t signal_mask;
-    int signal_mask_bak;
-    rt_uint32_t signal_in_process;
-    lwp_sighandler_t signal_handler[_LWP_NSIG];
+    /* POSIX signal */
+    struct lwp_signal signal;
 
     struct lwp_avl_struct *object_root;
     struct rt_mutex object_mutex;
@@ -123,19 +138,26 @@ struct rt_lwp
     struct rt_wqueue wait_queue; /*for console */
     struct tty_struct *tty; /* NULL if no tty */
 
-    struct lwp_avl_struct *address_search_head; /* for addressed object fast rearch */
+    struct lwp_avl_struct *address_search_head; /* for addressed object fast search */
     char working_directory[DFS_PATH_MAX];
+
     int debug;
-    int background;
-    uint32_t bak_first_ins;
+    rt_uint32_t bak_first_inst; /* backup of first instruction */
+
+    struct rt_mutex lwp_lock;
+
+    rt_slist_t signalfd_notify_head;
 
 #ifdef LWP_ENABLE_ASID
     uint64_t generation;
     unsigned int asid;
 #endif
 };
+typedef struct rt_lwp *rt_lwp_t;
 
 struct rt_lwp *lwp_self(void);
+rt_err_t lwp_children_register(struct rt_lwp *parent, struct rt_lwp *child);
+rt_err_t lwp_children_unregister(struct rt_lwp *parent, struct rt_lwp *child);
 
 enum lwp_exit_request_type
 {
@@ -146,17 +168,30 @@ enum lwp_exit_request_type
 struct termios *get_old_termios(void);
 void lwp_setcwd(char *buf);
 char *lwp_getcwd(void);
-void lwp_request_thread_exit(rt_thread_t thread_to_exit);
 int  lwp_check_exit_request(void);
 void lwp_terminate(struct rt_lwp *lwp);
-void lwp_wait_subthread_exit(void);
 
+int lwp_tid_init(void);
 int lwp_tid_get(void);
 void lwp_tid_put(int tid);
-rt_thread_t lwp_tid_get_thread(int tid);
+
+/**
+ * @brief Automatically get a thread and increase a reference count
+ *
+ * @param tid queried thread ID
+ * @return rt_thread_t
+ */
+rt_thread_t lwp_tid_get_thread_and_inc_ref(int tid);
+
+/**
+ * @brief Decrease a reference count
+ *
+ * @param thread target thread
+ */
+void lwp_tid_dec_ref(rt_thread_t thread);
+
 void lwp_tid_set_thread(int tid, rt_thread_t thread);
 
-size_t lwp_user_strlen(const char *s, int *err);
 int lwp_execve(char *filename, int debug, int argc, char **argv, char **envp);
 
 /*create by lwp_setsid.c*/
@@ -166,67 +201,29 @@ void lwp_aspace_switch(struct rt_thread *thread);
 #endif
 void lwp_user_setting_save(rt_thread_t thread);
 void lwp_user_setting_restore(rt_thread_t thread);
+
+void lwp_uthread_ctx_save(void *ctx);
+void lwp_uthread_ctx_restore(void);
+
 int lwp_setaffinity(pid_t pid, int cpu);
 
-#ifdef ARCH_MM_MMU
-struct __pthread {
-    /* Part 1 -- these fields may be external or
-     *      * internal (accessed via asm) ABI. Do not change. */
-    struct pthread *self;
-    uintptr_t *dtv;
-    struct pthread *prev, *next; /* non-ABI */
-    uintptr_t sysinfo;
-    uintptr_t canary, canary2;
+pid_t exec(char *filename, int debug, int argc, char **argv);
 
-    /* Part 2 -- implementation details, non-ABI. */
-    int tid;
-    int errno_val;
-    volatile int detach_state;
-    volatile int cancel;
-    volatile unsigned char canceldisable, cancelasync;
-    unsigned char tsd_used:1;
-    unsigned char dlerror_flag:1;
-    unsigned char *map_base;
-    size_t map_size;
-    void *stack;
-    size_t stack_size;
-    size_t guard_size;
-    void *result;
-    struct __ptcb *cancelbuf;
-    void **tsd;
-    struct {
-        volatile void *volatile head;
-        long off;
-        volatile void *volatile pending;
-    } robust_list;
-    volatile int timer_id;
-    locale_t locale;
-    volatile int killlock[1];
-    char *dlerror_buf;
-    void *stdio_locks;
+/* ctime lwp API */
+int timer_list_free(rt_list_t *timer_list);
 
-    /* Part 3 -- the positions of these fields relative to
-     *      * the end of the structure is external and internal ABI. */
-    uintptr_t canary_at_end;
-    uintptr_t *dtv_copy;
-};
-#endif
+rt_err_t lwp_futex_init(void);
+rt_err_t lwp_futex(struct rt_lwp *lwp, int *uaddr, int op, int val,
+                   const struct timespec *timeout, int *uaddr2, int val3);
 
-/* for futex op */
-#define FUTEX_WAIT  0
-#define FUTEX_WAKE  1
-
-/* for pmutex op */
-#define PMUTEX_INIT    0
-#define PMUTEX_LOCK    1
-#define PMUTEX_UNLOCK  2
-#define PMUTEX_DESTROY 3
 
 #ifdef __cplusplus
 }
 #endif
 
-#define AUX_ARRAY_ITEMS_NR 6
+#ifndef AUX_ARRAY_ITEMS_NR
+#define AUX_ARRAY_ITEMS_NR 32
+#endif
 
 /* aux key */
 #define AT_NULL 0
@@ -304,5 +301,8 @@ int dbg_step_type(void);
 void dbg_attach_req(void *pc);
 int dbg_check_suspend(void);
 void rt_hw_set_process_id(int pid);
+
+/* backtrace service */
+rt_err_t lwp_backtrace_frame(rt_thread_t uthread, struct rt_hw_backtrace_frame *frame);
 
 #endif

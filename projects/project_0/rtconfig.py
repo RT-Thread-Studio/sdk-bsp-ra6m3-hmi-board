@@ -1,15 +1,10 @@
 import os
 import sys
-import platform
 
 # toolchains options
 ARCH='arm'
 CPU='cortex-m4'
-BUILD_HOST=platform.system()
-if  BUILD_HOST == 'Linux':
-    CROSS_TOOL='gcc'
-else :
-    CROSS_TOOL='keil'
+CROSS_TOOL='gcc'
 
 if os.getenv('RTT_CC'):
     CROSS_TOOL = os.getenv('RTT_CC')
@@ -20,22 +15,22 @@ if os.getenv('RTT_ROOT'):
 # EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR
 if  CROSS_TOOL == 'gcc':
     PLATFORM    = 'gcc'
-    if BUILD_HOST == 'Linux':
-        EXEC_PATH   = r'/usr/bin'
-    else :
-        EXEC_PATH   = r'C:\Users\XXYYZZ'
+    EXEC_PATH   = r'C:\Users\XXYYZZ'
 elif CROSS_TOOL == 'keil':
     PLATFORM    = 'armclang'
     EXEC_PATH   = r'C:/Keil_v5'
 elif CROSS_TOOL == 'iar':
     PLATFORM    = 'iccarm'
     EXEC_PATH   = r'C:/Program Files/IAR Systems/Embedded Workbench 8.0'
+elif CROSS_TOOL == 'llvm-arm':
+    PLATFORM    = 'llvm-arm'
+    EXEC_PATH   = r'D:\Progrem\LLVMEmbeddedToolchainForArm-17.0.1-Windows-x86_64\bin'
 
 if os.getenv('RTT_EXEC_PATH'):
     EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
-BUILD = 'debug'
-# BUILD = 'release'
+BUILD = 'debug' 
+# BUILD = 'release' 
 
 if PLATFORM == 'gcc':
     # toolchains
@@ -64,6 +59,7 @@ if PLATFORM == 'gcc':
         AFLAGS += ' -gdwarf-2'
     else:
         CFLAGS += ' -Os'
+    CXXFLAGS = CFLAGS
 
     POST_ACTION = OBJCPY + ' -O ihex $TARGET rtthread.hex\n' + SIZE + ' $TARGET \n'
     # POST_ACTION += OBJCPY + ' -O binary $TARGET rtthread.bin\n' + SIZE + ' $TARGET \n'
@@ -101,6 +97,36 @@ elif PLATFORM == 'armclang':
         CFLAGS += ' -Os'
 
     POST_ACTION = 'fromelf --bin $TARGET --output rtthread.bin \nfromelf -z $TARGET \n'
+elif PLATFORM == 'llvm-arm':
+    # toolchains
+    PREFIX = 'llvm-'
+    CC = 'clang'
+    AS = 'clang'
+    AR = PREFIX + 'ar'
+    CXX = 'clang++'
+    LINK = 'clang'
+    TARGET_EXT = 'elf'
+    SIZE = PREFIX + 'size'
+    OBJDUMP = PREFIX + 'objdump'
+    OBJCPY = PREFIX + 'objcopy'
+    DEVICE = ' --target=arm-none-eabihf -mfloat-abi=hard -march=armv7em -mfpu=fpv4-sp-d16'
+    DEVICE += ' -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti'
+    CFLAGS = DEVICE
+    AFLAGS = ' -c' + DEVICE + ' -Wa,-mimplicit-it=thumb ' ## -x assembler-with-cpp
+    LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rt-thread.map,-u,Reset_Handler -lcrt0 -T script/fsp.ld -L script/'
+
+    CPATH = ''
+    LPATH = ''
+
+    if BUILD == 'debug':
+        CFLAGS += ' -O0 -gdwarf-2 -g'
+        AFLAGS += ' -gdwarf-2'
+    else:
+        CFLAGS += ' -O2'
+
+    CXXFLAGS = CFLAGS 
+
+    POST_ACTION = OBJCPY + ' -O ihex $TARGET rtthread.hex\n' + SIZE + ' $TARGET \n'
 
 def dist_handle(BSP_ROOT, dist_dir):
     import sys

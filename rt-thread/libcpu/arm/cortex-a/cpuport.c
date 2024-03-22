@@ -74,7 +74,7 @@ void rt_hw_spin_unlock(rt_hw_spinlock_t *lock)
 /*@{*/
 
 /** shutdown CPU */
-rt_weak void rt_hw_cpu_shutdown()
+void rt_hw_cpu_shutdown(void)
 {
     rt_base_t level;
     rt_kprintf("shutdown...\n");
@@ -102,5 +102,12 @@ int __rt_ffs(int value)
     return __builtin_ffs(value);
 }
 #endif
+
+rt_bool_t rt_hw_interrupt_is_disabled(void)
+{
+    int rc;
+    __asm__ volatile("mrs %0, cpsr" : "=r" (rc));
+    return !!(rc & 0x80);
+}
 
 /*@}*/

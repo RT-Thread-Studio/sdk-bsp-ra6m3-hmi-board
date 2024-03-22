@@ -343,6 +343,11 @@ static void directory_delete_for_msh(const char *pathname, char f, char v)
         if (rt_strcmp(".", dirent->d_name) != 0 &&
                 rt_strcmp("..", dirent->d_name) != 0)
         {
+            if (strlen(pathname) + 1 + strlen(dirent->d_name) > DFS_PATH_MAX)
+            {
+                rt_kprintf("cannot remove '%s/%s', path too long.\n", pathname, dirent->d_name);
+                continue;
+            }
             rt_sprintf(full_path, "%s/%s", pathname, dirent->d_name);
             if (dirent->d_type != DT_DIR)
             {
@@ -422,14 +427,14 @@ static int cmd_rm(int argc, char **argv)
         if (stat(argv[index], &s) == 0)
 #endif
         {
-            if (s.st_mode & S_IFDIR)
+            if (S_ISDIR(s.st_mode))
             {
                 if (r == 0)
                     rt_kprintf("cannot remove '%s': Is a directory\n", argv[index]);
                 else
                     directory_delete_for_msh(argv[index], f, v);
             }
-            else if (s.st_mode & S_IFREG)
+            else
             {
                 if (unlink(argv[index]) != 0)
                 {
@@ -618,6 +623,7 @@ MSH_CMD_EXPORT_ALIAS(cmd_mount, mount, mount <device> <mountpoint> <fstype>);
 /* unmount the filesystem from the specified mountpoint */
 static int cmd_umount(int argc, char **argv)
 {
+#ifndef RT_USING_DFS_V2
     char *path = argv[1];
 
     if (argc != 2)
@@ -637,6 +643,34 @@ static int cmd_umount(int argc, char **argv)
         rt_kprintf("succeed!\n");
         return 0;
     }
+#else
+    int flags = 0;
+    char *path = argv[1];
+
+    if (argc < 2)
+    {
+        rt_kprintf("Usage: unmount [-f] <mountpoint>.\n");
+        return -1;
+    }
+
+    if (argc > 2)
+    {
+        flags = strcmp(argv[1], "-f") == 0 ? MNT_FORCE : 0;
+        path  = argv[2];
+    }
+
+    rt_kprintf("unmount %s ... ", path);
+    if (dfs_umount(path, flags) < 0)
+    {
+        rt_kprintf("failed!\n");
+        return -1;
+    }
+    else
+    {
+        rt_kprintf("succeed!\n");
+        return 0;
+    }
+#endif
 }
 MSH_CMD_EXPORT_ALIAS(cmd_umount, umount, Unmount the mountpoint);
 
@@ -833,6 +867,11 @@ static void directory_setattr(const char *pathname, struct dfs_attr *attr, char 
         if (rt_strcmp(".", dirent->d_name) != 0 &&
             rt_strcmp("..", dirent->d_name) != 0)
         {
+            if (strlen(pathname) + 1 + strlen(dirent->d_name) > DFS_PATH_MAX)
+            {
+                rt_kprintf("'%s/%s' setattr failed, path too long.\n", pathname, dirent->d_name);
+                continue;
+            }
             rt_sprintf(full_path, "%s/%s", pathname, dirent->d_name);
             if (dirent->d_type == DT_REG)
             {
@@ -1060,7 +1099,7 @@ static int cmd_chmod(int argc, char **argv)
                     struct stat s;
                     if (stat(argv[i], &s) == 0)
                     {
-                        if (s.st_mode & S_IFDIR)
+                        if (S_ISDIR(s.st_mode))
                         {
                             directory_setattr(argv[i], &attr, f, v);
                         }

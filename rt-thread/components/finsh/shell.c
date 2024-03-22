@@ -381,6 +381,10 @@ static void shell_auto_complete(char *prefix)
     rt_kprintf("\n");
     msh_auto_complete(prefix);
 
+#ifdef FINSH_USING_OPTION_COMPLETION
+    msh_opt_auto_complete(prefix);
+#endif
+
     rt_kprintf("%s%s", FINSH_PROMPT, prefix);
 }
 
@@ -444,7 +448,7 @@ static void shell_push_history(struct finsh_shell *shell)
 }
 #endif
 
-void finsh_thread_entry(void *parameter)
+static void finsh_thread_entry(void *parameter)
 {
     int ch;
 
@@ -686,7 +690,7 @@ void finsh_thread_entry(void *parameter)
     } /* end of device read */
 }
 
-void finsh_system_function_init(const void *begin, const void *end)
+static void finsh_system_function_init(const void *begin, const void *end)
 {
     _syscall_table_begin = (struct finsh_syscall *) begin;
     _syscall_table_end = (struct finsh_syscall *) end;

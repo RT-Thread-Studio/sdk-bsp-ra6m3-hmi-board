@@ -205,11 +205,7 @@ int ra_can_recvmsg(struct rt_can_device *can_dev, void *buf, rt_uint32_t boxno)
     RT_ASSERT(boxno < can->config->num_of_mailboxs);
     if (can->callback_args->mailbox != boxno)
         return 0;
-#if FSP_VERSION_MAJOR > 3U
-    msg_ra = &can->callback_args->frame;
-#else
     msg_ra = can->callback_args->p_frame;
-#endif
 
     msg_rt->id = msg_ra->id;
     msg_rt->ide = msg_ra->id_mode;
@@ -246,9 +242,6 @@ void can0_callback(can_callback_args_t *p_args)
     case CAN_EVENT_TX_ABORTED:
         rt_hw_can_isr(&can_obj[CAN0_INDEX].can_dev, RT_CAN_EVENT_TX_FAIL | p_args->mailbox << 8);
         break;
-#if FSP_VERSION_MAJOR > 3U
-    case CAN_EVENT_FIFO_MESSAGE_LOST:
-#endif
     case CAN_EVENT_MAILBOX_MESSAGE_LOST:    //overwrite/overrun error event
     case CAN_EVENT_BUS_RECOVERY:            //Bus recovery error event
     case CAN_EVENT_ERR_BUS_OFF:             //error Bus Off event

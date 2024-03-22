@@ -10,8 +10,8 @@
 #include <lvgl.h>
 #include "hal_data.h"
 
-#if LV_USE_GPU_RA6M3_G2D
-    #include "lv_gpu_d2_ra6m3.h"
+#if DLG_LVGL_USE_GPU_RA6M3
+    #include "drv_g2d.h"
 #endif
 
 #ifdef PKG_USING_ILI9341
@@ -20,7 +20,7 @@
     #include "lcd_port.h"
 #endif
 
-#define COLOR_BUFFER  (LV_HOR_RES_MAX * LV_VER_RES_MAX / 2)
+#define COLOR_BUFFER  (LV_HOR_RES_MAX * LV_VER_RES_MAX / 4)
 
 /*A static or global variable to store the buffers*/
 static lv_disp_draw_buf_t disp_buf;
@@ -33,7 +33,7 @@ static struct rt_device_graphic_info info;
 // 0x1FFE0000    0x20040000
 lv_color_t buf_1[COLOR_BUFFER];
 
-#if !LV_USE_GPU_RA6M3_G2D
+#if !DLG_LVGL_USE_GPU_RA6M3
 static void color_to16_maybe(lv_color16_t *dst, lv_color_t *src)
 {
 #if (LV_COLOR_DEPTH == 16)
@@ -55,7 +55,7 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
 {
 #ifdef PKG_USING_ILI9341
     lcd_fill_array_spi(area->x1, area->y1, area->x2, area->y2, color_p);
-#elif LV_USE_GPU_RA6M3_G2D
+#elif DLG_LVGL_USE_GPU_RA6M3
     lv_port_gpu_blit(area->x1, area->y1, color_p, area);
 #else
     int x1, x2, y1, y2;
@@ -136,9 +136,9 @@ void lv_port_disp_init(void)
     /*Used to copy the buffer's content to the display*/
     disp_drv.flush_cb = disp_flush;
 
-#if LV_USE_GPU_RA6M3_G2D
+#if DLG_LVGL_USE_GPU_RA6M3
     /* Initialize GPU module */
-    lv_draw_ra6m3_g2d_init();
+    G2d_Drv_HWInit();
 #endif /* LV_PORT_DISP_GPU_EN */
 
     /*Finally register the driver*/

@@ -67,6 +67,7 @@ int dfs_mnt_insert(struct dfs_mnt* mnt, struct dfs_mnt* child)
             {
                 /* it's root mnt */
                 mnt = child;
+                mnt->flags |= MNT_IS_LOCKED;
 
                 /* ref to gobal root */
                 if (_root_mnt)
@@ -130,6 +131,53 @@ int dfs_mnt_remove(struct dfs_mnt* mnt)
     return ret;
 }
 
+static struct dfs_mnt *_dfs_mnt_dev_lookup(struct dfs_mnt *mnt, rt_device_t dev_id)
+{
+    struct dfs_mnt *ret = RT_NULL, *iter = RT_NULL;
+
+    rt_list_for_each_entry(iter, &mnt->child, sibling)
+    {
+        if (iter->dev_id == dev_id)
+        {
+            ret = iter;
+            break;
+        }
+        else
+        {
+            ret = _dfs_mnt_dev_lookup(iter, dev_id);
+            if (ret)
+            {
+                break;
+            }
+        }
+    }
+
+    return ret;
+}
+
+struct dfs_mnt *dfs_mnt_dev_lookup(rt_device_t dev_id)
+{
+    struct dfs_mnt *mnt = _root_mnt;
+    struct dfs_mnt *ret = RT_NULL;
+
+    if (mnt)
+    {
+        dfs_lock();
+
+        if (mnt->dev_id == dev_id)
+        {
+            dfs_unlock();
+            return mnt;
+        }
+
+        ret = _dfs_mnt_dev_lookup(mnt, dev_id);
+
+        dfs_unlock();
+    }
+
+    return ret;
+}
+
 /**
  * this function will return the file system mounted on specified path.
  *
@@ -138,24 +186,26 @@ int dfs_mnt_remove(struct dfs_mnt* mnt)
  * @return the found file system or NULL if no file system mounted on
  * specified path
  */
-struct dfs_mnt* dfs_mnt_lookup(const char* fullpath)
+struct dfs_mnt *dfs_mnt_lookup(const char *fullpath)
 {
     struct dfs_mnt *mnt = _root_mnt;
     struct dfs_mnt *iter = RT_NULL;
 
     if (mnt)
     {
+        int mnt_len = rt_strlen(mnt->fullpath);
+
         dfs_lock();
-        if (strncmp(mnt->fullpath, fullpath, strlen(fullpath))!= 0)
+        if ((strncmp(mnt->fullpath, fullpath, mnt_len) == 0) &&
+            (mnt_len == 1 || (fullpath[mnt_len] == '\0') || (fullpath[mnt_len] == '/')))
         {
             while (!rt_list_isempty(&mnt->child))
             {
                 rt_list_for_each_entry(iter, &mnt->child, sibling)
                 {
-                    int mnt_len = rt_strlen(iter->fullpath);
+                    mnt_len = rt_strlen(iter->fullpath);
                     if ((strncmp(iter->fullpath, fullpath, mnt_len) == 0) &&
-                        ((fullpath[mnt_len] == '\0') ||
-                        (fullpath[mnt_len] == '/')))
+                        ((fullpath[mnt_len] == '\0') || (fullpath[mnt_len] == '/')))
                     {
                         mnt = iter;
                         break;
@@ -164,6 +214,10 @@ struct dfs_mnt* dfs_mnt_lookup(const char* fullpath)
 
                 if (mnt != iter) break;
             }
+        }
+        else
+        {
+            mnt = RT_NULL;
         }
         dfs_unlock();
 
@@ -194,22 +248,34 @@ int dfs_mnt_unref(struct dfs_mnt* mnt)
 
     if (mnt)
     {
-        ret = dfs_lock();
-        if (ret == RT_EOK)
-        {
-            rt_atomic_sub(&(mnt->ref_count), 1);
+        rt_atomic_sub(&(mnt->ref_count), 1);
 
-            if (rt_atomic_load(&(mnt->ref_count)) < 0)
+        if (rt_atomic_load(&(mnt->ref_count)) == 0)
+        {
+            dfs_lock();
+
+            if (mnt->flags & MNT_IS_UMOUNT)
             {
-                LOG_W("bug on mnt(%s) release ref_count(%d).", mnt->fullpath, mnt->ref_count);
+                mnt->fs_ops->umount(mnt);
             }
-            DLOG(note, "mnt", "mnt(%s),ref_count=%d", mnt->fs_ops->name, rt_atomic_load(&(mnt->ref_count)));
+
+            /* free full path */
+            rt_free(mnt->fullpath);
+            mnt->fullpath = RT_NULL;
+
+            /* destroy self and the ref_count should be 0 */
+            DLOG(msg, "mnt", "mnt", DLOG_MSG, "free mnt(%s)", mnt->fs_ops->name);
+            rt_free(mnt);
 
             dfs_unlock();
         }
+        else
+        {
+            DLOG(note, "mnt", "mnt(%s),ref_count=%d", mnt->fs_ops->name, rt_atomic_load(&(mnt->ref_count)));
+        }
     }
 
-    return 0;
+    return ret;
 }
 
 int dfs_mnt_destroy(struct dfs_mnt* mnt)
@@ -218,33 +284,21 @@ int dfs_mnt_destroy(struct dfs_mnt* mnt)
 
     if (mnt)
     {
-        ret = dfs_lock();
-        if (ret == RT_EOK)
+        if (mnt->flags & MNT_IS_MOUNTED)
         {
-            if (rt_atomic_load(&(mnt->ref_count)) != 1)
-            {
-                LOG_W("bug on mnt(%s) ref_count(%d).", mnt->fullpath, mnt->ref_count);
-            }
-
+            mnt->flags &= ~MNT_IS_MOUNTED;
+            mnt->flags |= MNT_IS_UMOUNT;
             /* remote it from mnt list */
             if (mnt->flags & MNT_IS_ADDLIST)
             {
                 dfs_mnt_remove(mnt);
             }
-
-            /* free full path */
-            rt_free(mnt->fullpath);
-            mnt->fullpath = RT_NULL;
-
-            dfs_unlock();
-
-            /* destroy self and the ref_count should be 0 */
-            DLOG(msg, "mnt", "mnt", DLOG_MSG, "free mnt(%s)", mnt->fs_ops->name);
-            rt_free(mnt);
         }
+
+        dfs_mnt_unref(mnt);
     }
 
-    return 0;
+    return ret;
 }
 
 static struct dfs_mnt* _dfs_mnt_foreach(struct dfs_mnt *mnt, struct dfs_mnt* (*func)(struct dfs_mnt *mnt, void *parameter), void *parameter)
@@ -379,6 +433,17 @@ int dfs_mnt_list(struct dfs_mnt *mnt)
     /* lock file system */
     dfs_lock();
     _dfs_mnt_foreach(mnt, _mnt_dump, RT_NULL);
+    /* unlock file system */
+    dfs_unlock();
+
+    return 0;
+}
+
+int dfs_mnt_foreach(struct dfs_mnt* (*func)(struct dfs_mnt *mnt, void *parameter), void *parameter)
+{
+    /* lock file system */
+    dfs_lock();
+    _dfs_mnt_foreach(_root_mnt, func, parameter);
     /* unlock file system */
     dfs_unlock();
 

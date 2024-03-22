@@ -20,7 +20,7 @@
     #ifdef RT_USING_SERIAL_V2
         #include <drv_usart_v2.h>
     #else
-	#error "Serial-v1 has been obsoleted, and please select serial-v2 as the default option"
+    #error "Serial-v1 has been obsoleted, and please select serial-v2 as the default option"
     #endif
 #endif
 
@@ -111,7 +111,6 @@ void rt_hw_us_delay(rt_uint32_t us)
  */
 rt_weak void rt_hw_board_init()
 {
-
     rt_hw_systick_init();
 
     /* Heap initialization */
