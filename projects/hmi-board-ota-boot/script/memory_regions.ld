@@ -3,7 +3,7 @@
                             RAM_START  = 0x1FFE0000;
                 RAM_LENGTH = 0xA0000;
                 FLASH_START  = 0x00000000;
-                FLASH_LENGTH = 0x010000;
+                FLASH_LENGTH = 0x200000;
                 DATA_FLASH_START  = 0x40100000;
                 DATA_FLASH_LENGTH = 0x10000;
                 OPTION_SETTING_START  = 0x00000000;
