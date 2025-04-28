@@ -16,8 +16,8 @@ on:
     paths-ignore:
       - documenation/**
       - '**/README.md'
-  env:
-    RTT_TOOL_CHAIN: "sourcery-arm"
+env:
+  RTT_TOOL_CHAIN: "sourcery-arm"
 
 jobs:
   check:
